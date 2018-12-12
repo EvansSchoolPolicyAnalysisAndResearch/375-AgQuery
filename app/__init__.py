@@ -14,12 +14,7 @@ from flask import Flask
 app = Flask(__name__, instance_relative_config=True)
 # Load the Config file
 app.config.from_object('config')
-
-
-# Load the views
-from app import views
-
-#Load the database
+# Load the rest of the website
 from app import models
-
+from app import views
 
