@@ -18,17 +18,20 @@ def index():
 	"""
 	indicators=[]
 	geography = [r.geography for r in 
-		db_session.query(Estimates.geography).distinct().all()]
+		db_session.query(Estimates.geography).distinct()]
 	indicatorCategory = [r.indicatorCategory for r in
-			db_session.query(Estimates.indicatorCategory).distinct().all()]
+			db_session.query(Estimates.indicatorCategory).distinct()]
+	goDisabled = True
 	if request.form:
-		indicators = [r.indicatorName for r in
-				db_session.query(Estimates.indicatorName).distinct().filter(Estimates.indicatorCategory.in_(
-						request.form.getlist('indicatorCategory')),
-					Estimates.geography.in_(
-						request.form.getlist('geography')))]
+		cats = request.form.getlist('indicatorCategory')
+		geos = request.form.getlist('geography')
+		if cats and geos:
+			goDisabled = False
+			indicators = [r.indicatorName for r in
+				db_session.query(Estimates.indicatorName).distinct().filter(Estimates.indicatorCategory.in_(cats),
+					Estimates.geography.in_(geos))]
 	
-	return render_template("index.html",indicators=indicators, geography=geography, indicatorCategory=indicatorCategory)
+	return render_template("index.html",indicators=indicators, geography=geography, indicatorCategory=indicatorCategory, goDisabled=goDisabled)
 
 @app.route('/login')
 def login():
@@ -43,8 +46,11 @@ def results():
 	if request.method == "POST":
 		indicatorNames = request.values
 		indicators = db_session.query(
-			Estimates.indicatorName, Estimates.year, Estimates.mean).filter(
+			Estimates).filter(
 				Estimates.indicatorName.in_(indicatorNames))
+
+		for ind in indicators:
+			pass
 	return render_template("results.html", indicators=indicators)
 
 @app.teardown_appcontext
