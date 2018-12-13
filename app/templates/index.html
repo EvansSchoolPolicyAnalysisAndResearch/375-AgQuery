@@ -31,17 +31,20 @@
 			<option>b</option>
 		</select>
 	</div>
-	<input type="submit" name="Find Vars">
+	<input type="submit" name="Find Vars" value="Find Vars">
 </form>
 <form method="POST" action="/results">
 	<fieldset id="indicators">
 		<legend>Indicators</legend>
-		<!--
-		for indicator in sql query "SELECT DISTINCT indicatorName FROM Estimates WHERE indicatorCategory IS category AND geography IS geo"
-			<input type="checkbox" id="indicator" value="indicator">
-			<label for="indicator">indicator</label>
-		-->
+		<ul>
+		{% for indicator in indicators %}
+			<li>
+				<input type="checkbox" id="{{indicator}}" value="indicator">
+				<label for="{{indicator}}">{{indicator}}</label>
+			</li>
+		{% endfor %}
+		</ul>
 	</fieldset>
-	<input type="submit" name="Go">
+	<input type="submit" name="Go" value="Go">
 </form>
 {% endblock %}
