@@ -10,12 +10,16 @@
 <table>
 	<tr>
 		<th>Indicator Name</th>
+		<th>Year</th>
+		<th>Variable Name</th>
 		<th>Mean</th>
 	</tr>
 {% for ind in indicators %}
 	<tr>
 		<td>{{ind.indicatorName}}</td>
-		<td>{{ind.mean}}
+		<td>{{ind.year}}</td>
+		<td>{{ind.variableName}}
+		<td>{{ind.mean}} {{ind.units}}</td>
 	</tr>
 {% endfor %}
 </table>
