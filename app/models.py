@@ -22,7 +22,7 @@ class Estimates(Base):
 	units = Column(String)
 	cropDisaggregation = Column(String)
 	genderDisaggregation = Column(String)
-	hhFarmSizeDisaggregation = Column(String)
+	farmSizeDisaggregation = Column(String)
 	subpopulation = Column(String)
 	currencyConversion = Column(String)
 	indicatorLevel = Column(String)
