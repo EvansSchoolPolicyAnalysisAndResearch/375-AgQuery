@@ -77,3 +77,9 @@ select {
 	width:50%;
 	text-align: center;
 }
+
+td {
+	padding: 10px;
+	border-bottom-width:2px;
+	border-bottom-style: dashed;
+}
