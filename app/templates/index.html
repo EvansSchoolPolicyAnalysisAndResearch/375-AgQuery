@@ -9,7 +9,9 @@
 
 {% block body %}
 <form method="POST" action="/">
-
+		<p> To select multiple categories, geographies or years use Control +
+			click (Command + Click on Mac).
+		</p>
 		<!-- Here be the point where I need to get the indicator categories from the database -->
 	<div id="icGroup" class="leftBox">
 		<label for=indicatorCategory>Category:</label> <br />
@@ -27,7 +29,7 @@
 			{% endfor %}
 		</select>
 	</div>
-	<input type="submit" name="Find Vars" value="Find Vars">
+	<input type="submit" name="Find Indicators" value="Find Indicators">
 </form>
 <form method="POST" action="/results">
 		<h2>Indicators</h2>
@@ -42,6 +44,6 @@
 			</li>
 		{% endfor %}
 		</ul>
-	<input type="submit" value="Go">
+	<input type="submit" value="Go" {% if goDisabled==True %} disabled='true' {% endif %}>
 </form>
 {% endblock %}
