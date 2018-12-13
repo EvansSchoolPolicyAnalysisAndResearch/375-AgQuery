@@ -14,37 +14,34 @@
 	<div id="icGroup" class="leftBox">
 		<label for=indicatorCategory>Category:</label> <br />
 		<select multiple id="indicatorCategory" name="indicatorCategory">
-			<!-- for category sql query "SELECT DISTINCT inidicatorCategory FROM Estimates"
-				<option>category</option>
-			-->
-			<option>a</option>
-			<option>b </option>
+			{% for cat in indicatorCategory %}
+				<option>{{cat}}</option>
+			{% endfor %}
 		</select>
 	</div>
 	<div id="geoGroup" class="rightBox">
 		<label for="geography">Geographic Region:</label><br />
 		<select multiple id="geography" name="geography">
-		<!-- for geo sql query "SELECT DISTINCT geography FROM Estimates"
-			<option>geo</option>
-		-->
-			<option>a</option>
-			<option>b</option>
+			{% for geo in geography %}
+				<option>{{geo}}</option>
+			{% endfor %}
 		</select>
 	</div>
 	<input type="submit" name="Find Vars" value="Find Vars">
 </form>
 <form method="POST" action="/results">
-	<fieldset id="indicators">
-		<legend>Indicators</legend>
+		<h2>Indicators</h2>
 		<ul>
 		{% for indicator in indicators %}
 			<li>
-				<input type="checkbox" id="{{indicator}}" value="indicator">
+				<input type="checkbox" 
+						id="{{indicator}}" 
+						name="{{indicator}}" 
+						value="{{indicator}}">
 				<label for="{{indicator}}">{{indicator}}</label>
 			</li>
 		{% endfor %}
 		</ul>
-	</fieldset>
-	<input type="submit" name="Go" value="Go">
+	<input type="submit" value="Go">
 </form>
 {% endblock %}

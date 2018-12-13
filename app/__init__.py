@@ -16,10 +16,8 @@ app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('config')
 
 # Set up the database connection
-db = SQLAlchemy(app)
-
-
-from app import models
+from app.database import init_db
+init_db()
 
 # Load the routing table
 from app import views

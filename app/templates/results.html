@@ -8,6 +8,15 @@
 
 {% block body %}
 <table>
-	
+	<tr>
+		<th>Indicator Name</th>
+		<th>Mean</th>
+	</tr>
+{% for ind in indicators %}
+	<tr>
+		<td>{{ind.indicatorName}}</td>
+		<td>{{ind.mean}}
+	</tr>
+{% endfor %}
 </table>
 {% endblock %}
