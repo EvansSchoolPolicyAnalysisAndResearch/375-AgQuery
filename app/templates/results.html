@@ -10,6 +10,7 @@
 <table>
 	<tr>
 		<th>Indicator Name</th>
+		<th>Geography</th>
 		<th>Year</th>
 		<th>Variable Name</th>
 		<th>Mean</th>
@@ -17,6 +18,7 @@
 {% for ind in indicators %}
 	<tr>
 		<td>{{ind.indicatorName}}</td>
+		<td>{{ind.geography}}</td>
 		<td>{{ind.year}}</td>
 		<td>{{ind.variableName}}
 		<td>{{ind.mean}} {{ind.units}}</td>
