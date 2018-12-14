@@ -68,13 +68,13 @@ select {
 
 .leftBox {
 	float:left;
-	width:50%;
+	width:33%;
 	text-align: center;
 }
 
 .rightBox {
 	float:right;
-	width:50%;
+	width:33%;
 	text-align: center;
 }
 
