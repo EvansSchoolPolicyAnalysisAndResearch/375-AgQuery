@@ -21,6 +21,14 @@
 			{% endfor %}
 		</select>
 	</div>
+	<div id='years' class='leftBox'>
+		<label for='years'>Years:</label> <br />
+		<select multiple id="years" name="years">
+			{% for year in years %}
+				<option>{{year}}</option>
+			{% endfor %}
+		</select>
+	</div>
 	<div id="geoGroup" class="rightBox">
 		<label for="geography">Geographic Region:</label><br />
 		<select multiple id="geography" name="geography">
@@ -33,6 +41,8 @@
 </form>
 <form method="POST" action="/results">
 		<h2>Indicators</h2>
+		<input type="hidden" name="years" value='{{yrs}}' />
+		<input type="hidden" name="geography" value='{{geos}}' />
 		<ul>
 		{% for indicator in indicators %}
 			<li>
