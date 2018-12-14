@@ -68,10 +68,10 @@ def results():
 		if yrs:
 			filt = and_(filt, Estimates.year.in_(yrs))
 		indicators = db_session.query(Estimates).filter(filt)
-		#for ind in indicators:
-		#	pass
+		for ind in indicators:
+			pass
 
-	return render_template("results.html", indicators=indicators, geos=indicatorNames)
+	return render_template("results.html", indicators=indicators, )
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
