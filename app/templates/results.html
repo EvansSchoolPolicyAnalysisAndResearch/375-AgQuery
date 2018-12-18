@@ -7,6 +7,10 @@
 {% block pageheader %}Results:{% endblock %}
 
 {% block body %}
+<form method="POST" action="/get-csv">
+	<input type='hidden' name='csv' value='{{csv}}'>
+	<input type='submit' value="Get CSV">
+</form>
 <table>
 	<tr>
 		<th>Indicator Name</th>
@@ -21,7 +25,12 @@
 		<td>{{ind.geography}}</td>
 		<td>{{ind.year}}</td>
 		<td>{{ind.variableName}}
-		<td>{{ind.mean}} {{ind.units}}</td>
+		<td>{% if ind.mean %} 
+				{{"{:.3f}".format(ind.mean)}} ({{ind.units}})
+			{% else %}
+				N/A
+			{% endif %}
+		</td>
 	</tr>
 {% endfor %}
 </table>
