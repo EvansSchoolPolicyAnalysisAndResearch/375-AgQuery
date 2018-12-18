@@ -9,7 +9,7 @@ license.txt file for more information.
 from app import app
 from sqlalchemy.sql import select
 from sqlalchemy import and_, or_
-from flask import render_template,request
+from flask import render_template, request, Response
 import ast
 from app.database import db_session
 from app.models import Estimates
@@ -34,10 +34,16 @@ def index():
 		cats = request.form.getlist('indicatorCategory')
 		geos = request.form.getlist('geography')
 		yrs = request.form.getlist('years')
+		filt = Estimates.indicatorCategory.in_(cats)
+		if geos:
+			filt = and_(filt, Estimates.geography.in_(geos))
+		if yrs:
+			filt = and_(filt, Estimates.year.in_(yrs))
 		if cats:
-			goDisabled = False
 			indicators = [r.indicatorName for r in
-				db_session.query(Estimates.indicatorName).distinct().filter(Estimates.indicatorCategory.in_(cats))]
+				db_session.query(Estimates.indicatorName).distinct().filter(filt)]
+			if len(indicators) > 0:
+				goDisabled = False
 	
 	return render_template("index.html",indicators=indicators, 
 		geography=geography, indicatorCategory=indicatorCategory, 
@@ -49,7 +55,7 @@ def login():
 	"""
 	return render_template("login.html")
 
-@app.route('/results', methods={"GET","POST"})
+@app.route('/results', methods={"POST"})
 def results():
 	"""
 	"""
@@ -58,7 +64,7 @@ def results():
 		geos = ast.literal_eval(request.form.get('geography'))
 		yrs = ast.literal_eval(request.form.get('years'))
 		indicatorNames = request.values.to_dict()
-		# Remove years and geography from the list returned to indicator names
+		# Remove years and geography from the dict of request.values
 		del indicatorNames ['years']
 		del indicatorNames ['geography'] 
 		filt = Estimates.indicatorName.in_(indicatorNames)
@@ -68,10 +74,20 @@ def results():
 		if yrs:
 			filt = and_(filt, Estimates.year.in_(yrs))
 		indicators = db_session.query(Estimates).filter(filt)
+		headers = Estimates.__table__.columns.keys()
+		csvRows =[','.join(headers),]
+		csvRows[0] = csvRows[0][3:]
 		for ind in indicators:
-			pass
+			csvRows.append(str(ind))
 
-	return render_template("results.html", indicators=indicators, )
+		csv = "\n".join(csvRows)
+	return render_template("results.html", indicators=indicators, csv=csv)
+
+@app.route('/get-csv',methods={"POST"})
+def get_csv():
+		return Response(request.form.get('csv'), mimetype="text/plain",
+			headers={
+				"Content-Disposition": "attachment;filename=estimates.csv"})
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
