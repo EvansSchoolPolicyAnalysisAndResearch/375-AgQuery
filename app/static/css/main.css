@@ -34,10 +34,12 @@ header nav{
 }
 header nav a {
 	color: #fff;
+	display:inline-block;
+	height:100%;
+	padding:12px;
 }
 header nav a:link{
 	text-decoration: none;
-	display:inline-blockx;
 }
 
 header nav a:hover {
@@ -50,7 +52,6 @@ header nav li {
 	display: inline-block;
 	min-width: 100px;
 	margin:0px;
-	padding: 12px;
 }
 
 header nav li:hover {
