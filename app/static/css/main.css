@@ -36,7 +36,8 @@ header nav a {
 	color: #fff;
 	display:inline-block;
 	height:100%;
-	padding:12px;
+	width:100%;
+	padding:12px 0px 12px 0px;
 }
 header nav a:link{
 	text-decoration: none;
@@ -50,7 +51,7 @@ header nav a:hover {
 header nav li {
 	list-style: none;
 	display: inline-block;
-	min-width: 100px;
+	width: 115px;
 	margin:0px;
 }
 
@@ -61,26 +62,66 @@ header nav li:hover a{
 	color:#000;
 
 }
-
 select {
-	width:75%;
-	margin:0 30 0 30px;
+	width:100%;
 }
 
-.leftBox {
+.filterbox {
 	float:left;
-	width:33%;
-	text-align: center;
+	display:block;
+	width: 25em;
+	height:25em;
+	border-width: 3px;
+	border-style:solid;
+	border-color:#000;
+	padding:1em 0em 0em 0em;
+	margin: .5em;
 }
 
-.rightBox {
-	float:right;
-	width:33%;
-	text-align: center;
+.filterbox p {
+	padding:0;
+	margin: 0;
+	text-align:center;
 }
+.filterbox select {
+	font-size: 17px;
+	font-family: "Open Sans" sans-serif;
+	height:23.25em;
+}
+.scrollbox {
+	overflow-y:scroll;
+	overflox-x:hidden;
+	height: 23.25em;
+	border-top:1px solid black;
+}
+
+.scrollbox ul {
+	list-style: none;
+	padding-left:0;
+	margin-top: 0;
+}
+.scrollbox li {
+	line-height: 1.1em;
+	padding-bottom: .5em;
+}
+
 
 td {
 	padding: 10px;
 	border-bottom-width:2px;
 	border-bottom-style: dashed;
+}
+
+.contenthole {
+	margin:auto;
+	overflow:hidden;
+	max-width:80em;
+}
+
+input[type="submit"] {
+	clear:both;
+}
+
+footer {
+	clear:both;
 }
