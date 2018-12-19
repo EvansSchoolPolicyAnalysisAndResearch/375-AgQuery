@@ -8,12 +8,13 @@
 {% block pageheader %}Select your Data{% endblock %}
 
 {% block body %}
+{% if goDisabled == True %}
 <form method="POST" action="/">
 		<p> To select multiple categories, geographies or years use Control +
 			click (Command + Click on Mac).
 		</p>
 		<!-- Here be the point where I need to get the indicator categories from the database -->
-	<div id="icGroup" class="leftBox">
+	<div id="icGroup" class="filterbox">
 		<label for=indicatorCategory>Category:</label> <br />
 		<select multiple id="indicatorCategory" name="indicatorCategory">
 			{% for cat in indicatorCategory %}
@@ -21,39 +22,46 @@
 			{% endfor %}
 		</select>
 	</div>
-	<div id='years' class='leftBox'>
-		<label for='years'>Years:</label> <br />
+	
+	<input type="submit" name="Find Indicators" value="Find Indicators">
+</form>
+{% endif %}
+{% if goDisabled == False %}
+<form method="POST" action="/results">
+	<div id='years' class='filterbox'>
+		<p>Years:</p> 
 		<select multiple id="years" name="years">
 			{% for year in years %}
 				<option>{{year}}</option>
 			{% endfor %}
 		</select>
 	</div>
-	<div id="geoGroup" class="rightBox">
-		<label for="geography">Geographic Region:</label><br />
+	<div id="geoGroup" class="filterbox">
+		<p>Geographic Region:</p>
 		<select multiple id="geography" name="geography">
 			{% for geo in geography %}
 				<option>{{geo}}</option>
 			{% endfor %}
 		</select>
 	</div>
-	<input type="submit" name="Find Indicators" value="Find Indicators">
+	<div id="indicatorBox" class="filterbox" >
+		<p>Indicators:</p>
+		<div class="scrollbox">
+			<ul>
+			{% for indicator in indicators %}
+				<li>
+					<input type="checkbox" 
+							id="{{indicator}}" 
+							name="{{indicator}}" 
+							value="{{indicator}}">
+					<label for="{{indicator}}">{{indicator}}</label>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<input type="submit" value="Go" 
+		{% if goDisabled==True %} disabled='true' {% endif %}>
 </form>
-<form method="POST" action="/results">
-		<h2>Indicators</h2>
-		<input type="hidden" name="years" value='{{yrs}}' />
-		<input type="hidden" name="geography" value='{{geos}}' />
-		<ul>
-		{% for indicator in indicators %}
-			<li>
-				<input type="checkbox" 
-						id="{{indicator}}" 
-						name="{{indicator}}" 
-						value="{{indicator}}">
-				<label for="{{indicator}}">{{indicator}}</label>
-			</li>
-		{% endfor %}
-		</ul>
-	<input type="submit" value="Go" {% if goDisabled==True %} disabled='true' {% endif %}>
-</form>
+{% endif %}
 {% endblock %}
