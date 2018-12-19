@@ -14,14 +14,27 @@ from app.models import *
 
 def filterFactory(filters, inclusive, model):
 	"""
-	filterFactory takes a dict of filters and generates a filter for use in
-	flask-sqlalchemy queries.
-	:param filters: The dict of 
-	:param inclusive: boolean value true the factory creates a filter with ands
-	:param model: model is the model which is the basis for the filter
+	A very simple factory for building very simple filters. 
+
+	filterFactory takes a dict of filters and creates a compound IN SQL query 
+	using SQLALchemy's and_(), or_(), and in_() functions. An example SQL query buildable with this factory would be: 
+		WHERE key1 IN val1 AND key2 IN v AND key3 IN val3
+
+
+	:param filters: The dict of filter values. Keys must be the same as the 
+	name of database Column rows. The values in the dict should be lists of 
+	values.
+	:param inclusive: Boolean True - filter is built out of ands; False - 
+	filter is built out of ors
+	:param model: Is the SQLAlchemy ORM which is being queried
+	:returns: SQLAlchemy BinaryExpression object which can be passed to a sqlalchemy filter() call.
+	:raises AttributeError: raises an exception if a key in filters is not an
+	attribute of model
 	"""
 	first = True
 	filt = None
+
+	# This loop is where the action is
 	for key,val in filters.items():
 		if val and inclusive and not first:
 			filt = and_(filt, getattr(model, key).in_(val))
@@ -32,5 +45,8 @@ def filterFactory(filters, inclusive, model):
 			first = False
 
 	return filt
+
+def mostRecent(model, geography)
+
 
 
