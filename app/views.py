@@ -13,15 +13,20 @@ from flask import render_template, request, Response
 import ast
 from app.database import db_session
 from app.models import Estimates
+from app.dbhelper import filterFactory
 
 @app.route('/', methods={"GET","POST"})
 def index():
 	"""
 	"""
-	indicators=[]
-	yrs = []
-	geos = []
 
+	# Creating the variables to be used throughout the method
+	indicators=[] # the list of indicators to display
+	filterDict = {} # dict of attributes and lists for building a filter
+	goDisabled = True # Is the go button on the page disabled
+
+	# These database queries are for populating the filter lists at the top of
+	# the page
 	geography = [r.geography for r in 
 		db_session.query(Estimates.geography).distinct()]
 	indicatorCategory = [r.indicatorCategory for r in
@@ -29,25 +34,29 @@ def index():
 	years = [r.year for r in 
 			db_session.query(Estimates.year).distinct()]
 
-	goDisabled = True
+	# If this page was accessed using post then request.form should not be 
+	# empty. In which case this code block will get the list of indicator names
+	# to be displayed in the indicators filter.
 	if request.form:
-		cats = request.form.getlist('indicatorCategory')
-		geos = request.form.getlist('geography')
-		yrs = request.form.getlist('years')
-		filt = Estimates.indicatorCategory.in_(cats)
-		if geos:
-			filt = and_(filt, Estimates.geography.in_(geos))
-		if yrs:
-			filt = and_(filt, Estimates.year.in_(yrs))
-		if cats:
+		# Pull the information necessary from the post information
+		filterDict["indicatorCategory"] = request.form.getlist('indicatorCategory')
+		filterDict["geography"] = request.form.getlist('geography')
+		filterDict["year"] = request.form.getlist('years')
+
+		# The only absolutely necessary filter is the indicator category. The
+		# rest default to all.
+		if filterDict["indicatorCategory"]:
 			indicators = [r.indicatorName for r in
-				db_session.query(Estimates.indicatorName).distinct().filter(filt)]
+				db_session.query(
+					Estimates.indicatorName).distinct().filter(filterFactory(filterDict, True, Estimates))]
+			# If the db query returned something, enable the go button
 			if len(indicators) > 0:
 				goDisabled = False
 	
 	return render_template("index.html",indicators=indicators, 
 		geography=geography, indicatorCategory=indicatorCategory, 
-		goDisabled=goDisabled, years=years,yrs=yrs, geos=geos)
+		goDisabled=goDisabled, years=years,yrs=filterDict["year"], 
+		geos=filterDict["geography"])
 
 @app.route('/login')
 def login():
@@ -60,26 +69,32 @@ def results():
 	"""
 	"""
 	indicators = []
+	filterDict = {}
 	if request.method == "POST":
-		geos = ast.literal_eval(request.form.get('geography'))
-		yrs = ast.literal_eval(request.form.get('years'))
-		indicatorNames = request.values.to_dict()
-		# Remove years and geography from the dict of request.values
-		del indicatorNames ['years']
-		del indicatorNames ['geography'] 
-		filt = Estimates.indicatorName.in_(indicatorNames)
+		# Pull the information necessary for the db query from the post
+		# information
+		filterDict['geography'] = ast.literal_eval(request.form.get('geography'))
+		filterDict['year'] = ast.literal_eval(request.form.get('years'))
+		filterDict['indicatorName'] = request.values.to_dict()
+		
+		# Request.values.to_dict() also gives the values for year and geos,
+		# Those need to be removed from the dict of indicator names
+		del filterDict['indicatorName'] ['years']
+		del filterDict['indicatorName'] ['geography']
 
-		if geos:
-			filt = and_(filt, Estimates.geography.in_(geos))
-		if yrs:
-			filt = and_(filt, Estimates.year.in_(yrs))
-		indicators = db_session.query(Estimates).filter(filt)
+
+		# Query the database to get the estimates.
+		indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
+
+		# Building the rows of the CSV
+		# This is horrible code that should be replaced before the final
+		# version as it relies on the order of the keys in the code.
 		headers = Estimates.__table__.columns.keys()
 		csvRows =[','.join(headers),]
 		csvRows[0] = csvRows[0][3:]
 		for ind in indicators:
 			csvRows.append(str(ind))
-
+		# Combine all of the rows into a single row.
 		csv = "\n".join(csvRows)
 	return render_template("results.html", indicators=indicators, csv=csv)
 
