@@ -11,7 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_, or_
 from sqlalchemy.sql import select
 from app.models import *
-from app.database import db_session
 
 
 def filterFactory(filters, inclusive, model):
@@ -36,12 +35,12 @@ def filterFactory(filters, inclusive, model):
 	return filt
 
 
-def getMostRecent(geo):
+def getMostRecent(geo, session):
 	"""
 	getMostRecent 
 	"""
 	years = [r.year for r in 
-		db_session.query(Estimates.year).distinct().filter_by(geography= geo)]
+		session.query(Estimates.year).distinct().filter_by(geography= geo)]
 	mostRec = "0"
 	for yr in years:
 		if yr > mostRec:
