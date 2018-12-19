@@ -9,7 +9,9 @@ license.txt file for more information.
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_, or_
+from sqlalchemy.sql import select
 from app.models import *
+from app.database import db_session
 
 
 def filterFactory(filters, inclusive, model):
@@ -50,3 +52,14 @@ def mostRecent(model, geography)
 
 
 
+def getMostRecent(geo):
+	"""
+	getMostRecent 
+	"""
+	years = [r.year for r in 
+		db_session.query(Estimates.year).distinct().filter_by(geography= geo)]
+	mostRec = "0"
+	for yr in years:
+		if yr > mostRec:
+			mostRec = yr
+	return mostRec

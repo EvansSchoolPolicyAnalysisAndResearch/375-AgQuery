@@ -39,24 +39,22 @@ def index():
 	# to be displayed in the indicators filter.
 	if request.form:
 		# Pull the information necessary from the post information
-		filterDict["indicatorCategory"] = request.form.getlist('indicatorCategory')
-		filterDict["geography"] = request.form.getlist('geography')
-		filterDict["year"] = request.form.getlist('years')
 
 		# The only absolutely necessary filter is the indicator category. The
 		# rest default to all.
-		if filterDict["indicatorCategory"]:
+		selectedCategories = request.form.getlist('indicatorCategory')
+		if selectedCategories:
 			indicators = [r.indicatorName for r in
 				db_session.query(
-					Estimates.indicatorName).distinct().filter(filterFactory(filterDict, True, Estimates))]
+					Estimates.indicatorName).distinct().filter(
+						Estimates.indicatorCategory.in_(selectedCategories))]
 			# If the db query returned something, enable the go button
 			if len(indicators) > 0:
 				goDisabled = False
 	
 	return render_template("index.html",indicators=indicators, 
 		geography=geography, indicatorCategory=indicatorCategory, 
-		goDisabled=goDisabled, years=years,yrs=filterDict["year"], 
-		geos=filterDict["geography"])
+		goDisabled=goDisabled, years=years)
 
 @app.route('/login')
 def login():
@@ -73,12 +71,13 @@ def results():
 	if request.method == "POST":
 		# Pull the information necessary for the db query from the post
 		# information
-		filterDict['geography'] = ast.literal_eval(request.form.get('geography'))
-		filterDict['year'] = ast.literal_eval(request.form.get('years'))
+		filterDict['geography'] = request.form.getlist('geography')
+		filterDict['year'] = request.form.getlist('years')
 		filterDict['indicatorName'] = request.values.to_dict()
 		
 		# Request.values.to_dict() also gives the values for year and geos,
 		# Those need to be removed from the dict of indicator names
+		
 		del filterDict['indicatorName'] ['years']
 		del filterDict['indicatorName'] ['geography']
 
