@@ -47,9 +47,6 @@ def filterFactory(filters, inclusive, model):
 
 	return filt
 
-def mostRecent(model, geography)
-
-
 
 def getMostRecent(geo, session):
 	"""

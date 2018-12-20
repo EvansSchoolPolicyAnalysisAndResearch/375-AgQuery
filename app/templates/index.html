@@ -8,11 +8,17 @@
 {% block pageheader %}Select your Data{% endblock %}
 
 {% block body %}
+<p> 
+	To select multiple categories, geographies or years use Control +
+	click (Command + Click on Mac).
+</p>
+<p>
+	To view values for all years or geographies leave the selection blank.
+</p>
+
 {% if goDisabled == True %}
 <form method="POST" action="/">
-		<p> To select multiple categories, geographies or years use Control +
-			click (Command + Click on Mac).
-		</p>
+		
 		<!-- Here be the point where I need to get the indicator categories from the database -->
 	<div id="icGroup" class="filterbox">
 		<label for=indicatorCategory>Category:</label> <br />
@@ -26,6 +32,7 @@
 	<input type="submit" name="Find Indicators" value="Find Indicators">
 </form>
 {% endif %}
+
 {% if goDisabled == False %}
 <form method="POST" action="/results">
 	<div id='years' class='filterbox'>

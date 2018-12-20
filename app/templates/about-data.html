@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}General Data Construction Decisions{% endblock %}
+
+{% block pageheader %}General Data Construction Decisions{% endblock %}
+
+{% block body %}
+<p>The data in this page was curated by the <a href="https://evans.uw.edu/policy-impact/epar">Evans Policy Analysis and Research Group</a> (EPAR) at the <a href="https://evans.uw.edu/">Daniel J. Evans School of Public Policy and Governance</a> of the <a href='https://uw.edu'>University of Washington</a>. The raw data was collected as part of the <a href="http://surveys.worldbank.org/lsms/programs/integrated-surveys-agriculture-ISA">LSMS-ISA</a> conducted by the <a href='http://www.worldbank.org/'>World Bank Group</a> and can be downloaded from their site.</p>
+
+<p>The data was curated using the <a href='https://www.stata.com/'>STATA</a> software package. The STATA source code files used to curate the data can be found on <a href='https://github.com'>Github</a> in <a href='https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Agricultural-Indicator-Curation'>EPAR's repositories</a>. These files, along with the data from the World Bank's site can be used to recreate these estimates. General decision rules for this curation are detailed below.</p>
+
+{% for decision in decisions %}
+	<h2>{{decision.topic}}</h2>
+	{{decision.decision|safe}}
+{% endfor %}
+
+{% endblock %}

@@ -12,7 +12,7 @@ from sqlalchemy import and_, or_
 from flask import render_template, request, Response
 import ast
 from app.database import db_session
-from app.models import Estimates
+from app.models import Estimates,GenCons
 from app.dbhelper import filterFactory
 
 @app.route('/', methods={"GET","POST"})
@@ -77,9 +77,11 @@ def results():
 		
 		# Request.values.to_dict() also gives the values for year and geos,
 		# Those need to be removed from the dict of indicator names
-		
-		del filterDict['indicatorName'] ['years']
-		del filterDict['indicatorName'] ['geography']
+		if filterDict['year']: 
+			del filterDict['indicatorName'] ['years']
+
+		if filterDict['geography']:
+			del filterDict['indicatorName'] ['geography']
 
 
 		# Query the database to get the estimates.
@@ -102,6 +104,11 @@ def get_csv():
 		return Response(request.form.get('csv'), mimetype="text/plain",
 			headers={
 				"Content-Disposition": "attachment;filename=estimates.csv"})
+
+@app.route('/about-data/')
+def about_data():
+	decisions = db_session.query(GenCons).all()
+	return render_template('about-data.html', decisions=decisions)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

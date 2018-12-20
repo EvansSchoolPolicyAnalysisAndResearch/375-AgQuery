@@ -49,3 +49,11 @@ class Estimates(Base):
 			self.crosswave, self.variableName, str(self.mean),str(self.se), 
 			str(self.sd), str(self.p25), str(self.median),str(self.p75), 
 			str(self.minim), str(self.maxim), str(self.n), self.n30])
+
+class GenCons(Base):
+	__tablename__ = 'GenCons'
+	topic = Column(String, primary_key=True)
+	decision = Column(String)
+
+	def __repr__(self):
+		return "<Topic: %s>" % (self.topic)

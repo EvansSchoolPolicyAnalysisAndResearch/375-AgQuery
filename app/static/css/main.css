@@ -51,8 +51,8 @@ header nav a:hover {
 header nav li {
 	list-style: none;
 	display: inline-block;
-	width: 115px;
-	margin:0px;
+	width: 10em;
+	margin:0;
 }
 
 header nav li:hover {
@@ -71,9 +71,7 @@ select {
 	display:block;
 	width: 25em;
 	height:25em;
-	border-width: 3px;
-	border-style:solid;
-	border-color:#000;
+	border: 3px solid #4c2d82;
 	padding:1em 0em 0em 0em;
 	margin: .5em;
 }
@@ -92,7 +90,7 @@ select {
 	overflow-y:scroll;
 	overflox-x:hidden;
 	height: 23.25em;
-	border-top:1px solid black;
+	border-top:1px solid #999;
 }
 
 .scrollbox ul {
