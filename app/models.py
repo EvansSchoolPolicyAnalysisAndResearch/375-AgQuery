@@ -41,14 +41,14 @@ class Estimates(Base):
 	n30 = Column(String)
 
 	def __repr__(self):
-		return ",".join([self.geography, self.survey, self.instrument,
+		return '"' + '","'.join([self.geography, self.survey, self.instrument,
 			self.year, self.indicatorCategory, self.indicatorName, self.units, 
 			self.cropDisaggregation, self.genderDisaggregation, 
 			self.farmSizeDisaggregation, self.subpopulation, 
 			self.currencyConversion, self.indicatorLevel,self.weight, 
 			self.crosswave, self.variableName, str(self.mean),str(self.se), 
 			str(self.sd), str(self.p25), str(self.median),str(self.p75), 
-			str(self.minim), str(self.maxim), str(self.n), self.n30])
+			str(self.minim), str(self.maxim), str(self.n), self.n30]) + '"'
 
 class GenCons(Base):
 	__tablename__ = 'GenCons'
