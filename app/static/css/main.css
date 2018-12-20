@@ -103,6 +103,11 @@ select {
 	padding-bottom: .5em;
 }
 
+.buttonbox {
+	clear:both;
+	margin: auto;
+	text-align:center;
+}
 
 td {
 	padding: 10px;
