@@ -77,7 +77,7 @@ def formHandler(request, session):
 		del filterDict['indicatorName'] ['geography']
 	else:
 		filterDict['geography'] = [r.geography for r in 
-		db_session.query(Estimates.geography).distinct()]
+			session.query(Estimates.geography).distinct()]
 
 
 	# Build the filter for the query.
