@@ -37,7 +37,7 @@
 <form method="POST" action="/results">
 	<div id='years' class='filterbox'>
 		<p>Years:</p> 
-		<select multiple id="years" name="years">
+		<select id="years" name="years">
 			{% for year in years %}
 				<option>{{year}}</option>
 			{% endfor %}

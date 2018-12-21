@@ -13,7 +13,7 @@ from flask import render_template, request, Response
 import ast
 from app.database import db_session
 from app.models import Estimates,GenCons
-from app.dbhelper import filterFactory
+from app.dbhelper import filterFactory,getMostRecent
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -31,8 +31,7 @@ def index():
 		db_session.query(Estimates.geography).distinct()]
 	indicatorCategory = [r.indicatorCategory for r in
 			db_session.query(Estimates.indicatorCategory).distinct()]
-	years = [r.year for r in 
-			db_session.query(Estimates.year).distinct()]
+	years = ["All Years", "Most Recent Survey"]
 
 	# If this page was accessed using post then request.form should not be 
 	# empty. In which case this code block will get the list of indicator names
@@ -72,20 +71,23 @@ def results():
 		# Pull the information necessary for the db query from the post
 		# information
 		filterDict['geography'] = request.form.getlist('geography')
-		filterDict['year'] = request.form.getlist('years')
+		years = request.form.get('years')
 		filterDict['indicatorName'] = request.values.to_dict()
 		
-		# Request.values.to_dict() also gives the values for year and geos,
-		# Those need to be removed from the dict of indicator names
-		if filterDict['year']: 
-			del filterDict['indicatorName'] ['years']
+		if years == "Most Recent":
+			filterDict['years'] = ""
+		else:
+			# Request.values.to_dict() also gives the values for year and geos,
+			# Those need to be removed from the dict of indicator names
+			if filterDict['years']: 
+				del filterDict['indicatorName'] ['years']
 
-		if filterDict['geography']:
-			del filterDict['indicatorName'] ['geography']
+			if filterDict['geography']:
+				del filterDict['indicatorName'] ['geography']
 
 
-		# Query the database to get the estimates.
-		indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
+			# Query the database to get the estimates.
+			indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
 
 		# Building the rows of the CSV
 		# This is horrible code that should be replaced before the final
