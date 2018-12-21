@@ -19,7 +19,7 @@ def filterFactory(filters, inclusive, model):
 
 	filterFactory takes a dict of filters and creates a compound IN SQL query 
 	using SQLALchemy's and_(), or_(), and in_() functions. An example SQL query buildable with this factory would be: 
-		WHERE key1 IN val1 AND key2 IN v AND key3 IN val3
+		WHERE key1 IN vals1 AND key2 IN vals2 AND key3 IN vals3
 
 
 	:param filters: The dict of filter values. Keys must be the same as the 
@@ -47,6 +47,65 @@ def filterFactory(filters, inclusive, model):
 
 	return filt
 
+def formHandler(request, session):
+	"""
+	Handles the input from the filter on the main page.
+
+	This takes in the request information passed to the flask route function
+	and turns it into a database query. The results of this query are then
+	returned to the original function
+
+	:param request:
+	:param session:
+	:returns:
+	:raises:
+	"""
+	
+	# Set the scope for the indicators variable
+	filtCreated = False
+	filt = None
+	filterDict= {}
+	
+	# Pull the information necessary for the db query from the request
+	# passed to this function
+	filterDict['geography'] = request.form.getlist('geography')
+	years = request.form.get('years')
+	filterDict['indicatorName'] = request.values.to_dict()
+	del filterDict['indicatorName'] ['years']
+	
+	if filterDict['geography']:
+		del filterDict['indicatorName'] ['geography']
+	else:
+		filterDict['geography'] = [r.geography for r in 
+		db_session.query(Estimates.geography).distinct()]
+
+
+	# Build the filter for the query.
+	if years == "Most Recent Survey":
+		for geo in filterDict['geography']:
+			# Get the most recent year for each country
+			mry = getMostRecent(geo, session)
+
+			# Test to see if the filt already exists.
+			if not filtCreated:
+				# Add this country/year combo to the filter
+				filt = or_(filt, 
+					and_(Estimates.geography.is_(geo), 
+						Estimates.year.is_(mry)))
+			else:
+				# Filter is new, create the first entry
+				filt = and_(Estimates.geography.is_(geo),
+						Estimates.year.is_(mry))
+				filtCreated=True
+		# Add the requested indicators to the filter
+		filt = and_(filt, Estimates.indicatorName.in_(filterDict['indicatorName']))	
+	else:
+		# Request.values.to_dict() also gives the values for year and geos,
+		# Those need to be removed from the dict of indicator names
+		filt = filterFactory(filterDict, True, Estimates)
+	
+	# Query the database to get the estimates.
+	return session.query(Estimates).filter(filt)
 
 def getMostRecent(geo, session):
 	"""

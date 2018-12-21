@@ -13,7 +13,7 @@ from flask import render_template, request, Response
 import ast
 from app.database import db_session
 from app.models import Estimates,GenCons
-from app.dbhelper import filterFactory,getMostRecent
+from app.dbhelper import filterFactory,formHandler
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -22,7 +22,6 @@ def index():
 
 	# Creating the variables to be used throughout the method
 	indicators=[] # the list of indicators to display
-	filterDict = {} # dict of attributes and lists for building a filter
 	goDisabled = True # Is the go button on the page disabled
 
 	# These database queries are for populating the filter lists at the top of
@@ -53,7 +52,7 @@ def index():
 	
 	return render_template("index.html",indicators=indicators, 
 		geography=geography, indicatorCategory=indicatorCategory, 
-		goDisabled=goDisabled, years=years)
+		goDisabled=goDisabled)
 
 @app.route('/login')
 def login():
@@ -65,48 +64,17 @@ def login():
 def results():
 	"""
 	"""
-	indicators = []
-	filterDict = {}
-	if request.method == "POST":
-		# Pull the information necessary for the db query from the post
-		# information
-		filterDict['geography'] = request.form.getlist('geography')
-		years = request.form.get('years')
-		filterDict['indicatorName'] = request.values.to_dict()
-		
-		if years == "Most Recent":
-			pass
-		else:
-			# Request.values.to_dict() also gives the values for year and geos,
-			# Those need to be removed from the dict of indicator names
-			if filterDict['years']: 
-				del filterDict['indicatorName'] ['years']
-
-			if filterDict['geography']:
-				del filterDict['indicatorName'] ['geography']
-
-
-			# Query the database to get the estimates.
-			indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
+	indicators = formHandler(request, db_session)
 	return render_template("results.html", indicators=indicators)
->>>>>>> master
 
 @app.route('/get-csv',methods={"POST"})
 def get_csv():
-	filterDict = {}
-	filterDict['geography'] = request.form.getlist('geography')
-	filterDict['year'] = request.form.getlist('years')
-	filterDict['indicatorName'] = request.values.to_dict()
-	
-	# Request.values.to_dict() also gives the values for year and geos,
-	# Those need to be removed from the dict of indicator names
-	if filterDict['year']: 
-		del filterDict['indicatorName'] ['years']
-	if filterDict['geography']:
-		del filterDict['indicatorName'] ['geography']
+	"""
 
-	# Query the database to get the estimates.
-	indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
+	"""
+	# Get the estimates from the formhandler
+	indicators = formHandler(request, db_session)
+
 	# Building the rows of the CSV
 	# This is horrible code that should be replaced before the final
 	# version as it relies on the order of the keys in the code.

@@ -39,9 +39,8 @@
 	<div id='years' class='filterbox'>
 		<p>Years:</p> 
 		<select id="years" name="years">
-			{% for year in years %}
-				<option>{{year}}</option>
-			{% endfor %}
+			<option selected="selected">All Years</option>
+			<option>Most Recent Survey</option>
 		</select>
 	</div>
 	<div id="geoGroup" class="filterbox">
@@ -61,7 +60,7 @@
 					<input type="checkbox" 
 							id="{{indicator}}" 
 							name="{{indicator}}" 
-							value="{{indicator}}">
+							value="{{indicator}}" />
 					<label for="{{indicator}}">{{indicator}}</label>
 				</li>
 			{% endfor %}
@@ -69,7 +68,7 @@
 		</div>
 	</div>
 	<div class='buttonbox'>
-		<input type="submit" value="Go" formaction='results' />
+		<input type="submit" value="View Estimates" formaction='results' />
 		<input type='submit' value='Download CSV' formaction='get-csv' />
 	</div>
 </form>
