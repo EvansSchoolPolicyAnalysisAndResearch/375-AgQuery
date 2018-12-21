@@ -75,7 +75,7 @@ def results():
 		filterDict['indicatorName'] = request.values.to_dict()
 		
 		if years == "Most Recent":
-			filterDict['years'] = ""
+			pass
 		else:
 			# Request.values.to_dict() also gives the values for year and geos,
 			# Those need to be removed from the dict of indicator names
@@ -88,22 +88,36 @@ def results():
 
 			# Query the database to get the estimates.
 			indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
-
-		# Building the rows of the CSV
-		# This is horrible code that should be replaced before the final
-		# version as it relies on the order of the keys in the code.
-		headers = Estimates.__table__.columns.keys()
-		csvRows =[','.join(headers),]
-		csvRows[0] = csvRows[0][3:]
-		for ind in indicators:
-			csvRows.append(str(ind))
-		# Combine all of the rows into a single row.
-		csv = "\n".join(csvRows)
-	return render_template("results.html", indicators=indicators, csv=csv)
+	return render_template("results.html", indicators=indicators)
+>>>>>>> master
 
 @app.route('/get-csv',methods={"POST"})
 def get_csv():
-		return Response(request.form.get('csv'), mimetype="text/plain",
+	filterDict = {}
+	filterDict['geography'] = request.form.getlist('geography')
+	filterDict['year'] = request.form.getlist('years')
+	filterDict['indicatorName'] = request.values.to_dict()
+	
+	# Request.values.to_dict() also gives the values for year and geos,
+	# Those need to be removed from the dict of indicator names
+	if filterDict['year']: 
+		del filterDict['indicatorName'] ['years']
+	if filterDict['geography']:
+		del filterDict['indicatorName'] ['geography']
+
+	# Query the database to get the estimates.
+	indicators = db_session.query(Estimates).filter(filterFactory(filterDict, True, Estimates))
+	# Building the rows of the CSV
+	# This is horrible code that should be replaced before the final
+	# version as it relies on the order of the keys in the code.
+	headers = Estimates.__table__.columns.keys()
+	csvRows =[','.join(headers),]
+	csvRows[0] = csvRows[0][3:]
+	for ind in indicators:
+		csvRows.append(str(ind))
+	# Combine all of the rows into a single row.
+	csv = "\n".join(csvRows)
+	return Response(csv, mimetype="text/plain",
 			headers={
 				"Content-Disposition": "attachment;filename=estimates.csv"})
 
