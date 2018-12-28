@@ -32,18 +32,18 @@ def filterFactory(filters, inclusive, model):
 	:raises AttributeError: raises an exception if a key in filters is not an
 	attribute of model
 	"""
-	first = True
+	filtCreated = True
 	filt = None
 
 	# This loop is where the action is
 	for key,val in filters.items():
-		if val and inclusive and not first:
+		if val and inclusive and not filtCreated:
 			filt = and_(filt, getattr(model, key).in_(val))
 		elif val and filt:
 			filt = or_(filt, getattr(model,key).in_(val))
 		elif val:
 			filt = getattr(model,key).in_(val)
-			first = False
+			filtCreated = False
 
 	return filt
 
@@ -81,7 +81,7 @@ def formHandler(request, session):
 
 
 	# Build the filter for the query.
-	if years == "Most Recent Survey":
+	if years == "most-recent":
 		for geo in filterDict['geography']:
 			# Get the most recent year for each country
 			mry = getMostRecent(geo, session)
