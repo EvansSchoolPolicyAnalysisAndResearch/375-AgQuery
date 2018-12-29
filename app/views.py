@@ -18,14 +18,21 @@ from app.dbhelper import filterFactory,formHandler
 @app.route('/', methods={"GET","POST"})
 def index():
 	"""
+		Handles requests to the main page of the website
+
+		This function handles all of the requests to the default page it takes 
+		no parameters, but relies on the request.form global for the flask
+		session to populate the indicators for the selected category
+
+		:returns: HTML file representing the index page
 	"""
 
 	# Creating the variables to be used throughout the method
 	indicators=[] # the list of indicators to display
 	goDisabled = True # Is the go button on the page disabled
 
-	# These database queries are for populating the filter lists at the top of
-	# the page
+	# These database queries are for populating the filter lists for indicator
+	# category, georgraphy, and years
 	geography = [r.geography for r in 
 		db_session.query(Estimates.geography).distinct()]
 	indicatorCategory = [r.indicatorCategory for r in
@@ -36,8 +43,6 @@ def index():
 	# empty. In which case this code block will get the list of indicator names
 	# to be displayed in the indicators filter.
 	if request.form:
-		# Pull the information necessary from the post information
-
 		# The only absolutely necessary filter is the indicator category. The
 		# rest default to all.
 		selectedCategories = request.form.getlist('indicatorCategory')
@@ -57,12 +62,26 @@ def index():
 @app.route('/login')
 def login():
 	"""
+		Place holder for a login page
+
+		This will be where any login handling will be done when the login
+		system is created
+
+		:returns: HTML page for displaying a login screen. 
 	"""
 	return render_template("login.html")
 
 @app.route('/results', methods={"POST"})
 def results():
 	"""
+	Creates the results page
+
+	Passes the filter state from the index page to the form handler function
+	before passing the results to the JINJA Template for rendering into an
+	HTML page which is returned. Requires the request object to have the
+	necessary filters.
+
+	:returns: an HTML page to be displayed by the website
 	"""
 	indicators = formHandler(request, db_session)
 	return render_template("results.html", indicators=indicators)
@@ -70,7 +89,13 @@ def results():
 @app.route('/get-csv',methods={"POST"})
 def get_csv():
 	"""
+	Handles requests to download CSV Files containing the estimates
 
+	Passes the state of the filters on the index page to the formHandler 
+	function. It then collates the results into a CSV file which is
+	then offered as a download by the website.
+
+	:returns: a Response object containing a CSV of the required variables
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
