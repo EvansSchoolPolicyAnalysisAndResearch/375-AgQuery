@@ -32,18 +32,19 @@ def filterFactory(filters, inclusive, model):
 	:raises AttributeError: raises an exception if a key in filters is not an
 	attribute of model
 	"""
-	first = True
+
+	filtCreated = False
 	filt = None
 
 	# This loop is where the action is
 	for key,val in filters.items():
-		if val and inclusive and not first:
+		if val and inclusive and  filtCreated:
 			filt = and_(filt, getattr(model, key).in_(val))
-		elif val and filt:
+		elif val and filtCreated:
 			filt = or_(filt, getattr(model,key).in_(val))
 		elif val:
 			filt = getattr(model,key).in_(val)
-			first = False
+			filtCreated = True
 
 	return filt
 
@@ -53,11 +54,12 @@ def formHandler(request, session):
 
 	This takes in the request information passed to the flask route function
 	and turns it into a database query. The results of this query are then
-	returned to the original function
+	returned to the original function to either be displayed or transformed
+	into a downloadable CSV
 
-	:param request:
-	:param session:
-	:returns:
+	:param request: The request information from the website
+	:param session: the database session for the query
+	:returns: 
 	:raises:
 	"""
 	
@@ -71,8 +73,10 @@ def formHandler(request, session):
 	filterDict['geography'] = request.form.getlist('geography')
 	years = request.form.get('years')
 	filterDict['indicatorName'] = request.values.to_dict()
-	del filterDict['indicatorName'] ['years']
 	
+	# Request.values.to_dict() also gives the values for year and geos,
+	# Those need to be removed from the dict of indicator names	
+	del filterDict['indicatorName'] ['years']
 	if filterDict['geography']:
 		del filterDict['indicatorName'] ['geography']
 	else:
@@ -100,17 +104,21 @@ def formHandler(request, session):
 		# Add the requested indicators to the filter
 		filt = and_(filt, Estimates.indicatorName.in_(filterDict['indicatorName']))	
 	else:
-		# Request.values.to_dict() also gives the values for year and geos,
-		# Those need to be removed from the dict of indicator names
+		# If all years is selected, use the filterFactory function
 		filt = filterFactory(filterDict, True, Estimates)
 	
-	# Query the database to get the estimates.
+	# Query the database to get the estimates and return the results
 	return session.query(Estimates).filter(filt)
 
 def getMostRecent(geo, session):
 	"""
-	getMostRecent 
+	Finds the most recent year of LSMS surveys for a given geography
+
+	:param geo: String - the geography you are seeking the most recent year for
+	:param session: SQLAlchemy Database session to use for the query
+	:returns: String of the most recent survey year for the given geography
 	"""
+
 	years = [r.year for r in 
 		session.query(Estimates.year).distinct().filter_by(geography= geo)]
 	mostRec = "0"
