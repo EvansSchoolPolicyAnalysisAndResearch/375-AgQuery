@@ -18,13 +18,13 @@ from app.dbhelper import filterFactory,formHandler
 @app.route('/', methods={"GET","POST"})
 def index():
 	"""
-		Handles requests to the main page of the website
+	Handles requests to the main page of the website
 
-		This function handles all of the requests to the default page it takes 
-		no parameters, but relies on the request.form global for the flask
-		session to populate the indicators for the selected category
+	This function handles all of the requests to the default page it takes 
+	no parameters, but relies on the request.form global for the flask
+	session to populate the indicators for the selected category
 
-		:returns: HTML file representing the index page
+	:returns: HTML file representing the index page
 	"""
 
 	# Creating the variables to be used throughout the method
@@ -62,12 +62,12 @@ def index():
 @app.route('/login')
 def login():
 	"""
-		Place holder for a login page
+	Place holder for a login page
 
-		This will be where any login handling will be done when the login
-		system is created
+	This will be where any login handling will be done when the login
+	system is created
 
-		:returns: HTML page for displaying a login screen. 
+	:returns: HTML page for displaying a login screen. 
 	"""
 	return render_template("login.html")
 
@@ -95,7 +95,7 @@ def get_csv():
 	function. It then collates the results into a CSV file which is
 	then offered as a download by the website.
 
-	:returns: a Response object containing a CSV of the required variables
+	:returns: a Response object containing a CSV of the required variablesp
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
@@ -116,9 +116,15 @@ def get_csv():
 
 @app.route('/about-data/')
 def about_data():
+	"""
+
+	"""
 	decisions = db_session.query(GenCons).all()
 	return render_template('about-data.html', decisions=decisions)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
+	"""
+		
+	"""
 	db_session.remove()
