@@ -95,7 +95,7 @@ def get_csv():
 	function. It then collates the results into a CSV file which is
 	then offered as a download by the website.
 
-	:returns: a Response object containing a CSV of the required variablesp
+	:returns: a Response object containing a CSV of the required variables
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
@@ -117,7 +117,12 @@ def get_csv():
 @app.route('/about-data/')
 def about_data():
 	"""
+	Creates the About Data page
 
+	Gets the general constructions decisions from the database and passes them
+	to the template before returning the html page.
+
+	:returns: An HTML page to be displayed by the website
 	"""
 	decisions = db_session.query(GenCons).all()
 	return render_template('about-data.html', decisions=decisions)
@@ -125,6 +130,8 @@ def about_data():
 @app.teardown_appcontext
 def shutdown_session(exception=None):
 	"""
-		
+	When the http session is over this kills the database session.
+
+	:returns: none
 	"""
 	db_session.remove()
