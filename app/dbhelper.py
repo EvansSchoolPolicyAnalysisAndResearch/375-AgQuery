@@ -85,7 +85,7 @@ def formHandler(request, session):
 
 
 	# Build the filter for the query.
-	if years == "Most Recent Survey":
+	if years == "most-recent":
 		for geo in filterDict['geography']:
 			# Get the most recent year for each country
 			mry = getMostRecent(geo, session)
