@@ -9,11 +9,11 @@
 
 {% block body %}
 <p> 
-	To select multiple categories, geographies or years use Control +
+	To select multiple categories, or geographies use Control +
 	click (Command + Click on Mac).
 </p>
 <p>
-	To view values for all years or geographies leave the selection blank.
+	To view values for geographies leave the selection blank.
 </p>
 
 {% if goDisabled == True %}
@@ -41,13 +41,12 @@
 		<p>Years:</p> 
 		<div class="scrollbox" id="years">
 			<ul>
-				<li><input type='radio' id='yearsChoice1' selected="selected"
+				<li><input type='radio' id='yearsChoice1' checked="checked"
 				 name='years' value='all' />
-				<label for='yearsChoice1'>All LSMS Surveys</label> </li>
-				
-				<li><input type='radio' id='yearsChoice2' selected="selected"
-				 name='years' value='most-recent' />
-				<label for='yearsChoice2'>Most Recent LSMS Surveys</label></li>
+				<label for='yearsChoice1'>All Waves of LSMS-ISA</label> </li>
+				<li><input type='radio' id='yearsChoice2' name='years' 
+					value='most-recent' />
+				<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></li>
 			</ul>
 		</div>
 	</div>
