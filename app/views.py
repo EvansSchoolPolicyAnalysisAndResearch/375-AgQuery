@@ -84,6 +84,8 @@ def results():
 	:returns: an HTML page to be displayed by the website
 	"""
 	indicators = formHandler(request, db_session)
+	if not indicators:
+		return render_template("no-inds.html")
 	return render_template("results.html", indicators=indicators)
 
 @app.route('/get-csv',methods={"POST"})
@@ -99,7 +101,8 @@ def get_csv():
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
-
+	if not indicators:
+		return render_template("no-inds.html")
 	# Building the rows of the CSV
 	# This is horrible code that should be replaced before the final
 	# version as it relies on the order of the keys in the code.

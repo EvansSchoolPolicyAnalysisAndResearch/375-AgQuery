@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Oops{% endblock %}
+
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about-data.css') }}">
+{% endblock %}
+
+{% block pageheader %}No Indicators Selected{% endblock %}
+
+{% block body %}
+<p>No indicators were selected on the previous page. Please go back
+	and select at least one indicator.</p>
+{% endblock %}

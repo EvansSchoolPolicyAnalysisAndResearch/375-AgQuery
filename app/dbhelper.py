@@ -82,8 +82,9 @@ def formHandler(request, session):
 	else:
 		filterDict['geography'] = [r.geography for r in 
 			session.query(Estimates.geography).distinct()]
-
-
+	if not filterDict['indicatorName']:
+		return None
+	
 	# Build the filter for the query.
 	if years == "most-recent":
 		for geo in filterDict['geography']:
