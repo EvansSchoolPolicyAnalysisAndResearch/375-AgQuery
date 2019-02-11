@@ -9,11 +9,10 @@ license.txt file for more information.
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-
 # initialize the app
 app = Flask(__name__, instance_relative_config=True)
 # Load the Config file
-app.config.from_object('config')
+app.config.from_object(os.environ['APP_SETTINGS'])
 
 # Set up the database connection
 from app.database import init_db

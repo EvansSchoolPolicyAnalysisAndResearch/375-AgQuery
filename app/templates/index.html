@@ -4,29 +4,27 @@
 {% block title %}EPAR Agricultural Data Project{% endblock %}
 {% block includes %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	<!--<script type="text/javascript" 
+		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script> -->
 {% endblock %}
 {% block pageheader %}Select your Data{% endblock %}
 
 {% block body %}
-<p> 
-	To select multiple categories, or geographies use Control +
-	Click (Command + Click on Mac).
-</p>
-<p>
-	To view values for all geographies leave the selection blank.
-</p>
-
 {% if goDisabled == True %}
 <form method="POST" action="/">
 		
 		<!-- Here be the point where I need to get the indicator categories from the database -->
 	<div id="icGroup" class="filterbox">
-		<label for=indicatorCategory>Category:</label> <br />
-		<select multiple id="indicatorCategory" name="indicatorCategory">
+		<p>Indicator Category:</p>
+		<div class="scrollbox">
+			<ul>
 			{% for cat in indicatorCategory %}
-				<option>{{cat}}</option>
+				<li><label><input type="checkbox"
+							value="{{cat}}"
+							name="indicatorCategory"
+							id="{{cat}}" />
+					{{cat}}</label>
 			{% endfor %}
-		</select>
 	</div>
 	<div class='buttonbox'>
 		<input type="submit" name="Find Indicators" value="Find Indicators">
@@ -37,6 +35,21 @@
 {% if goDisabled == False %}
 <p><a href="/">Back to Category Selection</a></p>
 <form method="POST" action="/results">
+	<div id="geoGroup" class="filterbox">
+		<p>Geographic Region:</p>
+		<div class="scrollbox">
+			<ul>
+			{% for geo in geography %}
+				<li><label><input type="checkbox"
+							value="{{geo}}"
+							name="geography"
+							id="{{geo}}" />
+					{{geo}}</label>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 	<div id='years' class='filterbox'>
 		<p>Years:</p> 
 		<div class="scrollbox" id="years">
@@ -50,25 +63,22 @@
 			</ul>
 		</div>
 	</div>
-	<div id="geoGroup" class="filterbox">
-		<p>Geographic Region:</p>
-		<select multiple id="geography" name="geography">
-			{% for geo in geography %}
-				<option>{{geo}}</option>
-			{% endfor %}
-		</select>
-	</div>
+	
 	<div id="indicatorBox" class="filterbox" >
 		<p>Indicators:</p>
 		<div class="scrollbox">
 			<ul>
+			<!--<li> 
+				<input type="checkbox" id="allindicators" />
+				<label for="allindicators">Select All</label>
+			</li> -->
 			{% for indicator in indicators %}
 				<li>
-					<input type="checkbox" 
+					<label><input type="checkbox" 
 							id="{{indicator}}" 
-							name="{{indicator}}" 
+							name="indicator" 
 							value="{{indicator}}" />
-					<label for="{{indicator}}">{{indicator}}</label>
+					{{indicator}}</label>
 				</li>
 			{% endfor %}
 			</ul>
