@@ -88,7 +88,7 @@ def results():
 		return render_template("no-inds.html")
 	return render_template("results.html", indicators=indicators)
 
-@app.route('/get-csv',methods={"POST"})
+@app.route('/get-csv',methods={"GET","POST"})
 def get_csv():
 	"""
 	Handles requests to download CSV Files containing the estimates

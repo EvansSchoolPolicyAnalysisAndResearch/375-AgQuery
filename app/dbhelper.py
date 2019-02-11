@@ -24,8 +24,7 @@ def formHandler(request, session):
 	into a downloadable CSV
 
 	:param request: The request information from the website
-	:param sessi
-	on: the database session for the query
+	:param session: the database session for the query
 	:returns: 
 	:raises:
 	"""
