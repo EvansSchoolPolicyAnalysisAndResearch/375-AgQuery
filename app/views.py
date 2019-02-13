@@ -13,7 +13,7 @@ from flask import render_template, request, Response
 import ast
 from app.database import db_session
 from app.models import Estimates,GenCons
-from app.dbhelper import filterFactory,formHandler
+from app.dbhelper import formHandler
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -33,20 +33,20 @@ def index():
 
 	# These database queries are for populating the filter lists for indicator
 	# category, georgraphy, and years
-	geography = [r.geography for r in 
-		db_session.query(Estimates.geography).distinct()]
+	
 	indicatorCategory = [r.indicatorCategory for r in
 			db_session.query(Estimates.indicatorCategory).distinct()]
 	years = ["All Years", "Most Recent Survey"]
+	geography = []
 
 	# If this page was accessed using post then request.form should not be 
 	# empty. In which case this code block will get the list of indicator names
 	# to be displayed in the indicators filter.
 	if request.form:
-		# The only absolutely necessary filter is the indicator category. The
-		# rest default to all.
 		selectedCategories = request.form.getlist('indicatorCategory')
 		if selectedCategories:
+			geography = [r.geography for r in 
+					db_session.query(Estimates.geography).distinct()]
 			indicators = [r.indicatorName for r in
 				db_session.query(
 					Estimates.indicatorName).distinct().filter(
@@ -84,6 +84,8 @@ def results():
 	:returns: an HTML page to be displayed by the website
 	"""
 	indicators = formHandler(request, db_session)
+	if not indicators:
+		return render_template("no-inds.html")
 	return render_template("results.html", indicators=indicators)
 
 @app.route('/get-csv',methods={"POST"})
@@ -99,18 +101,29 @@ def get_csv():
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
-
+	if not indicators:
+		return render_template("no-inds.html")
 	# Building the rows of the CSV
 	# This is horrible code that should be replaced before the final
 	# version as it relies on the order of the keys in the code.
 	headers = Estimates.__table__.columns.keys()
+	headers = headers[1:]
 	csvRows =[','.join(headers),]
-	csvRows[0] = csvRows[0][3:]
 	for ind in indicators:
-		csvRows.append(str(ind))
+		currentRow = ''
+		for header in headers:
+			val = getattr(ind, header)
+			if type(val) is str:
+				currentRow += '"'  + val + '",'
+			elif type(val) is float:
+				currentRow += str(val) + ','
+			else:
+				currentRow += ','
+		csvRows.append(currentRow[:-1])
+		
 	# Combine all of the rows into a single row.
 	csv = "\n".join(csvRows)
-	return Response(csv, mimetype="text/plain",
+	return Response(csv, mimetype="text/csv",
 			headers={
 				"Content-Disposition": "attachment;filename=estimates.csv"})
 

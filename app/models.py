@@ -11,7 +11,7 @@ from sqlalchemy import Column,Integer,String,Float
 from app.database import Base
 
 class Estimates(Base):
-	__tablename__ = 'Estimates'
+	__tablename__ = 'estimates'
 	id = Column(Integer, primary_key=True)
 	geography = Column(String)
 	survey = Column(String)
@@ -38,17 +38,11 @@ class Estimates(Base):
 	minim = Column(Float)
 	maxim = Column(Float)
 	n = Column(Float)
-	n30 = Column(String)
+	nover30 = Column(String)
 
 	def __repr__(self):
 		return '"' + '","'.join([self.geography, self.survey, self.instrument,
-			self.year, self.indicatorCategory, self.indicatorName, self.units, 
-			self.cropDisaggregation, self.genderDisaggregation, 
-			self.farmSizeDisaggregation, self.subpopulation, 
-			self.currencyConversion, self.indicatorLevel,self.weight, 
-			self.crosswave, self.variableName, str(self.mean),str(self.se), 
-			str(self.sd), str(self.p25), str(self.median),str(self.p75), 
-			str(self.minim), str(self.maxim), str(self.n), self.n30]) + '"'
+			self.year, self.variableName]) + '"'
 
 class GenCons(Base):
 	__tablename__ = 'GenCons'

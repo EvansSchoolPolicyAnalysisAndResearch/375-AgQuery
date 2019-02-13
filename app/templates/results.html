@@ -4,6 +4,10 @@
 
 {% block title %}Data Estimates{% endblock %}
 
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+{% endblock %}
+
 {% block pageheader %}Results:{% endblock %}
 
 {% block body %}
@@ -12,22 +16,41 @@
 		<th>Indicator Name</th>
 		<th>Geography</th>
 		<th>Year</th>
-		<th>Variable Name</th>
+		<th>Gender</th>
+		<th>Level</th>
+		<th>Sub-Population</th>
+		<th>Farm Size</th>
+		<th>Crop</th>
+		<th>Units</th>
 		<th>Mean</th>
+		<th>Standard Error</th>
 	</tr>
 {% for ind in indicators %}
 	<tr>
 		<td>{{ind.indicatorName}}</td>
 		<td>{{ind.geography}}</td>
 		<td>{{ind.year}}</td>
-		<td>{{ind.variableName}}
-		<td>{% if ind.mean %} 
-				{{"{:.3f}".format(ind.mean)}} ({{ind.units}})
-			{% else %}
+		<td>{{ind.genderDisaggregation}}</td>
+		<td>{{ind.indicatorLevel}} </td>
+		<td>{{ind.subpopulation}}</td>
+		<td>{{ind.farmSizeDisaggregation}}</td>
+		<td>{{ind.cropDisaggregation}}</td>
+		<td>{{ind.units}}</td>
+		<td>{% if ind.mean and "$" in ind.units  %} 
+				{{"{:.2f}".format(ind.mean)}}
+			{% elif ind.mean %}
+				{{"{:.3f}".format(ind.mean)}}
+			{% else  %}
 				N/A
 			{% endif %}
 		</td>
-	</tr>
+		<td>{% if ind.se and "$" in ind.units  %} 
+				{{"{:.2f}".format(ind.se)}}
+			{% elif ind.se %}
+				{{"{:.3f}".format(ind.se)}}
+			{% else  %}
+				N/A
+			{% endif %}
 {% endfor %}
 </table>
 {% endblock %}

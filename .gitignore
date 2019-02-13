@@ -10,3 +10,8 @@ __pycache__
 # Python Compiled files
 *.pyc
 
+# hide the virtual env
+webserv
+
+# Stop tracking the .env special stuff in there
+.env

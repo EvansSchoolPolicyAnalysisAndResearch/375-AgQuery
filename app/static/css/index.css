@@ -1,0 +1,55 @@
+select {
+	width:100%;
+}
+
+.filterbox {
+	float:left;
+	display:block;
+	width: 25em;
+	height:25em;
+	border: 3px solid #4c2d82;
+	padding:1em 0em 0em 0em;
+	margin: .5em;
+}
+
+.filterbox p {
+	padding:0;
+	margin: 0;
+	text-align:center;
+}
+.filterbox select {
+	font-size: 17px;
+	font-family: "Open Sans" sans-serif;
+	height:23.25em;
+}
+.scrollbox {
+	overflow-y:scroll;
+	overflox-x:hidden;
+	height: 23.25em;
+	border-top:1px solid #999;
+}
+
+.scrollbox ul {
+	list-style: none;
+	padding-left:0;
+	margin-top: 0;
+}
+.scrollbox li {
+	line-height: 1.1em;
+	padding-bottom: .5em;
+}
+
+.buttonbox {
+	clear:both;
+	margin: auto;
+	text-align:center;
+}
+.contenthole {
+	margin:auto;
+	overflow:hidden;
+	max-width:80em;
+}
+
+input[type="submit"] {
+	clear:both;
+}
