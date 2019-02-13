@@ -4,8 +4,8 @@
 {% block title %}EPAR Agricultural Data Project{% endblock %}
 {% block includes %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-	<!--<script type="text/javascript" 
-		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script> -->
+	<script type="text/javascript" 
+		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script>
 {% endblock %}
 {% block pageheader %}Select your Data{% endblock %}
 
@@ -27,46 +27,27 @@
 			{% endfor %}
 			</ul>
 		</div>
+		<div class="selectionbuttons">
+			<button type="button" class="select" onclick="SelectAll('indicatorCategory');" >
+				Select All
+			</button>
+			<button type="button" class="clear" onclick="ClearAll('indicatorCategory');">
+				Clear All
+			</button>
+		</div>
 	</div>
 	<div class='buttonbox'>
-		<input type="submit" name="Find Indicators" value="Find Indicators">
+		<input type="submit" name="Find Indicators" value="Find Indicators" />
 	</div>
 </form>
 {% endif %}
 
 {% if goDisabled == False %}
 <p><a href="/">Back to Category Selection</a></p>
+
+
 <form method="POST" action="/results">
-	<div id="geoGroup" class="filterbox">
-		<p>Geographic Region:</p>
-		<div class="scrollbox">
-			<ul>
-			{% for geo in geography %}
-				<li><label><input type="checkbox"
-							value="{{geo}}"
-							name="geography"
-							id="{{geo}}" />
-					{{geo}}</label>
-				</li>
-			{% endfor %}
-			</ul>
-		</div>
-	</div>
-	<div id='years' class='filterbox'>
-		<p>Years:</p> 
-		<div class="scrollbox" id="years">
-			<ul>
-				<li><input type='radio' id='yearsChoice1' checked="checked"
-				 name='years' value='all' />
-				<label for='yearsChoice1'>All Waves of LSMS-ISA</label> </li>
-				<li><input type='radio' id='yearsChoice2' name='years' 
-					value='most-recent' />
-				<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></li>
-			</ul>
-		</div>
-	</div>
-	
-	<div id="indicatorBox" class="filterbox" >
+	<div id="indicatorbox" class="indicatorbox" >
 		<p>Indicators:</p>
 		<div class="scrollbox">
 			<ul>
@@ -85,11 +66,59 @@
 			{% endfor %}
 			</ul>
 		</div>
+		<div class="selectionbuttons">
+			<button type="button" class="select" onclick="SelectAll('indicator');" >
+				Select All
+			</button>
+			<button type="button" class="clear" onclick="ClearAll('indicator');">
+				Clear All
+			</button>
+		</div>
 	</div>
+
+	<div id="geoGroup" class="filterbox">
+		<p>Geographic Region:</p>
+		<div class="scrollbox">
+			<ul>
+			{% for geo in geography %}
+				<li><label><input type="checkbox"
+							value="{{geo}}"
+							name="geography"
+							id="{{geo}}" />
+					{{geo}}</label>
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+		<div class="selectionbuttons">
+			<button type="button" class="select" onclick="SelectAll('geography');" >
+				Select All
+			</button>
+			<button type="button" class="clear" onclick="ClearAll('geography');">
+				Clear All
+			</button>
+		</div>
+	</div>
+	
+	<div id='years' class='filterbox'>
+		<p>Years:</p> 
+		<div class="scrollbox" id="years">
+			<ul>
+				<li><input type='radio' id='yearsChoice1' checked="checked"
+				 name='years' value='all' />
+				<label for='yearsChoice1'>All Waves of LSMS-ISA</label> </li>
+				<li><input type='radio' id='yearsChoice2' name='years' 
+					value='most-recent' />
+				<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></li>
+			</ul>
+		</div>
+	</div>
+
 	<div class='buttonbox'>
 		<input type="submit" value="View Estimates" formaction='results' />
 		<input type='submit' value='Download CSV' formaction='get-csv' />
 	</div>
 </form>
 {% endif %}
+
 {% endblock %}

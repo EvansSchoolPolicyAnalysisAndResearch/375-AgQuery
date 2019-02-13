@@ -1,4 +1,4 @@
-#dev-config.py
+# config.py
 
 """
 Copyright 2018 Evans Policy Analysis and Research Group (EPAR)

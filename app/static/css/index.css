@@ -1,32 +1,36 @@
-select {
-	width:100%;
+.indicatorbox, .filterbox {
+	border: 3px solid #4c2d82;
+	width: 400px;
+	display:block;
+	padding:15px 0px 0px 0px;
+	margin: 10px 10px 45px 0px;
 }
 
 .filterbox {
-	float:left;
-	display:block;
-	width: 25em;
-	height:25em;
-	border: 3px solid #4c2d82;
-	padding:1em 0em 0em 0em;
-	margin: .5em;
+	height:250px;
 }
 
-.filterbox p {
+.indicatorbox {
+	float:right;
+	margin-top:0px;
+	height:530px;
+}
+
+.filterbox p, .indicatorbox p {
 	padding:0;
 	margin: 0;
 	text-align:center;
 }
-.filterbox select {
-	font-size: 17px;
-	font-family: "Open Sans" sans-serif;
-	height:23.25em;
-}
+
 .scrollbox {
 	overflow-y:scroll;
 	overflox-x:hidden;
-	height: 23.25em;
+	height: 220px;
 	border-top:1px solid #999;
+}
+
+.indicatorbox .scrollbox{
+	height: 500px;
 }
 
 .scrollbox ul {
@@ -35,8 +39,20 @@ select {
 	margin-top: 0;
 }
 .scrollbox li {
-	line-height: 1.1em;
-	padding-bottom: .5em;
+	line-height: 18px;
+	padding-bottom: 5px;
+}
+
+.selectionbuttons {
+	text-align: center;
+}
+
+.selectionbuttons button, input[type="submit"] {
+	background-color: #fff;
+	border: 2px solid #4c2d82;
+	padding: 5px;
+	width: 150px;
+	margin: 10px;
 }
 
 .buttonbox {
@@ -47,9 +63,5 @@ select {
 .contenthole {
 	margin:auto;
 	overflow:hidden;
-	max-width:80em;
-}
-
-input[type="submit"] {
-	clear:both;
+	max-width:850px;
 }

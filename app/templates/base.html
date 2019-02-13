@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>{% block title %}{% endblock %}</title>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+	 <link href="https://fonts.googleapis.com/css?family=Encode+Sans:900|Open+Sans" rel="stylesheet"> 
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 	{% block includes %}{% endblock %}
 </head>
@@ -26,11 +26,11 @@
 				<h1>{% block pageheader %}{% endblock %}</h1>
 				{% block body %} {% endblock %}
 		</section>
-		<footer>
-			&copy; Copyright 2018 Evans Policy Analysis and Research Group
-		</footer>
+		
 		
 	</div> <!-- end container -->
-
+<footer>
+	&copy; Copyright 2018 Evans Policy Analysis and Research Group
+</footer>
 </body>
 </html>

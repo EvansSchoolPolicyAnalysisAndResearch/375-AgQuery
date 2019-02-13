@@ -1,14 +1,16 @@
-body {
+html,body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 17px;
+	font-size: 12pt;
 	line-height: 1.722222;
 	font-weight: normal;
 	color: #3D3D3D;
 	background-color: #fff;
+	height: 100%;
 }
 
-h1 {
-	font-family: 'Open Sans', sans-serif;
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Encode Sans', sans-serif;
+	font-weight: 900;
 }
 
 header {
@@ -19,8 +21,9 @@ header {
 	margin-right:0px;
 	margin-left: 0px;
 }
+
 header h1 {
-	font-weight: 700;
+	font-size: 28pt;
 	text-align: center;
 	padding: 30px;
 }
@@ -69,6 +72,19 @@ td {
 	border-bottom-style: dashed;
 }
 
+.container {
+	min-height: 100%;
+}
+
+.contenthole {
+	overflow: auto;
+	padding-bottom: 50px;
+}
+
 footer {
-	clear:both;
+	position: relative;
+	margin-top: -50px;
+  /* negative value of footer height */
+  	height: 50px;
+  	clear: both;
 }
