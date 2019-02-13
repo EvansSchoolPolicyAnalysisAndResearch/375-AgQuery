@@ -56,6 +56,8 @@ def formHandler(request, session):
 			Estimates.geography.in_(geos), 
 			Estimates.indicatorName.in_(names)).all()
 	return indicators
+
+	
 def getMostRecent(geo, session):
 	"""
 	Finds the most recent year of LSMS surveys for a given geography
