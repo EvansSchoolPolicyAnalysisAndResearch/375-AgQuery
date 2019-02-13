@@ -45,7 +45,7 @@ class Estimates(Base):
 			self.year, self.variableName]) + '"'
 
 class GenCons(Base):
-	__tablename__ = 'GenCons'
+	__tablename__ = 'gencons'
 	topic = Column(String, primary_key=True)
 	decision = Column(String)
 
