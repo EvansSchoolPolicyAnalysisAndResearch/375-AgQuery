@@ -10,10 +10,10 @@ from app import app
 from sqlalchemy.sql import select
 from sqlalchemy import and_, or_
 from flask import render_template, request, Response
-import ast
 from app.database import db_session
 from app.models import Estimates,GenCons
 from app.dbhelper import formHandler
+from app.dlhelper import make_csv
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -84,8 +84,11 @@ def results():
 	:returns: an HTML page to be displayed by the website
 	"""
 	indicators = formHandler(request, db_session)
+	# Check if anything is returned from the formHandler. If no, then show the
+	# error page
 	if not indicators:
-		return render_template("no-inds.html")
+		return render_template("no-inds.html"), 406
+
 	return render_template("results.html", indicators=indicators)
 
 @app.route('/get-csv',methods={"GET","POST"})
@@ -102,27 +105,14 @@ def get_csv():
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
 	if not indicators:
-		return render_template("no-inds.html")
+		return render_template("no-inds.html"), 406
 	# Building the rows of the CSV
 	# This is horrible code that should be replaced before the final
 	# version as it relies on the order of the keys in the code.
 	headers = Estimates.__table__.columns.keys()
 	headers = headers[1:]
-	csvRows =[','.join(headers),]
-	for ind in indicators:
-		currentRow = ''
-		for header in headers:
-			val = getattr(ind, header)
-			if type(val) is str:
-				currentRow += '"'  + val + '",'
-			elif type(val) is float:
-				currentRow += str(val) + ','
-			else:
-				currentRow += ','
-		csvRows.append(currentRow[:-1])
-		
-	# Combine all of the rows into a single row.
-	csv = "\n".join(csvRows)
+	csv = make_csv(headers, indicators)
+	
 	return Response(csv, mimetype="text/csv",
 			headers={
 				"Content-Disposition": "attachment;filename=estimates.csv"})
