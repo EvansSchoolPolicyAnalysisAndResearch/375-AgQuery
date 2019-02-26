@@ -77,14 +77,17 @@ td {
 }
 
 .contenthole {
+	margin:auto;
 	overflow: auto;
-	padding-bottom: 50px;
+	padding-bottom: 80px	;
 }
 
 footer {
 	position: relative;
-	margin-top: -50px;
-  /* negative value of footer height */
-  	height: 50px;
+	/* negative value of footer height */
+	margin-top: -80px;
+  	height: 80px;
+  	padding-bottom: 0;
+  	margin-bottom:0;
   	clear: both;
 }
