@@ -12,8 +12,6 @@ from sqlalchemy import and_, or_
 from sqlalchemy.sql import select
 from app.models import *
 
-
-
 def formHandler(request, session):
 	"""
 	Handles the input from the filter on the main page.
@@ -21,11 +19,11 @@ def formHandler(request, session):
 	This takes in the request information passed to the flask route function
 	and turns it into a database query. The results of this query are then
 	returned to the original function to either be displayed or transformed
-	into a downloadable CSV
+	into a downloadable CSV.
 
 	:param request: The request information from the website
 	:param session: the database session for the query
-	:returns: 
+	:returns: 		Results of the Database Query
 	:raises:
 	"""
 	
@@ -33,7 +31,6 @@ def formHandler(request, session):
 	# passed to this function
 	geos = request.form.getlist('geography')
 	years = request.form.get('years')
-
 	names = request.form.getlist('indicator')
 
 	# If no geographies are selected count them as all selected	
