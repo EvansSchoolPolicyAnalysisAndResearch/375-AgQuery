@@ -9,6 +9,7 @@ license.txt file for more information.
 from app import app
 from sqlalchemy.sql import select
 from sqlalchemy import and_, or_
+from os import environ
 from flask import render_template, request, Response
 from app.database import db_session
 from app.models import Estimates,GenCons
@@ -29,7 +30,7 @@ def index():
 
 	# Creating the variables to be used throughout the method
 	indicators=[] # the list of indicators to display
-	goDisabled = True # Is the go button on the page disabled
+	goDisabled = True 
 
 	# These database queries are for populating the filter lists for indicator
 	# category, georgraphy, and years
@@ -45,8 +46,10 @@ def index():
 	if request.form:
 		selectedCategories = request.form.getlist('indicatorCategory')
 		if selectedCategories:
+			# Get a list of all of the geographies
 			geography = [r.geography for r in 
 					db_session.query(Estimates.geography).distinct()]
+			# Get a list of all indicators in the selected categories
 			indicators = [r.indicatorName for r in
 				db_session.query(
 					Estimates.indicatorName).distinct().filter(
@@ -104,18 +107,21 @@ def get_csv():
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
+
+	# Check if any indicators were selected
 	if not indicators:
 		return render_template("no-inds.html"), 406
-	# Building the rows of the CSV
-	# This is horrible code that should be replaced before the final
-	# version as it relies on the order of the keys in the code.
+
+	# Get the headers based on the columns of the database
 	headers = Estimates.__table__.columns.keys()
 	headers = headers[1:]
+
+	#Generate a string which is the final csv 
 	csv = make_csv(headers, indicators)
 	
 	return Response(csv, mimetype="text/csv",
-			headers={
-				"Content-Disposition": "attachment;filename=estimates.csv"})
+			headers={"Content-Disposition": 
+				"attachment;filename=indicator_estimates.csv"})
 
 @app.route('/about-data/')
 def about_data():
