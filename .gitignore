@@ -10,12 +10,12 @@ __pycache__
 # Python Compiled files
 *.pyc
 
-# hide the virtual env
-webserv
-
 # Stop tracking the .env special stuff in there
 .env
 
 # The csvs/xlsx are for updating the DBs and should not be tracked
 *.xlsx
 *.csv
+
+# Stop tracking the dls
+app/static/dls
