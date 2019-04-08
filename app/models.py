@@ -12,6 +12,14 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Estimates(Base):
+	"""
+		GenCons extends Base
+
+        Estimates is a class which extends this app's Base, an instance of a 
+        SQLAlchemy declarative database. This is the SQLAlchemy representation
+        of the estimates table in this project's database. 
+
+	"""
 	__tablename__ = 'estimates'
 	id = Column(Integer, primary_key=True)
 	geography = Column(String)
@@ -46,6 +54,14 @@ class Estimates(Base):
 			(self.variableName, self.instrument)
 
 class GenCons(Base):
+	"""
+		GenCons extends Base
+
+        Gencons is a class which extends this app's Base, an instance of a 
+        SQLAlchemy declarative database. This is the SQLAlchemy representation
+        of the gencons table in this project's database. 
+
+	"""
 	__tablename__ = 'gencons'
 	topic = Column(String, primary_key=True)
 	decision = Column(String)
@@ -54,6 +70,14 @@ class GenCons(Base):
 		return "<Topic: %s>" % (self.topic)
 
 class IndCons(Base):
+	""" 
+		IndCons extends Base
+
+        Indcons is a class which extends this app's Base, an instance of a 
+        SQLAlchemy declarative database. This is the SQLAlchemy representation
+        of the indcons table in this project's database. 
+
+	"""
 	__tablename__ = 'indcons'
 	id = Column(Integer, primary_key=True)
 	indicatorCategory = Column(String)
@@ -77,13 +101,21 @@ class IndCons(Base):
 			(self.indicatorName, self.constructiondecision)
 
 class CntryCons(Base):
+	"""
+		CntryCons extends Base
+	
+		CntryCons is a class which extends this app's Base class, a SQLAlchemy
+		declarative database. This class represents the cntrycons table in the
+		project's database. 
+	
+	"""
 	__tablename__ = "cntrycons"
 	id = Column(Integer, primary_key=True)
 	instrument = Column(String)
 	cntrydec = Column(String)
 	indid = Column(Integer, ForeignKey(IndCons.id))
 
-	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indid')
+	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indid', lazy=joined)
 
 	def __repr__(self):
 		return "<Instrument: %s; IndCon ID: %s>" % \
