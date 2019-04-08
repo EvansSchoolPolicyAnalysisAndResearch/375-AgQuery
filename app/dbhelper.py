@@ -45,11 +45,14 @@ def formHandler(request, session):
 	if years == "most-recent":
 		for geo in geos:
 			year = getMostRecent(geo, session)
-			indicators += session.query(Estimates).filter(
-							Estimates.geography == geo, Estimates.year == year,
-							Estimates.indicatorName.in_(names)).all()
+			indicators += session.query(Estimates, IndCons).filter(
+				IndCons.varnamestem.like(Estimates.variableName)).filter(
+				Estimates.geography == geo, 
+				Estimates.year == year,
+				Estimates.indicatorName.in_(names)).all()
 	else:
-		indicators = session.query(Estimates).filter(
+		indicators = session.query(Estimates, IndCons).filter(
+			IndCons.varnamestem.like(Estimates.variableName)).filter(
 			Estimates.geography.in_(geos), 
 			Estimates.indicatorName.in_(names)).all()
 	return indicators

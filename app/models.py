@@ -7,7 +7,8 @@ This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 
-from sqlalchemy import Column,Integer,String,Float
+from sqlalchemy import Column,Integer,String,Float,ForeignKey
+from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Estimates(Base):
@@ -41,8 +42,8 @@ class Estimates(Base):
 	nover30 = Column(String)
 
 	def __repr__(self):
-		return '"' + '","'.join([self.geography, self.survey, self.instrument,
-			self.year, self.variableName]) + '"'
+		return "<Variable Name: %s; Instrument: %s>" % \
+			(self.variableName, self.instrument)
 
 class GenCons(Base):
 	__tablename__ = 'gencons'
@@ -51,3 +52,39 @@ class GenCons(Base):
 
 	def __repr__(self):
 		return "<Topic: %s>" % (self.topic)
+
+class IndCons(Base):
+	__tablename__ = 'indcons'
+	id = Column(Integer, primary_key=True)
+	indicatorCategory = Column(String)
+	indicatorName = Column(String)
+	varnamestem = Column(String)
+	genderDisaggregation = Column(String)
+	farmSizeDisaggregation = Column(String)
+	cropDisaggregation = Column(String)
+	subpopulation = Column(String)
+	rowsperinstrument = Column(String)
+	numerator = Column(String)
+	denominator = Column(String)
+	units = Column(String)
+	indicatorLevel = Column(String)
+	weight = Column(String)
+	constructiondecision = Column(String)
+	winsorizing = Column(String)
+
+	def __repr__(self):
+		return "<Indicator Name: %s; Construction Decision: %s>" % \
+			(self.indicatorName, self.constructiondecision)
+
+class CntryCons(Base):
+	__tablename__ = "cntrycons"
+	id = Column(Integer, primary_key=True)
+	instrument = Column(String)
+	cntrydec = Column(String)
+	indid = Column(Integer, ForeignKey(IndCons.id))
+
+	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indid')
+
+	def __repr__(self):
+		return "<Instrument: %s; IndCon ID: %s>" % \
+			(self.instrument, self.indid)
