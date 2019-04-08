@@ -23,11 +23,11 @@ class Estimates(Base):
 	cropDisaggregation = Column(String)
 	genderDisaggregation = Column(String)
 	farmSizeDisaggregation = Column(String)
+	ruralortotal = Column(String)
 	subpopulation = Column(String)
 	currencyConversion = Column(String)
 	indicatorLevel = Column(String)
 	weight = Column(String)
-	crosswave = Column(String)
 	variableName = Column(String)
 	mean = Column(Float)
 	se = Column(Float)
@@ -45,7 +45,7 @@ class Estimates(Base):
 			self.year, self.variableName]) + '"'
 
 class GenCons(Base):
-	__tablename__ = 'GenCons'
+	__tablename__ = 'gencons'
 	topic = Column(String, primary_key=True)
 	decision = Column(String)
 
