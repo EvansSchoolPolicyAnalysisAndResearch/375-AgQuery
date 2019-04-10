@@ -1,4 +1,12 @@
 #data/gencons_cleaner
+
+"""
+Copyright 2019 Evans Policy Analysis and Research Group (EPAR)
+
+This project is licensed under the 3-Clause BSD License. Please see the 
+license.txt file for more information.
+"""
+
 import csv
 import re
 # Clean the gencons file

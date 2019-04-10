@@ -1,4 +1,11 @@
 #data/csv_cleaner.py
+"""
+Copyright 2019 Evans Policy Analysis and Research Group (EPAR)
+
+This project is licensed under the 3-Clause BSD License. Please see the 
+license.txt file for more information.
+"""
+
 import csv
 
 headers = ["id", "geography", "survey", "instrument", "year", "indicatorCategory", "indicatorName", "units", "cropDisaggregation", "genderDisaggregation", "farmSizeDisaggregation", "ruralortotal", "subpopulation", "currencyConversion", "indicatorLevel", "weight", "variableName", "mean", "se", "sd", "p25", "median", "p75", "minim", "maxim", "n", "nover30"]
