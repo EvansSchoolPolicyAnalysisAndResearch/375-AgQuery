@@ -115,7 +115,7 @@ class CntryCons(Base):
 	cntrydec = Column(String)
 	indid = Column(Integer, ForeignKey(IndCons.id))
 
-	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indid', lazy=joined)
+	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indid', lazy="joined")
 
 	def __repr__(self):
 		return "<Instrument: %s; IndCon ID: %s>" % \
