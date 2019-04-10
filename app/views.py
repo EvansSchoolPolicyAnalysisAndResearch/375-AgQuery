@@ -7,14 +7,16 @@ This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 from app import app
-from sqlalchemy.sql import select
-from sqlalchemy import and_, or_
-from os import environ
-from flask import render_template, request, Response
 from app.database import db_session
-from app.models import Estimates,GenCons
+from app.models import *
 from app.dbhelper import formHandler
 from app.dlhelper import make_csv
+
+from sqlalchemy.sql import select
+from collections import OrderedDict
+from markdown import markdown
+from flask import render_template, request, Response, Markup
+
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -133,7 +135,11 @@ def about_data():
 
 	:returns: An HTML page to be displayed by the website
 	"""
-	decisions = db_session.query(GenCons).all()
+
+	# Create an ordered dict of the gencons database items and converts the
+	# Markdown in the decision column into HTML
+	decisions = OrderedDict((d.topic, Markup(markdown(d.decision))) for d in  db_session.query(GenCons).all())
+
 	return render_template('about-data.html', decisions=decisions)
 
 @app.teardown_appcontext

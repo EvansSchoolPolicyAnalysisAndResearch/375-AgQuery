@@ -9,9 +9,9 @@
 {% block pageheader %}General Data Construction Decisions{% endblock %}
 
 {% block body %}
-{% for decision in decisions %}
-	<h2>{% if decision.topic != "Intro" %}{{decision.topic}}{% endif %}</h2>
-	{{decision.decision|safe}}
+{% for topic, decision in decisions.items() %}
+	<h2>{% if topic != "Intro" %}{{topic}}{% endif %}</h2>
+	{{decision|safe}}
 {% endfor %}
 
 {% endblock %}
