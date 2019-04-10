@@ -2,7 +2,7 @@
 instance
 
 # Data files are the local testing SQLite Database
-data
+data/*.csv
 
 #cache files
 __pycache__
