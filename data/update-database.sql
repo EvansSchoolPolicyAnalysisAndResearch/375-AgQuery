@@ -94,10 +94,7 @@ ALTER TABLE public.cntrycons_update OWNER to epardata;
 --                             REPLACE OLD TABLE                             --
 -------------------------------------------------------------------------------
 -- Out with the old -- 
-DROP TABLE estimates;
-DROP TABLE gencons;
-DROP TABLE indcons;
-DROP TABLE cntrycons;
+DROP TABLE estimates, gencons, indcons, cntrycons;
 
 -- In with the new --
 ALTER TABLE estimates_update RENAME TO estimates;
