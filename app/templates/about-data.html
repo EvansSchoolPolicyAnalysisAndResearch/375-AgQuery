@@ -11,7 +11,7 @@
 {% block body %}
 {% for topic, decision in decisions.items() %}
 	<h2>{% if topic != "Intro" %}{{topic}}{% endif %}</h2>
-	{{decision|safe}}
+	{{decision}}
 {% endfor %}
 
 {% endblock %}
