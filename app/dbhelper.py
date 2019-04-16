@@ -6,11 +6,16 @@ Copyright 2018 Evans Policy Analysis and Research Group (EPAR)
 This project is licensed under the 3-Clause BSD License. Please see the 
 license.txt file for more information.
 """
-
+from app.models import *
 from flask_sqlalchemy import SQLAlchemy
+from flask import Markup
+
 from sqlalchemy import and_, or_
 from sqlalchemy.sql import select
-from app.models import *
+
+from markdown import markdown
+from collections import OrderedDict
+from markdown import markdown
 
 def formHandler(request, session):
 	"""
@@ -23,8 +28,7 @@ def formHandler(request, session):
 
 	:param request: The request information from the website
 	:param session: the database session for the query
-	:returns: 		Results of the Database Query
-	:raises:
+	:returns: 		Results of the Database Query or None for no results
 	"""
 	
 	# Pull the information necessary for the db query from the request
@@ -57,7 +61,7 @@ def formHandler(request, session):
 			Estimates.indicatorName.in_(names)).all()
 	return indicators
 
-	
+
 def getMostRecent(geo, session):
 	"""
 	Finds the most recent year of LSMS surveys for a given geography
@@ -74,3 +78,10 @@ def getMostRecent(geo, session):
 		if yr > mostRec:
 			mostRec = yr
 	return mostRec
+
+def get_gencons(session):
+	"""
+	"""
+	# Create an ordered dict of the gencons database items and converts the
+	# Markdown in the decision column into HTML
+	return OrderedDict((d.topic, Markup(markdown(d.decision))) for d in  session.query(GenCons).all()) 

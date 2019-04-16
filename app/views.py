@@ -9,13 +9,11 @@ license.txt file for more information.
 from app import app
 from app.database import db_session
 from app.models import *
-from app.dbhelper import formHandler
+from app.dbhelper import formHandler, get_gencons
 from app.dlhelper import make_csv
 
 from sqlalchemy.sql import select
-from collections import OrderedDict
-from markdown import markdown
-from flask import render_template, request, Response, Markup
+from flask import render_template, request, Response
 
 
 @app.route('/', methods={"GET","POST"})
@@ -135,12 +133,8 @@ def about_data():
 
 	:returns: An HTML page to be displayed by the website
 	"""
-
-	# Create an ordered dict of the gencons database items and converts the
-	# Markdown in the decision column into HTML
-	decisions = OrderedDict((d.topic, Markup(markdown(d.decision))) for d in  db_session.query(GenCons).all())
-
-	return render_template('about-data.html', decisions=decisions)
+	decisions = get_gencons(db_session)
+	return render_template('about-data.html', decisions = decisions)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
