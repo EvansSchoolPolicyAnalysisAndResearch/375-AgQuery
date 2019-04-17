@@ -74,7 +74,7 @@ def login():
 	"""
 	return render_template("login.html")
 
-@app.route('/results', methods={"POST"})
+@app.route('/results', methods={"GET", "POST"})
 def results():
 	"""
 	Creates the results page
@@ -86,6 +86,11 @@ def results():
 
 	:returns: an HTML page to be displayed by the website
 	"""
+	# If the user got here without submitting form data reply with no 
+	# indicator selected page
+	if not request.form:
+		return render_template("no-inds.html"), 406
+
 	indicators = formHandler(request, db_session)
 	# Check if anything is returned from the formHandler. If no, then show the
 	# error page

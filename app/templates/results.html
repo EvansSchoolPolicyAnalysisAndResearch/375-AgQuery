@@ -30,14 +30,30 @@
 		<td title="{{ ind.CntryCons.indcon.constructiondecision }}">
 			{{ind.Estimates.indicatorName}}
 		</td>
-		<td>{{ind.Estimates.geography}}</td>
-		<td title="{{ ind.CntryCons.cntrydec }}">{{ind.Estimates.year}}</td>
-		<td>{{ind.Estimates.genderDisaggregation}}</td>
-		<td>{{ind.Estimates.indicatorLevel}} </td>
-		<td>{{ind.Estimates.subpopulation}}</td>
-		<td>{{ind.Estimates.farmSizeDisaggregation}}</td>
-		<td>{{ind.Estimates.cropDisaggregation}}</td>
-		<td>{{ind.Estimates.units}}</td>
+		<td title="{{ind.CntryCons.cntrydec }}">
+			{{ind.Estimates.geography}}
+		</td>
+		<td title="{{ ind.CntryCons.cntrydec }}">
+			{{ind.Estimates.year}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.genderDisaggregation }}">
+			{{ind.Estimates.genderDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.indicatorLevel }}">
+			{{ind.Estimates.indicatorLevel}} 
+		</td>
+		<td title="{{ ind.CntryCons.indcon.subpopulation }}">
+			{{ind.Estimates.subpopulation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.farmSizeDisaggregation }}">
+			{{ind.Estimates.farmSizeDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.cropDisaggregation }}">
+			{{ind.Estimates.cropDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.units }}">
+			{{ind.Estimates.units}}
+		</td>
 		<td title="{{ ind.CntryCons.indcon.numerator }} {% if ind.Estimates.units == 'Proportion' %} / {{ ind.CntryCons.indcon.denominator }}{% endif %}">
 			{% if ind.Estimates.mean and "$" in ind.Estimates.units  %} 
 				{{"{:.2f}".format(ind.Estimates.mean)}}
@@ -47,13 +63,16 @@
 				N/A
 			{% endif %}
 		</td>
-		<td>{% if ind.Estimates.se and "$" in ind.Estimates.units  %} 
+		<td title="{{ ind.CntryCons.indcon.numerator }} {% if ind.Estimates.units == 'Proportion' %} <strong>/</strong> {{ ind.CntryCons.indcon.denominator }}{% endif %}">
+			{% if ind.Estimates.se and "$" in ind.Estimates.units  %} 
 				{{"{:.2f}".format(ind.Estimates.se)}}
 			{% elif ind.Estimates.se %}
 				{{"{:.3f}".format(ind.Estimates.se)}}
 			{% else  %}
 				N/A
 			{% endif %}
+		</td>
+	</tr>
 {% endfor %}
 </table>
 {% endblock %}
