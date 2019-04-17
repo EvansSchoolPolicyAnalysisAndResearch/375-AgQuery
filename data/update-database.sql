@@ -5,7 +5,7 @@
 -- license.txt file for more information.
 
 -------------------------------------------------------------------------------
---                             CREATE THE TABLES                             --
+--                             CREATE NEW TABLES                             --
 -------------------------------------------------------------------------------
 CREATE TABLE public.estimates_update (
     id bigserial PRIMARY KEY,
@@ -43,10 +43,9 @@ CREATE TABLE public.gencons_update (
 );
 
 CREATE TABLE public.indcons_update (
-    id bigserial PRIMARY KEY,
     "indicatorCategory" text,
     "indicatorName" text,
-    varnamestem text,
+    varnamestem text PRIMARY KEY,
     "genderDisaggregation" text,
     "farmSizeDisaggregation" text,
     "cropDisaggregation" text,
@@ -65,7 +64,7 @@ CREATE TABLE public.cntrycons_update (
     id bigserial PRIMARY KEY,
     instrument text,
     cntrydec text,
-    indid integer REFERENCES indcons_update
+    varnamestem text REFERENCES indcons_update
 );
 
 

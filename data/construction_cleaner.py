@@ -47,8 +47,8 @@ with open('construction.csv', newline='') as infile:
 						row_stub[i] = elem.strip()
 					else:
 						row_stub[i] = elem
-				row_stub.insert(0, r)
 				wrtr.writerow(row_stub)
 				for i,inst in enumerate(instruments):
-					cntry_row = [get_id(), inst, row[i+15], r]
+					# Note Row Stub 2 is the varnamestem
+					cntry_row = [get_id(), inst, row[i+15], row_stub[2]]
 					cntry_wrtr.writerow(cntry_row)

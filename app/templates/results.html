@@ -27,16 +27,18 @@
 	</tr>
 {% for ind in indicators %}
 	<tr>
-		<td>{{ind.Estimates.indicatorName}}</td>
+		<td title="{{ ind.CntryCons.indcon.constructiondecision }}">
+			{{ind.Estimates.indicatorName}}
+		</td>
 		<td>{{ind.Estimates.geography}}</td>
-		<td>{{ind.Estimates.year}}</td>
+		<td title="{{ ind.CntryCons.cntrydec }}">{{ind.Estimates.year}}</td>
 		<td>{{ind.Estimates.genderDisaggregation}}</td>
 		<td>{{ind.Estimates.indicatorLevel}} </td>
 		<td>{{ind.Estimates.subpopulation}}</td>
 		<td>{{ind.Estimates.farmSizeDisaggregation}}</td>
 		<td>{{ind.Estimates.cropDisaggregation}}</td>
 		<td>{{ind.Estimates.units}}</td>
-		<td title="{{ ind.IndCons.numerator }} / {{ ind.IndCons.denominator }}">
+		<td title="{{ ind.CntryCons.indcon.numerator }} {% if ind.Estimates.units == 'Proportion' %} / {{ ind.CntryCons.indcon.denominator }}{% endif %}">
 			{% if ind.Estimates.mean and "$" in ind.Estimates.units  %} 
 				{{"{:.2f}".format(ind.Estimates.mean)}}
 			{% elif ind.Estimates.mean %}
