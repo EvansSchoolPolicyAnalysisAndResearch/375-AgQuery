@@ -16,15 +16,15 @@ with open('estimates.csv', newline='') as infile:
 		rdr = csv.reader(infile, delimiter=',', quotechar='"', 
 			quoting=csv.QUOTE_NONNUMERIC)
 		wrtr = csv.writer(outfile, delimiter=',', quotechar='"', 
-			quoting=csv.QUOTE_NONNUMERIC)
+			quoting=csv.QUOTE_MINIMAL)
 		for r,row in enumerate(rdr):
 			# Postgres does not like having headers, so this removes them
 			if r == 0:
 				continue
 			# Add the ID to the row
 			row.insert(0, r)
+			# Clean the elements of the row
 			for i,elem in enumerate(row) :
-
 				if elem == "0 ":
 					row[i] = 0
 				elif elem == "1": 
@@ -34,4 +34,6 @@ with open('estimates.csv', newline='') as infile:
 				else:
 					row[i] = elem
 			wrtr.writerow(row)
+
+
 

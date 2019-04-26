@@ -50,9 +50,9 @@ def index():
 			geography = [r.geography for r in 
 					db_session.query(Estimates.geography).distinct()]
 			# Get a list of all indicators in the selected categories
-			indicators = [r.indicatorName for r in
+			indicators = [r.indicator for r in
 				db_session.query(
-					Estimates.indicatorName).distinct().filter(
+					Estimates.indicator).distinct().filter(
 						Estimates.indicatorCategory.in_(selectedCategories))]
 			# If the db query returned something, enable the go button
 			if len(indicators) > 0:

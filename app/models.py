@@ -27,7 +27,7 @@ class Estimates(Base):
 	instrument = Column(String)
 	year = Column(String)
 	indicatorCategory = Column(String)
-	indicatorName = Column(String)
+	indicator = Column(String)
 	units = Column(String)
 	cropDisaggregation = Column(String)
 	genderDisaggregation = Column(String)
@@ -80,7 +80,7 @@ class IndCons(Base):
 	"""
 	__tablename__ = 'indcons'
 	indicatorCategory = Column(String)
-	indicatorName = Column(String)
+	indicator = Column(String)
 	varnamestem = Column(String, primary_key=True)
 	genderDisaggregation = Column(String)
 	farmSizeDisaggregation = Column(String)
@@ -97,7 +97,7 @@ class IndCons(Base):
 
 	def __repr__(self):
 		return "<Indicator Name: %s; Construction Decision: %s>" % \
-			(self.indicatorName, self.constructiondecision)
+			(self.indicator, self.constructiondecision)
 
 class CntryCons(Base):
 	"""
@@ -112,9 +112,9 @@ class CntryCons(Base):
 	id = Column(Integer, primary_key=True)
 	instrument = Column(String)
 	cntrydec = Column(String)
-	varnamestem = Column(String, ForeignKey(IndCons.varnamestem))
+	indicator = Column(String, ForeignKey(IndCons.indicator))
 
-	indcon = relationship('IndCons', foreign_keys = 'CntryCons.varnamestem', lazy="joined")
+	indcon = relationship('IndCons', foreign_keys = 'CntryCons.indicator', lazy="joined")
 
 	def __repr__(self):
 		return "<Instrument: %s; IndCon ID: %s>" % \

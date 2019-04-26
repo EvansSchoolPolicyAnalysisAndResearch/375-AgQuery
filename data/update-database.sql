@@ -14,7 +14,7 @@ CREATE TABLE public.estimates_update (
     instrument text,
     year text,
     "indicatorCategory" text,
-    "indicatorName" text,
+    indicator text,
     units text,
     "cropDisaggregation" text,
     "genderDisaggregation" text,
@@ -43,9 +43,10 @@ CREATE TABLE public.gencons_update (
 );
 
 CREATE TABLE public.indcons_update (
+
+    indicator text PRIMARY KEY,
     "indicatorCategory" text,
-    "indicatorName" text,
-    varnamestem text PRIMARY KEY,
+    varnamestem text,
     "genderDisaggregation" text,
     "farmSizeDisaggregation" text,
     "cropDisaggregation" text,
@@ -64,7 +65,7 @@ CREATE TABLE public.cntrycons_update (
     id bigserial PRIMARY KEY,
     instrument text,
     cntrydec text,
-    varnamestem text REFERENCES indcons_update
+    indicator text REFERENCES indcons_update
 );
 
 

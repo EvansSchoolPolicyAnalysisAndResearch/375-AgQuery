@@ -18,7 +18,7 @@ def make_id_counter():
 	return id_counter
 
 instruments = ("ETH ESS Wave 1", "ETH ESS Wave 2", "ETH ESS Wave 3", "NGA GHSP Wave 1", "NGA GHSP Wave 2", "NGA GHSP Wave 3", "TZA NPS Wave 1", "TZA NPS Wave 2", "TZA NPS Wave 3", "TZA NPS Wave 4")
-
+INDCOLUMN = 0
 
 # Clean the construction csv exported from the Excel File
 with open('construction.csv', newline='') as infile:
@@ -50,5 +50,5 @@ with open('construction.csv', newline='') as infile:
 				wrtr.writerow(row_stub)
 				for i,inst in enumerate(instruments):
 					# Note Row Stub 2 is the varnamestem
-					cntry_row = [get_id(), inst, row[i+15], row_stub[2]]
+					cntry_row = [get_id(), inst, row[i+15], row_stub[INDCOLUMN]]
 					cntry_wrtr.writerow(cntry_row)

@@ -15,7 +15,6 @@ from sqlalchemy.sql import select
 
 from markdown import markdown
 from collections import OrderedDict
-from markdown import markdown
 
 def formHandler(request, session):
 	"""
@@ -35,13 +34,13 @@ def formHandler(request, session):
 	# passed to this function
 	geos = request.form.getlist('geography')
 	years = request.form.get('years')
-	names = request.form.getlist('indicator')
+	inds = request.form.getlist('indicator')
 
 	# If no geographies are selected count them as all selected	
 	if not geos :
 		geos = session.query(Estimates.geography).distinct()
 
-	if not names:
+	if not inds:
 		return None
 
 	indicators = []	
@@ -50,17 +49,17 @@ def formHandler(request, session):
 		for geo in geos:
 			year = getMostRecent(geo, session)
 			indicators += session.query(Estimates, CntryCons).filter(
-				CntryCons.varnamestem.like(Estimates.variableName),
-				CntryCons.instrument == Estimates.instrument).filter(
+				Estimates.indicator == CntryCons.indicator,
+				Estimates.instrument == CntryCons.instrument).filter(
 				Estimates.geography == geo, 
 				Estimates.year == year,
-				Estimates.indicatorName.in_(names)).all()
+				Estimates.indicator.in_(inds)).all()
 	else:
 		indicators = session.query(Estimates, CntryCons).filter(
-				CntryCons.varnamestem.like(Estimates.variableName),
+				CntryCons.indicator.like(Estimates.indicator),
 				CntryCons.instrument == Estimates.instrument).filter(
 			Estimates.geography.in_(geos), 
-			Estimates.indicatorName.in_(names)).all()
+			Estimates.indicator.in_(inds)).all()
 	return indicators
 
 
