@@ -1,4 +1,5 @@
 .contenthole {
-	overflow:hidden;
+	overflow:auto;
+	min-width: 1400px;
 	width:100%;
 }

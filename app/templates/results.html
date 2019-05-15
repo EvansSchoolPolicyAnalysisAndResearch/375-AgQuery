@@ -17,13 +17,13 @@
 		<th>Geography</th>
 		<th>Year</th>
 		<th>Gender</th>
-		<th>Level</th>
 		<th>Sub-Population</th>
 		<th>Farm Size</th>
 		<th>Crop</th>
 		<th>Units</th>
 		<th>Mean</th>
-		<th>Standard Error</th>
+		<th>SE</th>
+		<th>N</th>
 	</tr>
 {% for ind in indicators %}
 	<tr>
@@ -38,9 +38,6 @@
 		</td>
 		<td title="{{ ind.CntryCons.indcon.genderDisaggregation }}">
 			{{ind.Estimates.genderDisaggregation}}
-		</td>
-		<td title="{{ ind.CntryCons.indcon.indicatorLevel }}">
-			{{ind.Estimates.indicatorLevel}} 
 		</td>
 		<td title="{{ ind.CntryCons.indcon.subpopulation }}">
 			{{ind.Estimates.subpopulation}}
@@ -72,6 +69,7 @@
 				N/A
 			{% endif %}
 		</td>
+		<td>{{ind.Estimates.n}}
 	</tr>
 {% endfor %}
 </table>
