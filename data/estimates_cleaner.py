@@ -7,7 +7,8 @@ license.txt file for more information.
 """
 
 import csv
-
+INDICATORCOL=6
+CROPCOL=8
 headers = ["id", "geography", "survey", "instrument", "year", "indicatorCategory", "indicatorName", "units", "cropDisaggregation", "genderDisaggregation", "farmSizeDisaggregation", "ruralortotal", "subpopulation", "currencyConversion", "indicatorLevel", "weight", "variableName", "mean", "se", "sd", "p25", "median", "p75", "minim", "maxim", "n", "nover30"]
 
 # Clean the estimates csv exported from the Excel File 
@@ -33,6 +34,27 @@ with open('estimates.csv', newline='') as infile:
 					row[i] = elem.strip()
 				else:
 					row[i] = elem
+			if ' - large ruminants, small ruminants, poultry' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - large ruminants, small ruminants, poultry', '')
+				row[CROPCOL] = "All livestock"
+			elif ' - large ruminants' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - large ruminants', '')
+				row[CROPCOL] = "Large ruminants"
+			elif ' - small ruminants' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - small ruminants', '')
+				row[CROPCOL] = "Small ruminants"
+			elif ' - poultry' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - poultry', '')
+				row[CROPCOL] = "Poultry"
+			elif ' - cows' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - cows', '')
+				row[CROPCOL] = "Cows"
+			elif ' - buffalos' in row[INDICATORCOL]:
+				row[INDICATORCOL] = row[INDICATORCOL].replace(' - buffalos', '')
+				row[CROPCOL]="Buffalos"
+			elif row[INDICATORCOL] == "Milk productivity":
+				row[CROPCOL] = "Large ruminants"
+
 			wrtr.writerow(row)
 
 

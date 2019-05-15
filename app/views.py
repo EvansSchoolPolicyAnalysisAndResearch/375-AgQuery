@@ -111,7 +111,7 @@ def get_csv():
 	:returns: a Response object containing a CSV of the required variables
 	"""
 	# Get the estimates from the formhandler
-	indicators = formHandler(request, db_session)
+	indicators = [r.Estimates for r in formHandler(request, db_session)]
 
 	# Check if any indicators were selected
 	if not indicators:
@@ -120,7 +120,6 @@ def get_csv():
 	# Get the headers based on the columns of the database
 	headers = Estimates.__table__.columns.keys()
 	headers = headers[1:]
-
 	#Generate a string which is the final csv 
 	csv = make_csv(headers, indicators)
 	
