@@ -36,7 +36,9 @@ them cannot.
     
     2. Linux - Fedora
 
-       ```sudo dnf install postgresql```
+       ```sh
+       sudo dnf install postgresql
+       ```
 
     3. Mac OSX - There are a variety of ways to install PostgreSQL 10 on Mac 
        OSX. Please see the official [PostgreSQL Mac OSX download page][osx] 
