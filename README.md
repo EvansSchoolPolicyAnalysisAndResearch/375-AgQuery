@@ -13,7 +13,8 @@ If you are new to this project you can follow along with instructions below to
 get set up with a working version of the website on your personal computer. If 
 you are trying to set up a server using this code please make sure to follow
 best industry practices. Setting up your server in this manner is insecure, but
-for local testing it will work. 
+for local testing it will work. If you wish to deploy this software on your
+server please consult a professional.
 
 These instructions assume you have some familiarity with the command line. 
 While some of these steps may be completed using a graphic interface, many of 
@@ -25,29 +26,39 @@ them cannot.
 ### Steps:
 
 1. Download a local copy of the code (clone the repository)
-```sh 
-    git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-Ag-DB.git
-```
-2. Install PostgreSQL on your computer. The exact steps vary depending on your
-   operating system
-    1. Linux - Debian (includes Ubuntu, Mint, etc.) 
-     
-       `sudo apt install postgresql-10`
-    
-    2. Linux - Fedora
+   ```sh 
+   git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-Ag-DB.git
+   ```
 
-       ```sh
-       sudo dnf install postgresql
-       ```
+2. You will need to setup and install PostgreSQL. However, this is beyond 
+   the scope of  this tutorial. Please see the following pages for operating
+   system specific instructions. 
 
-    3. Mac OSX - There are a variety of ways to install PostgreSQL 10 on Mac 
-       OSX. Please see the official [PostgreSQL Mac OSX download page][osx] 
-       for instructions.
-    4. Windows -
+   1. Linux - Debian (includes Ubuntu, Mint, etc.)
 
+   2. Linux - Fedora
 
+   3. Mac OSX
+
+   4. Windows
+
+3. Once you have setup the database connect to it using the command line tool
+   `psql`. How you do this will depend on your operating system but it should
+   have been explained in the provided tutorial. 
+4. Create the `epardata` user replace `<password>` with your password
+   
+   ```sql
+   CREATE ROLE epardata PASSWORD '<password>';
+   ```
+
+5. Create the `epardata` database with `epardata` as the owner
+   ```sql
+   CREATE DATABASE epardata OWNER epardata;
+   ```
+6. 
 
 
 [epar]: https://evans.uw.edu/policy-impact/epar
 [iqt]: http://v1008.host.s.uw.edu
 [osx]: https://www.postgresql.org/download/macosx/
+[win]: https://www.postgresql.org/download/windows/
