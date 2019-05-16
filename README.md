@@ -26,39 +26,61 @@ them cannot.
 ### Steps:
 
 1. Download a local copy of the code (clone the repository)
+   
+   Open up your terminal of choice and use the git command line tool to clone
+   the repository. While you can use the GitHub desktop tool for this step, 
+   later steps will require you to use the command line. 
+
    ```sh 
    git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-Ag-DB.git
    ```
 
-2. You will need to setup and install PostgreSQL. However, this is beyond 
+2. Install/Setup Postgresql
+
+   You will need to setup and install PostgreSQL. However, this is beyond 
    the scope of  this tutorial. Please see the following pages for operating
    system specific instructions. 
 
-   1. Linux - Debian (includes Ubuntu, Mint, etc.)
+   1. Linux - [Debian (includes Ubuntu, Mint, etc.)][ubuntu]
 
-   2. Linux - Fedora
+   2. Linux - [Fedora Wiki][fedora]
 
-   3. Mac OSX
+   3. Mac OSX - [Postgress.app][osx]
 
    4. Windows
 
-3. Once you have setup the database connect to it using the command line tool
+3. Setup the epardata Database within PostgreSQL.
+
+   Once you have setup the PostgreSQL connect to it using the command line tool
    `psql`. How you do this will depend on your operating system but it should
    have been explained in the provided tutorial. 
-4. Create the `epardata` user replace `<password>` with your password
-   
-   ```sql
-   CREATE ROLE epardata PASSWORD '<password>';
-   ```
 
-5. Create the `epardata` database with `epardata` as the owner
+   Once you have connected to the database run the following commands within
+   the sql console to prepare the database for later. 
    ```sql
+   -- Create the epardata user
+   CREATE USER epardata PASSWORD '<password>';
+   -- Create the 'epardata' database with the 'epardata' user as the owner.
    CREATE DATABASE epardata OWNER epardata;
+   -- You're done, disconnect from the database
+   \quit
    ```
-6. 
+7. Setup Python Virtual Environment.
+
+   > With the exception of Windows, most operating systems come with a version
+   > of Python installed. If you have python installed please check which 
+   > version using `python --version`. If you are using python 3.6 or higher
+   > you are all set. Some operating systems default to python 2.7. If this is
+   > the case on your computer try typing `python3 --version` to check. If 
+   > this is the case on your computer you will need to adjust when creating
+   > a virtual environment (see below).
+
+   Open a terminal within your downloaded repository 
 
 
 [epar]: https://evans.uw.edu/policy-impact/epar
 [iqt]: http://v1008.host.s.uw.edu
-[osx]: https://www.postgresql.org/download/macosx/
+[ubuntu]: https://help.ubuntu.com/lts/serverguide/postgresql.html
+[fedora]: https://fedoraproject.org/wiki/PostgreSQL
+[osx]: https://postgresapp.com/
 [win]: https://www.postgresql.org/download/windows/
