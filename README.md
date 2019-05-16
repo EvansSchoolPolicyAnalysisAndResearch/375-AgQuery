@@ -22,17 +22,17 @@ them cannot.
 ### Steps:
 
 1. Download a local copy of the code (clone the repository)
-```bash 
+```sh 
     git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-Ag-DB.git
 ```
 2. Install PostgreSQL on your computer. The exact steps vary depending on your
    operating system
     1. Linux - Debian (includes Ubuntu, Mint, etc.) 
-```bash
+```sh
     sudo apt install postgresql-10
 ```
     2. Linux - Fedora
-```bash
+```sh
     sudo dnf install postgresql
 ```
     3. Mac OSX - There are a variety of ways to install PostgreSQL 10 on Mac 
