@@ -30,7 +30,7 @@ them cannot.
     1. Linux - Debian (includes Ubuntu, Mint, etc.) 
 ```bash
     sudo apt install postgresql-10
-````
+```
     2. Linux - Fedora
 ```bash
     sudo dnf install postgresql
