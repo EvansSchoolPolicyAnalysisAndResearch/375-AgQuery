@@ -18,6 +18,9 @@ for local testing it will work.
 These instructions assume you have some familiarity with the command line. 
 While some of these steps may be completed using a graphic interface, many of 
 them cannot. 
+```
+    Any instructions like this should be typed/pasted into your local terminal
+```
 
 ### Steps:
 
@@ -31,13 +34,17 @@ them cannot.
 ```sh
     sudo apt install postgresql-10
 ```
+    
     2. Linux - Fedora
+
 ```sh
     sudo dnf install postgresql
 ```
+
     3. Mac OSX - There are a variety of ways to install PostgreSQL 10 on Mac 
        OSX. Please see the official [PostgreSQL Mac OSX download page][osx] 
        for instructions.
+    4. Windows
 
 
 
