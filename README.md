@@ -31,20 +31,17 @@ them cannot.
 2. Install PostgreSQL on your computer. The exact steps vary depending on your
    operating system
     1. Linux - Debian (includes Ubuntu, Mint, etc.) 
-```sh
-    sudo apt install postgresql-10
-```
+     
+       `sudo apt install postgresql-10`
     
     2. Linux - Fedora
 
-```sh
-    sudo dnf install postgresql
-```
+       `sudo dnf install postgresql`
 
     3. Mac OSX - There are a variety of ways to install PostgreSQL 10 on Mac 
        OSX. Please see the official [PostgreSQL Mac OSX download page][osx] 
        for instructions.
-    4. Windows
+    4. Windows -
 
 
 
