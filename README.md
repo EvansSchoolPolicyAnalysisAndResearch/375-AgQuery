@@ -41,13 +41,14 @@ them cannot.
    the scope of  this tutorial. Please see the following pages for operating
    system specific instructions. 
 
-   1. Linux - [Debian (includes Ubuntu, Mint, etc.)][ubuntu]
+   1. Debian (including Ubuntu, Mint, etc.) - [Ubuntu Wiki][ubuntu]
 
-   2. Linux - [Fedora Wiki][fedora]
+   2. Fedora - [Fedora Wiki][fedora]
 
    3. Mac OSX - [Postgress.app][osx]
 
-   4. Windows
+   4. Windows - Still looking for a good tutorial (Web development on windows
+      is notoriously annoying)
 
 3. Setup the epardata Database within PostgreSQL.
 
@@ -57,6 +58,10 @@ them cannot.
 
    Once you have connected to the database run the following commands within
    the sql console to prepare the database for later. 
+
+   > NOTE: lines starting with -- should not be typed in. They are comments and
+   > are for guidance purposes only. 
+
    ```sql
    -- Create the epardata user
    CREATE USER epardata PASSWORD '<password>';
@@ -65,22 +70,69 @@ them cannot.
    -- You're done, disconnect from the database
    \quit
    ```
-7. Setup Python Virtual Environment.
+4. Populate the Database
 
-   > With the exception of Windows, most operating systems come with a version
-   > of Python installed. If you have python installed please check which 
-   > version using `python --version`. If you are using python 3.6 or higher
-   > you are all set. Some operating systems default to python 2.7. If this is
-   > the case on your computer try typing `python3 --version` to check. If 
-   > this is the case on your computer you will need to adjust when creating
-   > a virtual environment (see below).
+   > __NOTE:__ Please make sure you have python 3.7 installed before you 
+   > continue.
 
-   Open a terminal within your downloaded repository 
+   To populate the database we will be using data released as part of[EPAR's 
+   Data Curation Project][data]. Specifically, we need the indicator estimates 
+   spreadsheet found [here][sheet]. 
+
+   Once you have the spreadsheet you will need to export two of the sheets into
+   CSV files. To be specific, save the sheet 'Summ. of Indicator Construction'
+   as `constuction.csv` and the sheet 'Estimates by Instrument' as 
+   `estimates.csv`. Once you have both files place them in the 'data' folder of
+   the repository you downloaded. 
+
+   > __NOTE:__ When exporting the CSV files from the spreadsheet make sure 
+   > that text fields are quoted to prevent commas in the spreadsheet from 
+   > interfering with the CSV file's structure. 
+
+   Once that is complete you are ready to get back to the terminal.
+
+   > __NOTE:__ Lines starting with # should not be typed in. They are comments 
+   > and are for guidance purposes only.
+
+   ```sh
+   # First we need to change our working directory
+   cd <directory_with_the_repository>/data
+   # Next we clean the CSV files we exported from the spreadsheet
+   python3 estimates_cleaner.py
+   python3 construction_cleaner.py
+   # Finally we load the data into the database
+   psql -d epardata -U epardata -W -f update-database.sql
+   ```
+
+   The final line of code you will ask you for epardata's password. Enter the 
+   password you set up in step 3. 
+
+5. Setup Python Virtual Environment.
+
+   Once you have the database set up
+ 
+   > __NOTE:__ lines starting with # should not be typed in. They are comments 
+   > and are for guidance purposes only. 
+
+   ```sh
+   cd ..
+   # Next we create the python virtual environment
+   python3 -m venv env
+   # Next start up the virtual environment you just created
+   source env/bin/activate
+   # Finally use pip to install the python dependencies
+   pip install -r requirements.txt
+   ```
+6. Setup your environment variables
+   
+   The python
 
 
-[epar]: https://evans.uw.edu/policy-impact/epar
-[iqt]: http://v1008.host.s.uw.edu
-[ubuntu]: https://help.ubuntu.com/lts/serverguide/postgresql.html
-[fedora]: https://fedoraproject.org/wiki/PostgreSQL
-[osx]: https://postgresapp.com/
-[win]: https://www.postgresql.org/download/windows/
+[epar]:     https://evans.uw.edu/policy-impact/epar
+[iqt]:      http://v1008.host.s.uw.edu
+[ubuntu]:   https://help.ubuntu.com/lts/serverguide/postgresql.html
+[fedora]:   https://fedoraproject.org/wiki/PostgreSQL
+[osx]:      https://postgresapp.com/
+[win]:      https://www.postgresql.org/download/windows/
+[data]:     https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation
+[sheet]:    https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx 
