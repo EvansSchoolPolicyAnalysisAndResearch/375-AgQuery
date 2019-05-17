@@ -74,12 +74,12 @@ CREATE TABLE public.cntrycons_update (
 -------------------------------------------------------------------------------
 
 -- Import the data from the respective csv files --
-\COPY estimates_update FROM '/var/lib/pgsql/estimates_cleaned.csv' CSV;
+\COPY estimates_update FROM 'estimates_cleaned.csv' CSV;
 -- Remove the AgDev results
 DELETE FROM public.estimates_update WHERE survey = 'AgDev Baseline';
-\COPY gencons_update FROM '/var/lib/pgsql/gencons_cleaned.csv' CSV;
-\COPY indcons_update FROM '/var/lib/pgsql/construction_cleaned.csv' CSV;
-\COPY cntrycons_update FROM '/var/lib/pgsql/construction_countries_cleaned.csv' CSV;
+\COPY gencons_update FROM 'gencons_cleaned.csv' CSV;
+\COPY indcons_update FROM 'construction_cleaned.csv' CSV;
+\COPY cntrycons_update FROM 'construction_countries_cleaned.csv' CSV;
 
 
 
