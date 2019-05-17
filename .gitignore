@@ -10,9 +10,6 @@ __pycache__
 # Python Compiled files
 *.pyc
 
-# Stop tracking the .env special stuff in there
-.env
-
 # The csvs/xlsx are for updating the DBs and should not be tracked
 *.xlsx
 *.csv
