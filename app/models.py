@@ -53,22 +53,6 @@ class Estimates(Base):
 		return "<Variable Name: %s; Instrument: %s>" % \
 			(self.variableName, self.instrument)
 
-class GenCons(Base):
-	"""
-		GenCons extends Base
-
-        Gencons is a class which extends this app's Base, an instance of a 
-        SQLAlchemy declarative database. This is the SQLAlchemy representation
-        of the gencons table in this project's database. 
-
-	"""
-	__tablename__ = 'gencons'
-	topic = Column(String, primary_key=True)
-	decision = Column(String)
-
-	def __repr__(self):
-		return "<Topic: %s>" % (self.topic)
-
 class IndCons(Base):
 	""" 
 		IndCons extends Base

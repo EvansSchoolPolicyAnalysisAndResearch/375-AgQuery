@@ -9,7 +9,7 @@ license.txt file for more information.
 from app import app
 from app.database import db_session
 from app.models import *
-from app.dbhelper import formHandler, get_gencons
+from app.dbhelper import formHandler
 from app.dlhelper import make_csv
 
 from sqlalchemy.sql import select
@@ -130,15 +130,11 @@ def get_csv():
 @app.route('/about-data/')
 def about_data():
 	"""
-	Creates the About Data page
-
-	Gets the general constructions decisions from the database and passes them
-	to the template before returning the html page.
-
-	:returns: An HTML page to be displayed by the website
+	For our purposes the about_data page is now on our website. Redirect in
+	case anyone still has the old link
 	"""
-	decisions = get_gencons(db_session)
-	return render_template('about-data.html', decisions = decisions)
+	return redirect("https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation#construction", 
+		code=301)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

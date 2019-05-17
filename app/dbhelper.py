@@ -79,10 +79,3 @@ def getMostRecent(geo, session):
 		if yr > mostRec:
 			mostRec = yr
 	return mostRec
-
-def get_gencons(session):
-	"""
-	"""
-	# Create an ordered dict of the gencons database items and converts the
-	# Markdown in the decision column into HTML
-	return OrderedDict((d.topic, Markup(markdown(d.decision))) for d in  session.query(GenCons).all()) 

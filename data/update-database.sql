@@ -37,11 +37,6 @@ CREATE TABLE public.estimates_update (
     nover30 text
 );
 
-CREATE TABLE public.gencons_update (
-    topic text PRIMARY KEY,
-    decision text
-);
-
 CREATE TABLE public.indcons_update (
 
     indicator text PRIMARY KEY,
@@ -77,7 +72,6 @@ CREATE TABLE public.cntrycons_update (
 \COPY estimates_update FROM 'estimates_cleaned.csv' CSV;
 -- Remove the AgDev results
 DELETE FROM public.estimates_update WHERE survey = 'AgDev Baseline';
-\COPY gencons_update FROM 'gencons_cleaned.csv' CSV;
 \COPY indcons_update FROM 'construction_cleaned.csv' CSV;
 \COPY cntrycons_update FROM 'construction_countries_cleaned.csv' CSV;
 
@@ -85,7 +79,6 @@ DELETE FROM public.estimates_update WHERE survey = 'AgDev Baseline';
 
 -- Change owners of the new tables to epardata --
 ALTER TABLE public.estimates_update OWNER TO epardata;
-ALTER TABLE public.gencons_update OWNER TO epardata;
 ALTER TABLE public.indcons_update OWNER to epardata;
 ALTER TABLE public.cntrycons_update OWNER to epardata;
 
@@ -94,10 +87,9 @@ ALTER TABLE public.cntrycons_update OWNER to epardata;
 --                             REPLACE OLD TABLE                             --
 -------------------------------------------------------------------------------
 -- Out with the old -- 
-DROP TABLE estimates, gencons, indcons, cntrycons;
+DROP TABLE estimates, indcons, cntrycons;
 
 -- In with the new --
 ALTER TABLE estimates_update RENAME TO estimates;
-ALTER TABLE gencons_update RENAME TO gencons;
 ALTER TABLE indcons_update RENAME TO indcons;
 ALTER TABLE cntrycons_update RENAME TO cntrycons;
