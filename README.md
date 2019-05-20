@@ -1,9 +1,9 @@
 #   [Evans School Policy Analysis and Research Group][epar]
 ##  Data Distribution Project
 
-This repository was created to distribute the source code behind our  
-[indicator query tool][iqt]. It was created using the  Flask Web Framework and
-PostgreSQL 10. It was designed to be easily adaptable to similar projects
+This repository was created to distribute the source code behind 
+our [indicator query tool][iqt]. It was created using the  Flask Web Framework 
+and PostgreSQL 10. It was designed to be easily adaptable to similar projects
 created by research teams around the world. Currently it is undergoing rapid
 development as we strive to make it more user friendly and powerful. 
 
@@ -48,7 +48,7 @@ them cannot.
    3. Mac OSX - [Postgress.app][osx]
 
    4. Windows - Still looking for a good tutorial (Web development on windows
-      is notoriously annoying)
+      is notoriously difficult)
 
 3. Setup the epardata Database within PostgreSQL.
 
@@ -70,12 +70,16 @@ them cannot.
    -- You're done, disconnect from the database
    \quit
    ```
+   Once you set the password you will want to update the .env file in the
+   repository. Replace `<password>` with the password you set when setting
+   up your epardata user. 
+
 4. Populate the Database
 
    > __NOTE:__ Please make sure you have python 3.7 installed before you 
    > continue.
 
-   To populate the database we will be using data released as part of[EPAR's 
+   To populate the database we will be using data released as part of [EPAR's 
    Data Curation Project][data]. Specifically, we need the indicator estimates 
    spreadsheet found [here][sheet]. 
 
@@ -109,12 +113,15 @@ them cannot.
 
 5. Setup Python Virtual Environment.
 
-   Once you have the database set up
+   Once you have the database set up you will need to set up the python virtual
+   environment and install the required python modules required to run the 
+   python app server. 
  
    > __NOTE:__ lines starting with # should not be typed in. They are comments 
    > and are for guidance purposes only. 
 
    ```sh
+   # Leave the data section 
    cd ..
    # Next we create the python virtual environment
    python3 -m venv env
@@ -123,9 +130,55 @@ them cannot.
    # Finally use pip to install the python dependencies
    pip install -r requirements.txt
    ```
-6. Setup your environment variables
+
+6. Start the Server
    
-   The python
+   At this point you are pretty much ready to go. There are a couple more 
+   commands you will need to run in order to start the server. After which 
+   you should be able to view the site in your web browser.
+
+   > __NOTE:__ lines starting with # should not be typed in. They are comments 
+   > and are for guidance purposes only. 
+
+   ```sh
+   # Load the environment variables into the local system
+   source .env
+   # Start the flask app server
+   flask run
+   ```
+
+   Now you can type [http://localhost:5000][local] into your browser's URL bar
+   to view your 
+
+7. Cleaning up
+   When you are done testing your the website you can quit flask by pressing 
+   `Ctrl+c`. This will end the currently running process. You may want to stop
+   PostgreSQL from running as well. The tutorials linked earlier should provide
+   you with direction for how to do that as well.
+
+   If you intend to continue using your open terminal for other purposes you
+   will want to deactivate the python virtual environment. To do so simply type
+   `deactivate` into your shell and press enter.
+
+8. Re-starting the Server
+   
+   When you are ready to come back to testing your server after some period of time you will need to run a small subset of the above commands to view your
+   website again. The first step is to start the PostgreSQL. The method for 
+   doing so will depend on your operating system and should be in the tutorials
+   linked above. Once that is done 4 simple commands will get your web server
+   running again.
+
+   ```sh
+   # Change to the directory where you downloaded the repository
+   cd <directory_with_the_repository>
+   # Start the python virtual environment
+   source env/bin/activate
+   # Source your environment variables
+   source .env
+   # start the server
+   flask run
+   ```
+   Now you can view your [local copy][local] of the website once again.
 
 
 [epar]:     https://evans.uw.edu/policy-impact/epar
@@ -136,3 +189,4 @@ them cannot.
 [win]:      https://www.postgresql.org/download/windows/
 [data]:     https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation
 [sheet]:    https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx 
+[local]:    http://localhost:5000
