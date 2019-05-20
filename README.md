@@ -71,8 +71,9 @@ them cannot.
    \quit
    ```
    Once you set the password you will want to update the .env file in the
-   repository. Replace `<password>` with the password you set when setting
-   up your epardata user. 
+   repository. Replace `<password>` with the password you created when setting
+   up your epardata user. Once  you have changed the .env file be sure not to 
+   commit it to your git repository.
 
 4. Populate the Database
 
