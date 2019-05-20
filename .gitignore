@@ -1,9 +1,3 @@
-# Hide the Instance Files
-instance
-
-# Data files are the local testing SQLite Database
-data/*.csv
-
 #cache files
 __pycache__
 
@@ -14,5 +8,3 @@ __pycache__
 *.xlsx
 *.csv
 
-# Stop tracking the dls
-app/static/dls
