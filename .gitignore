@@ -1,21 +1,10 @@
-# Hide the Instance Files
-instance
-
-# Data files are the local testing SQLite Database
-data
-
 #cache files
 __pycache__
 
 # Python Compiled files
 *.pyc
 
-# hide the virtual env
-webserv
-
-# Stop tracking the .env special stuff in there
-.env
-
 # The csvs/xlsx are for updating the DBs and should not be tracked
 *.xlsx
 *.csv
+

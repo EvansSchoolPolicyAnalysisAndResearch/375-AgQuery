@@ -9,26 +9,9 @@
 {% block pageheader %}General Data Construction Decisions{% endblock %}
 
 {% block body %}
-<p>The data on this page were curated by the <a href="https://evans.uw.edu/policy-impact/epar">Evans Policy Analysis and Research Group</a> (EPAR) at the <a href="https://evans.uw.edu/">Daniel J. Evans School of Public Policy and Governance</a> of the <a href='https://uw.edu'>University of Washington</a>. The raw data were collected as part of the <a href="http://surveys.worldbank.org/lsms/programs/integrated-surveys-agriculture-ISA">LSMS-ISA</a> conducted by the <a href='http://www.worldbank.org/'>World Bank Group</a> and can be downloaded from their site.</p>
-
-<p>For each country the data were collected by the respective country's
-	Statistical Bureau. For more information on each survey and to download
-	the data see the following links:
-</p>
-<ul>
-	<li><a href="http://surveys.worldbank.org/lsms/programs/integrated-surveys-agriculture-ISA/ethiopia" 
-		target="_blank">
-	Ethiopa Socioeconomic Survey (ESS)</a></li>
-	<li><a href="http://surveys.worldbank.org/lsms/programs/integrated-surveys-agriculture-ISA/nigeria" target="_blank">
-	Nigeria General Household Survey Panel (GHSP)</a></li>
-	<li><a href="http://surveys.worldbank.org/lsms/programs/integrated-surveys-agriculture-ISA/tanzania" target="_blank">
-	Tanzania National Panel Survey (TNPS)</a></li>
-</ul>
-<p>The data were curated using the <a href='https://www.stata.com/'>STATA</a> software package. The STATA source code files used to curate the data can be found on <a href='https://github.com'>Github</a> in <a href='https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Agricultural-Indicator-Curation'>EPAR's repositories</a>. These files, along with the data from the World Bank's site can be used to recreate these estimates. General decision rules for this curation are detailed below.</p>
-
-{% for decision in decisions %}
-	<h2>{{decision.topic}}</h2>
-	{{decision.decision|safe}}
+{% for topic, decision in decisions.items() %}
+	<h2>{% if topic != "Intro" %}{{topic}}{% endif %}</h2>
+	{{decision}}
 {% endfor %}
 
 {% endblock %}

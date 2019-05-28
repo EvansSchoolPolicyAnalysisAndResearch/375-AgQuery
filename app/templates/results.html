@@ -17,40 +17,60 @@
 		<th>Geography</th>
 		<th>Year</th>
 		<th>Gender</th>
-		<th>Level</th>
 		<th>Sub-Population</th>
 		<th>Farm Size</th>
 		<th>Crop</th>
 		<th>Units</th>
 		<th>Mean</th>
-		<th>Standard Error</th>
+		<th>SE</th>
+		<th>N</th>
 	</tr>
 {% for ind in indicators %}
 	<tr>
-		<td>{{ind.indicatorName}}</td>
-		<td>{{ind.geography}}</td>
-		<td>{{ind.year}}</td>
-		<td>{{ind.genderDisaggregation}}</td>
-		<td>{{ind.indicatorLevel}} </td>
-		<td>{{ind.subpopulation}}</td>
-		<td>{{ind.farmSizeDisaggregation}}</td>
-		<td>{{ind.cropDisaggregation}}</td>
-		<td>{{ind.units}}</td>
-		<td>{% if ind.mean and "$" in ind.units  %} 
-				{{"{:.2f}".format(ind.mean)}}
-			{% elif ind.mean %}
-				{{"{:.3f}".format(ind.mean)}}
+		<td title="{{ ind.CntryCons.indcon.constructiondecision }}">
+			{{ind.Estimates.indicator}}
+		</td>
+		<td title="{{ind.CntryCons.cntrydec }}">
+			{{ind.Estimates.geography}}
+		</td>
+		<td title="{{ ind.CntryCons.cntrydec }}">
+			{{ind.Estimates.year}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.genderDisaggregation }}">
+			{{ind.Estimates.genderDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.subpopulation }}">
+			{{ind.Estimates.subpopulation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.farmSizeDisaggregation }}">
+			{{ind.Estimates.farmSizeDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.cropDisaggregation }}">
+			{{ind.Estimates.cropDisaggregation}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.units }}">
+			{{ind.Estimates.units}}
+		</td>
+		<td title="{{ ind.CntryCons.indcon.numerator }} {% if ind.Estimates.units == 'Proportion' %} / {{ ind.CntryCons.indcon.denominator }}{% endif %}">
+			{% if ind.Estimates.mean and "$" in ind.Estimates.units  %} 
+				{{"{:.2f}".format(ind.Estimates.mean)}}
+			{% elif ind.Estimates.mean %}
+				{{"{:.3f}".format(ind.Estimates.mean)}}
 			{% else  %}
 				N/A
 			{% endif %}
 		</td>
-		<td>{% if ind.se and "$" in ind.units  %} 
-				{{"{:.2f}".format(ind.se)}}
-			{% elif ind.se %}
-				{{"{:.3f}".format(ind.se)}}
+		<td title="{{ ind.CntryCons.indcon.numerator }} {% if ind.Estimates.units == 'Proportion' %} <strong>/</strong> {{ ind.CntryCons.indcon.denominator }}{% endif %}">
+			{% if ind.Estimates.se and "$" in ind.Estimates.units  %} 
+				{{"{:.2f}".format(ind.Estimates.se)}}
+			{% elif ind.Estimates.se %}
+				{{"{:.3f}".format(ind.Estimates.se)}}
 			{% else  %}
 				N/A
 			{% endif %}
+		</td>
+		<td>{{ind.Estimates.n}}
+	</tr>
 {% endfor %}
 </table>
 {% endblock %}
