@@ -7,14 +7,14 @@ This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 from app import app
-from sqlalchemy.sql import select
-from sqlalchemy import and_, or_
-from os import environ
-from flask import render_template, request, Response
 from app.database import db_session
-from app.models import Estimates,GenCons
+from app.models import *
 from app.dbhelper import formHandler
 from app.dlhelper import make_csv
+
+from sqlalchemy.sql import select
+from flask import render_template, request, Response
+
 
 @app.route('/', methods={"GET","POST"})
 def index():
@@ -50,9 +50,9 @@ def index():
 			geography = [r.geography for r in 
 					db_session.query(Estimates.geography).distinct()]
 			# Get a list of all indicators in the selected categories
-			indicators = [r.indicatorName for r in
+			indicators = [r.indicator for r in
 				db_session.query(
-					Estimates.indicatorName).distinct().filter(
+					Estimates.indicator).distinct().filter(
 						Estimates.indicatorCategory.in_(selectedCategories))]
 			# If the db query returned something, enable the go button
 			if len(indicators) > 0:
@@ -74,7 +74,7 @@ def login():
 	"""
 	return render_template("login.html")
 
-@app.route('/results', methods={"POST"})
+@app.route('/results', methods={"GET", "POST"})
 def results():
 	"""
 	Creates the results page
@@ -86,6 +86,11 @@ def results():
 
 	:returns: an HTML page to be displayed by the website
 	"""
+	# If the user got here without submitting form data reply with no 
+	# indicator selected page
+	if not request.form:
+		return render_template("no-inds.html"), 406
+
 	indicators = formHandler(request, db_session)
 	# Check if anything is returned from the formHandler. If no, then show the
 	# error page
@@ -106,7 +111,7 @@ def get_csv():
 	:returns: a Response object containing a CSV of the required variables
 	"""
 	# Get the estimates from the formhandler
-	indicators = formHandler(request, db_session)
+	indicators = [r.Estimates for r in formHandler(request, db_session)]
 
 	# Check if any indicators were selected
 	if not indicators:
@@ -115,7 +120,6 @@ def get_csv():
 	# Get the headers based on the columns of the database
 	headers = Estimates.__table__.columns.keys()
 	headers = headers[1:]
-
 	#Generate a string which is the final csv 
 	csv = make_csv(headers, indicators)
 	
@@ -126,15 +130,11 @@ def get_csv():
 @app.route('/about-data/')
 def about_data():
 	"""
-	Creates the About Data page
-
-	Gets the general constructions decisions from the database and passes them
-	to the template before returning the html page.
-
-	:returns: An HTML page to be displayed by the website
+	For our purposes the about_data page is now on our website. Redirect in
+	case anyone still has the old link
 	"""
-	decisions = db_session.query(GenCons).all()
-	return render_template('about-data.html', decisions=decisions)
+	return redirect("https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation#construction", 
+		code=301)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

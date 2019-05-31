@@ -6,19 +6,22 @@
 	<meta charset="utf-8">
 	<title>{% block title %}{% endblock %}</title>
 	 <link href="https://fonts.googleapis.com/css?family=Encode+Sans:900|Open+Sans" rel="stylesheet"> 
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" 
+		href="{{ url_for('static', filename='css/main.css') }}" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon.png') }}" />
 	{% block includes %}{% endblock %}
 </head>
 <body>
 	<div class="container">
 		<header>
-			<h1>Evans Policy Analysis and Research Group</h1>
+			<h1>AgDev Indicator Query Tool (ADIQuT)</h1>
 			<nav> 
 				<ul>
 					<li><a href="https://evans.uw.edu/policy-impact/epar">EPAR Home</a></li>
 					<li><a href="/">Data Search</a></li>
-					<li><a href="/about-data/">About the Data</a></li>
-					
+					<li><a href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">Data Curation</a></li>
+					<li><a href="https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx">Download Data</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -31,7 +34,6 @@
 	</div> <!-- end container -->
 <footer>
 	<p>&copy; Copyright 2018 Evans Policy Analysis and Research Group</p>
-	<p><a href="/login">Login</a></p>
 </footer>
 </body>
 </html>

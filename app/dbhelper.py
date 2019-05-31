@@ -6,11 +6,15 @@ Copyright 2018 Evans Policy Analysis and Research Group (EPAR)
 This project is licensed under the 3-Clause BSD License. Please see the 
 license.txt file for more information.
 """
-
+from app.models import *
 from flask_sqlalchemy import SQLAlchemy
+from flask import Markup
+
 from sqlalchemy import and_, or_
 from sqlalchemy.sql import select
-from app.models import *
+
+from markdown import markdown
+from collections import OrderedDict
 
 def formHandler(request, session):
 	"""
@@ -23,21 +27,20 @@ def formHandler(request, session):
 
 	:param request: The request information from the website
 	:param session: the database session for the query
-	:returns: 		Results of the Database Query
-	:raises:
+	:returns: 		Results of the Database Query or None for no results
 	"""
 	
 	# Pull the information necessary for the db query from the request
 	# passed to this function
 	geos = request.form.getlist('geography')
 	years = request.form.get('years')
-	names = request.form.getlist('indicator')
+	inds = request.form.getlist('indicator')
 
 	# If no geographies are selected count them as all selected	
 	if not geos :
 		geos = session.query(Estimates.geography).distinct()
 
-	if not names:
+	if not inds:
 		return None
 
 	indicators = []	
@@ -45,16 +48,21 @@ def formHandler(request, session):
 	if years == "most-recent":
 		for geo in geos:
 			year = getMostRecent(geo, session)
-			indicators += session.query(Estimates).filter(
-							Estimates.geography == geo, Estimates.year == year,
-							Estimates.indicatorName.in_(names)).all()
+			indicators += session.query(Estimates, CntryCons).filter(
+				Estimates.indicator == CntryCons.indicator,
+				Estimates.instrument == CntryCons.instrument).filter(
+				Estimates.geography == geo, 
+				Estimates.year == year,
+				Estimates.indicator.in_(inds)).all()
 	else:
-		indicators = session.query(Estimates).filter(
+		indicators = session.query(Estimates, CntryCons).filter(
+				CntryCons.indicator.like(Estimates.indicator),
+				CntryCons.instrument == Estimates.instrument).filter(
 			Estimates.geography.in_(geos), 
-			Estimates.indicatorName.in_(names)).all()
+			Estimates.indicator.in_(inds)).all()
 	return indicators
 
-	
+
 def getMostRecent(geo, session):
 	"""
 	Finds the most recent year of LSMS surveys for a given geography

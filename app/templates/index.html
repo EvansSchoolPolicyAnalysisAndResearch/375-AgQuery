@@ -3,7 +3,7 @@
 {% extends "base.html" %}
 {% block title %}EPAR Agricultural Data Project{% endblock %}
 {% block includes %}
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" media='all' />
 	<script type="text/javascript" 
 		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script>
 {% endblock %}
@@ -15,17 +15,19 @@
 		
 		<!-- Here be the point where I need to get the indicator categories from the database -->
 	<div id="icGroup" class="filterbox">
-		<p>Indicator Category:</p>
-		<div class="scrollbox">
-			<ul>
-			{% for cat in indicatorCategory %}
-				<li><label><input type="checkbox"
-							value="{{cat}}"
-							name="indicatorCategory"
-							id="{{cat}}" />
-					{{cat}}</label></li>
-			{% endfor %}
-			</ul>
+		<div class='boundingbox'>
+		<h3>Indicator Category:</h3>
+			<div class="scrollbox">
+				<ul>
+				{% for cat in indicatorCategory %}
+					<li><label><input type="checkbox"
+								value="{{cat}}"
+								name="indicatorCategory"
+								id="{{cat}}" />
+						{{cat}}</label></li>
+				{% endfor %}
+				</ul>
+			</div>
 		</div>
 		<div class="selectionbuttons">
 			<button type="button" class="select" onclick="SelectAll('indicatorCategory');" >
@@ -43,52 +45,25 @@
 {% endif %}
 
 {% if goDisabled == False %}
-<p><a href="/">Back to Category Selection</a></p>
 
 
 <form method="POST" action="/results">
-	<div id="indicatorbox" class="indicatorbox" >
-		<p>Indicators:</p>
-		<div class="scrollbox">
-			<ul>
-			<!--<li> 
-				<input type="checkbox" id="allindicators" />
-				<label for="allindicators">Select All</label>
-			</li> -->
-			{% for indicator in indicators %}
-				<li>
-					<label><input type="checkbox" 
-							id="{{indicator}}" 
-							name="indicator" 
-							value="{{indicator}}" />
-					{{indicator}}</label>
-				</li>
-			{% endfor %}
-			</ul>
-		</div>
-		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicator');" >
-				Select All
-			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicator');">
-				Clear All
-			</button>
-		</div>
-	</div>
-
+	
 	<div id="geoGroup" class="filterbox">
-		<p>Geographic Region:</p>
-		<div class="scrollbox">
-			<ul>
-			{% for geo in geography %}
-				<li><label><input type="checkbox"
-							value="{{geo}}"
-							name="geography"
-							id="{{geo}}" />
-					{{geo}}</label>
-				</li>
-			{% endfor %}
-			</ul>
+		<div class='boundingbox'>
+			<h3>Geographic Region:</h3>
+			<div class="scrollbox">
+				<ul>
+				{% for geo in geography %}
+					<li><label><input type="checkbox"
+								value="{{geo}}"
+								name="geography"
+								id="{{geo}}" />
+						{{geo}}</label>
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
 		</div>
 		<div class="selectionbuttons">
 			<button type="button" class="select" onclick="SelectAll('geography');" >
@@ -101,24 +76,54 @@
 	</div>
 	
 	<div id='years' class='filterbox'>
-		<p>Years:</p> 
-		<div class="scrollbox" id="years">
-			<ul>
-				<li><input type='radio' id='yearsChoice1' checked="checked"
-				 name='years' value='all' />
-				<label for='yearsChoice1'>All Waves of LSMS-ISA</label> </li>
-				<li><input type='radio' id='yearsChoice2' name='years' 
-					value='most-recent' />
-				<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></li>
-			</ul>
+		<div class='boundingbox'>
+			<h3>Years:</h3> 
+			<div class="scrollbox" id="years">
+				<ul>
+					<li><p><input type='radio' id='yearsChoice1' checked="checked"
+					 name='years' value='all' />
+					<label for='yearsChoice1'>All Waves of LSMS-ISA</label></p> </li>
+					<li><p><input type='radio' id='yearsChoice2' name='years' 
+						value='most-recent' />
+					<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></p></li>
+				</ul>
+			</div>
 		</div>
 	</div>
+	<div id="indicatorbox" class="indicatorbox" >
+		<div class='boundingbox'>
+			<h3>Indicators:</h3>
+			<div class="scrollbox">
+				<ul>
+				{% for indicator in indicators %}
+					<li><p>
+						<label><input type="checkbox" 
+								id="{{indicator}}" 
+								name="indicator" 
+								value="{{indicator}}" />
+						{{indicator}}</label>
+					</p></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<div class="selectionbuttons">
+			<button type="button" class="select" onclick="SelectAll('indicator');" >
+				Select All
+			</button>
+			<button type="button" class="clear" onclick="ClearAll('indicator');">
+				Clear All
+			</button>
+		</div>
+	</div>
+
 
 	<div class='buttonbox'>
 		<input type="submit" value="View Estimates" formaction='results' />
 		<input type='submit' value='Download CSV' formaction='get-csv' />
+		<p><a href="/">Back to Category Selection</a></p>
 	</div>
+
 </form>
 {% endif %}
-<p>Looking for all indicators and estimates? Download the full results <a href="{{ url_for('static', filename='dls/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx') }}">here</a></p>
 {% endblock %}
