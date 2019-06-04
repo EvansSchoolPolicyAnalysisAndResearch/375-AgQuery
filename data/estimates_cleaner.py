@@ -86,15 +86,14 @@ def clean_estimates(rows):
 
 def write_estimates_cleaned(rows, outfile):	
 	"""
-	Writes  a CSV in memory onto disk
+	Writes  a CSV stored as a list of lists from memory to disk
 	
 	:param rows		: a list of csv rows (lists) to be written
 	:param outfile	: an open file for writing
 	"""
 	wrtr = csv.writer(outfile, delimiter=',', quotechar='"', 
 		quoting=csv.QUOTE_MINIMAL)
-	for row in rows:
-		wrtr.writerow(row)
+	wrtr.writerows(rows)
 
 if __name__ == "__main__":
 	import argparse

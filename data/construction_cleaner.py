@@ -93,15 +93,14 @@ def clean_decisions(rows):
 
 def write_decisions(rows, outfile):
 	"""
-	Writes  a CSV in memory onto disk
+	Writes  a CSV stored as a list of lists from memory to disk
 	
 	:param rows		: a list of csv rows (lists) to be written
 	:param outfile	: an open file for writing
 	"""
 	wrtr = csv.writer(outfile, delimiter=',', quotechar='"', 
 					quoting=csv.QUOTE_NONNUMERIC)
-	for row in rows:
-		wrtr.writerow(row)
+	wrter.writerows(rows)
 
 if __name__ == "__main__":
 	import argparse
