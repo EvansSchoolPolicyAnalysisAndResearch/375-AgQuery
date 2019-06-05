@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!python3
 
 #data/construction_cleaner.py
 
@@ -105,7 +105,7 @@ def write_decisions(rows, outfile):
 if __name__ == "__main__":
 	import argparse
 
-	# Get commandline arguments
+	# Setup commandline arguments
 	pars = argparse.ArgumentParser( description = __doc__,
 		epilog 			= __copyright__ + __license__,
 		formatter_class	= argparse.ArgumentDefaultsHelpFormatter)
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 		metavar	= "OUTPUT2", 
 		default	= 'construction_countries_cleaned.csv',
 		type	= argparse.FileType('w'),
-		help 	= 'path for the cleand CSV output - country-level decisions')
+		help 	= 'path for the cleaned CSV output - country-level decisions')
 
 	# Get the values passed on the command line
 	args = pars.parse_args()
