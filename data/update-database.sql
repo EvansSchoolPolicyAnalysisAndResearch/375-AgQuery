@@ -72,8 +72,8 @@ CREATE TABLE public.cntrycons_update (
 \COPY estimates_update FROM 'estimates_cleaned.csv' CSV;
 -- Remove the AgDev results
 DELETE FROM public.estimates_update WHERE survey = 'AgDev Baseline';
-\COPY indcons_update FROM 'construction_cleaned.csv' CSV;
-\COPY cntrycons_update FROM 'construction_countries_cleaned.csv' CSV;
+\COPY indcons_update FROM 'decs_cleaned.csv' CSV;
+\COPY cntrycons_update FROM 'ctry_decs_cleaned.csv' CSV;
 
 
 
