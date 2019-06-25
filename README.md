@@ -32,7 +32,7 @@ them cannot.
    later steps will require you to use the command line. 
 
    ```sh 
-   git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-Ag-DB.git
+   git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-ADIQuT.git
    ```
 
 2. Install/Setup Postgresql
@@ -75,44 +75,13 @@ them cannot.
    up your epardata user. Once  you have changed the .env file be sure not to 
    commit it to your git repository.
 
-4. Populate the Database
 
+
+4. Setup Python Virtual Environment.
+  
    > __NOTE:__ Please make sure you have python 3.7 installed before you 
    > continue.
 
-   To populate the database we will be using data released as part of [EPAR's 
-   Data Curation Project][data]. Specifically, we need the indicator estimates 
-   spreadsheet found [here][sheet]. 
-
-   Once you have the spreadsheet you will need to export two of the sheets into
-   CSV files. To be specific, save the sheet 'Summ. of Indicator Construction'
-   as `constuction.csv` and the sheet 'Estimates by Instrument' as 
-   `estimates.csv`. Once you have both files place them in the 'data' folder of
-   the repository you downloaded. 
-
-   > __NOTE:__ When exporting the CSV files from the spreadsheet make sure 
-   > that text fields are quoted to prevent commas in the spreadsheet from 
-   > interfering with the CSV file's structure. 
-
-   Once that is complete you are ready to get back to the terminal.
-
-   > __NOTE:__ Lines starting with # should not be typed in. They are comments 
-   > and are for guidance purposes only.
-
-   ```sh
-   # First we need to change our working directory
-   cd <directory_with_the_repository>/data
-   # Next we clean the CSV files we exported from the spreadsheet
-   python3 estimates_cleaner.py
-   python3 construction_cleaner.py
-   # Finally we load the data into the database
-   psql -d epardata -U epardata -W -f update-database.sql
-   ```
-
-   The final line of code you will ask you for epardata's password. Enter the 
-   password you set up in step 3. 
-
-5. Setup Python Virtual Environment.
 
    Once you have the database set up you will need to set up the python virtual
    environment and install the required python modules required to run the 
@@ -122,8 +91,9 @@ them cannot.
    > and are for guidance purposes only. 
 
    ```sh
-   # Leave the data section 
-   cd ..
+   # Replace <your_repository_directory> with the location where you cloned this
+   # repository
+   cd <directory_with_the_repository>
    # Next we create the python virtual environment
    python3 -m venv env
    # Next start up the virtual environment you just created
@@ -131,6 +101,27 @@ them cannot.
    # Finally use pip to install the python dependencies
    pip install -r requirements.txt
    ```
+
+5. Populate the Database
+
+   Once the Python requirements have been installed updating the database is
+   easy. 
+
+   > __NOTE:__ lines starting with # should not be typed in. They are comments 
+   > and are for guidance purposes only. 
+   ```sh
+   # Set the data directory as your working directory
+   cd data
+   # Run the db_updater
+   ./db_updater.py
+   ```
+
+   Once the data is downloaded and prepared for upload to your database you will
+   be asked for your SQL password. You will need the password you created in 
+   step 3. Type it in, press enter and the rest should be automatic.
+
+   > __NOTE:__ The first time you run this script it will state that there was
+   > an error on dropping tables. This can safely be ignored.
 
 6. Start the Server
    
@@ -151,11 +142,12 @@ them cannot.
    Now you can type [http://localhost:5000][local] into your browser's URL bar
    to view your 
 
-7. Cleaning up
+7. Cleaning up 
+
    When you are done testing your the website you can quit flask by pressing 
-   `Ctrl+c`. This will end the currently running process. You may want to stop
-   PostgreSQL from running as well. The tutorials linked earlier should provide
-   you with direction for how to do that as well.
+   `Ctrl+c` while your terminal is selected. This will end the currently running
+   process. You may want to stop PostgreSQL from running as well. The tutorials
+   linked earlier should provide you with direction on how to do that as well.
 
    If you intend to continue using your open terminal for other purposes you
    will want to deactivate the python virtual environment. To do so simply type
