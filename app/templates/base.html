@@ -9,19 +9,49 @@
 	<link rel="stylesheet" 
 		href="{{ url_for('static', filename='css/main.css') }}" />
 	<link rel="icon" 
-		href="{{ url_for('static', filename='images/icon.png') }}" />
+		href="{{ url_for('static', filename='images/icon16.png') }}" 
+		sizes="16x16" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon64.png') }}" 
+		sizes="64x64" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon128.png') }}" 
+		sizes="128x128" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon32.png') }}" 
+		sizes="32x32" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon60.png') }}" 
+		sizes="60x60" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon76.png') }}" 
+		sizes="76x76" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon120.png') }}" 
+		sizes="120x120" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon152.png') }}" 
+		sizes="152x152" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon167.png') }}" 
+		sizes="167x167" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon180.png') }}" 
+		sizes="180x180" />
 	{% block includes %}{% endblock %}
 </head>
 <body>
 	<div class="container">
 		<header>
-			<h1>AgQuery</h1>
+			<h1 id="banner"> AgQuery from EPAR
+			</h1>
 			<nav> 
 				<ul>
-					<li><a href="https://evans.uw.edu/policy-impact/epar">EPAR Home</a></li>
-					<li><a href="/">Data Search</a></li>
-					<li><a href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">Data Curation</a></li>
-					<li><a href="https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx">Download Data</a></li>
+					<li><a class='home' href="/">AgQuery Home</a>
+					</li>
+					<li><a  class='dl' href="https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx">Download Data</a></li>
+					<li><a class='about' href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">About the Data</a>
+					</li>
 				</ul>
 			</nav>
 		</header>
