@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 header {
 	color:			#000;
 	margin: 		auto;
+	padding: 		0;
 	width: 			1024px;
 }
 
@@ -80,23 +81,22 @@ header nav a:hover {
 
 /* Link Images */
 .about {
-	background: #4c2d82 url('../images/about32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/about32.png') left center no-repeat;
 }
 .about:hover {
-	background: #fff url('../images/about32i.png') left center no-repeat;
+	background:		#fff url('../images/about32i.png') left center no-repeat;
 }
-
 .home {
-	background: #4c2d82 url('../images/home32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/home32.png') left center no-repeat;
 }
 .home:hover {
-	background: #fff url('../images/home32i.png') left center no-repeat;
+	background:		#fff url('../images/home32i.png') left center no-repeat;
 }
 .dl {
-	background: #4c2d82 url('../images/dl32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/dl32.png') left center no-repeat;
 }
 .dl:hover {
-	background: #fff url('../images/dl32i.png') left center no-repeat;
+	background:		#fff url('../images/dl32i.png') left center no-repeat;
 }
   /****************************************************************************/
  /*                                  CONTENT                                 */
@@ -104,7 +104,7 @@ header nav a:hover {
 .contenthole {
 	margin:			auto;
 	overflow:		auto;
-	padding-bottom:	80px;
+	padding-bottom:	500px;
 }
 
 
@@ -112,14 +112,20 @@ header nav a:hover {
   /****************************************************************************/
  /*                                  FOOTER                                  */
 /****************************************************************************/
-footer {
+footer {	
 	position: 		relative;
 	/* negative value of footer height */
-	margin-top: 	-80px;
-  	height: 		80px;
-  	padding-bottom:	0;
-  	margin-bottom:	0;
+	margin:			-500px auto 0;
+  	height: 		500px;
+  	width: 			720px;
+  	padding:		200px 0 0;
   	clear: 			both;
+}
+#footimg {
+	background: #fff url('../images/footer720.png') center top no-repeat;
+	height:			180px;
+	width:			720px;
+	color:			rgba(256, 256, 256, 0);
 }
 
   /****************************************************************************/
@@ -127,28 +133,33 @@ footer {
 /****************************************************************************/
 @media (min-width: 768px) and (max-width: 1023px){
 	header {
-		margin:		5px auto 5px;
+		margin:			5px auto 5px;
 		width: 			720px;
 		display:		block;
 	}
+	header h1 {
+		margin:		0;
+		padding:	0;
+	}
+	header nav {
+		margin: 		0 auto 0px;
+		padding: 		0 0 0 10px;
+		width:			720px;
+		float:			none;
+	}
+
 	header nav ul {
-		display: 		block;
+		display: 		inline-block;
 		margin: 		5px auto 5px ;
 		padding:		0;
 	}
 
 	header nav li {
 		margin:			0 5px 0 0;
-		font-size:		20px;
 		display:		inline-block;
 	}
 	
-	header nav {
-		margin: 		0 auto 0;
-		padding: 		0;
-		width:			720px;
-		float:			none;
-	}
+
 }
   /****************************************************************************/
  /*                                PHONE MODE                                */
@@ -184,6 +195,23 @@ footer {
 	header nav li a {
 		margin: 		0 0 0 -10px;
 	}
-
+	.contenthole {
+		padding-bottom:		550px;
+	}
+	footer {	
+		position: 		relative;
+		/* negative value of footer height */
+		margin:			-550px auto 0;
+	  	height: 		550px;
+	  	width: 			360px;
+	  	padding:		0 0 0;
+	  	clear: 			both;
+	}
+	#footimg {
+		background: #fff url('../images/vfooter360.png') center top no-repeat;
+		height:			400px;
+		width:			360px;
+		color:			rgba(256, 256, 256, 0);
+	}
 }
 
