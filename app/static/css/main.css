@@ -15,6 +15,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
 	min-height:		100%;
+	max-width:		1024px;
+	margin:			0 auto 0;
 }
 
   /****************************************************************************/
@@ -45,8 +47,7 @@ header h1 {
 /************/
 header nav{
 	display:		inline-block;
-	margin: 		30px 30px 0 0;
-	width: 			180px;
+	margin: 		30px 0 0;
 	float:			right;
 }
 
@@ -60,14 +61,15 @@ header nav li {
 	list-style:		none;
 	font-size:		24px;
 	margin: 		0 auto 5px;
+	border:			3px solid #555;
 }
 header nav a {
 	color: 			#fff;
 	display:		inline-block;
 	height: 		36px;
-	padding:		10px;
+	padding:		10px 10px 10px 48px;
 	width:			180px;
-	padding-left: 	40px;
+	border:			3px solid #fff;
 	
 }
 header nav a:link{
@@ -81,30 +83,31 @@ header nav a:hover {
 
 /* Link Images */
 .about {
-	background:		#4c2d82 url('../images/about32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/about32r.png') left center no-repeat;
+	margin: 		0;
 }
 .about:hover {
-	background:		#fff url('../images/about32i.png') left center no-repeat;
+	background:		#fff url('../images/about32ir.png') left center no-repeat;
 }
 .home {
-	background:		#4c2d82 url('../images/home32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/home32r.png') left center no-repeat;
 }
 .home:hover {
-	background:		#fff url('../images/home32i.png') left center no-repeat;
+	background:		#fff url('../images/home32ir.png') left center no-repeat;
 }
 .dl {
-	background:		#4c2d82 url('../images/dl32.png') left center no-repeat;
+	background:		#4c2d82 url('../images/dl32r.png') left center no-repeat;
 }
 .dl:hover {
-	background:		#fff url('../images/dl32i.png') left center no-repeat;
+	background:		#fff url('../images/dl32ir.png') left center no-repeat;
 }
   /****************************************************************************/
  /*                                  CONTENT                                 */
 /****************************************************************************/
 .contenthole {
-	margin:			auto;
+	margin:			0 auto 0;
 	overflow:		auto;
-	padding-bottom:	700px;
+	padding-bottom:	900px;
 }
 
 
@@ -117,14 +120,27 @@ footer {
 	/* negative value of footer height */
 	margin:			-700px auto 0;
   	height: 		700px;
-  	width: 			720px;
-  	padding:		200px 0 0;
+  	width: 			1024px;
+  	padding:		0 0 0;
+  	border-top:		5px solid #555 ;
   	clear: 			both;
+}
+#credits{
+	float: 			left;
+	width: 			480px;
+	margin: 		0 0 0;
+	padding: 		0 0 0;
+}
+#about {
+	margin:			0 0 0;
+	padding: 		0 0 0;
+	width: 			480px;
+	float:			right;
 }
 #footimg {
 	background: #fff url('../images/vfooter360.png') center top no-repeat;
 	height:			400px;
-	width:			360px;
+	width:			480px;
 	color:			rgba(256, 256, 256, 0);
 }
 
@@ -134,17 +150,18 @@ footer {
 @media (min-width: 768px) and (max-width: 1023px){
 	header {
 		margin:			5px auto 5px;
-		width: 			720px;
+		width: 			768px;
 		display:		block;
 	}
 	header h1 {
 		margin:			0;
 		padding:		0;
+		width:			768px;
 	}
 	header nav {
 		margin: 		0 auto 0px;
-		padding: 		0 0 0 10px;
-		width:			720px;
+		padding: 		0 0 0 0;
+		width:			768px;
 		float:			none;
 	}
 
@@ -157,8 +174,28 @@ footer {
 	header nav li {
 		margin:			0 5px 0 0;
 		display:		inline-block;
+		font-size:		22px;
 	}
-	
+	header nav a {
+		width: 			170px;
+	}
+	footer {	
+	  	width: 			720px;
+	  	padding:		0 0 0;
+	  	clear: 			both;
+	}
+	#credits{
+		width: 			360px;
+	}
+	#about {
+		width: 			360px;
+		float:			right;
+	}
+	#footimg {
+		height:			400px;
+		width:			360px;
+	}
+		
 
 }
   /****************************************************************************/
@@ -183,7 +220,7 @@ footer {
 		float: 			none;
 	}
 	header nav ul {
-		margin: 	5px auto 5px;
+		margin: 		5px auto 5px;
 		width: 			360px;
 		display: 		block;
 	}
@@ -196,22 +233,29 @@ footer {
 		margin: 		0 0 0 -10px;
 	}
 	.contenthole {
-		padding-bottom:		550px;
+		padding-bottom:	700px;
 	}
 	footer {	
 		position: 		relative;
 		/* negative value of footer height */
-		margin:			-550px auto 0;
-	  	height: 		550px;
+		margin:			-700px auto 0;
+	  	height: 		700px;
 	  	width: 			360px;
 	  	padding:		0 0 0;
 	  	clear: 			both;
 	}
+
+	#credits{
+		width: 			360px;
+		float:			none;
+	}
+	#about {
+		width: 			360px;
+		float:			none;
+	}
 	#footimg {
-		background: #fff url('../images/vfooter360.png') center top no-repeat;
 		height:			400px;
 		width:			360px;
-		color:			rgba(256, 256, 256, 0);
 	}
 }
 

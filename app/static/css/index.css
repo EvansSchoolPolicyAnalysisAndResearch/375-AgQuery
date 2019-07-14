@@ -1,6 +1,7 @@
 
 .contenthole {
 	max-width: 375px;
+	margin: 0 auto 0;
 }
 .filterbox {
 	height: 320px;
@@ -19,8 +20,7 @@
 	padding: 10px 0 0 0;
 
 }
-.filterbox .boundingbox {
-}
+
 .scrollbox {
 	overflow-y:scroll;
 	overflow-x:hidden;
@@ -73,12 +73,18 @@
 	width: 150px;
 	margin: 10px;
 }
+
+  /****************************************************************************/
+ /*                                PHONE MODE                                */
+/****************************************************************************/
+
 @media (min-width: 768px) {
 	/*-- The Grid Layout --*/
 	.contenthole {
 		overflow:hidden;
 		min-width: 768px;
 		max-width:815px;
+		margin: 0 auto 0;
 	}
 
 	form {

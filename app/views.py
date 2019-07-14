@@ -111,11 +111,13 @@ def get_csv():
 	:returns: a Response object containing a CSV of the required variables
 	"""
 	# Get the estimates from the formhandler
-	indicators = [r.Estimates for r in formHandler(request, db_session)]
+	indicators = formHandler(request, db_session)
 
 	# Check if any indicators were selected
 	if not indicators:
 		return render_template("no-inds.html"), 406
+		
+	indicators = [r.Estimates for r in indicators]
 
 	# Get the headers based on the columns of the database
 	headers = Estimates.__table__.columns.keys()

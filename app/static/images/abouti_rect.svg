@@ -15,10 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (unknown)"
-   sodipodi:docname="about.svg"
-   inkscape:export-filename="/home/sammi/webdev/epardata/app/static/images/about32r.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96">
+   sodipodi:docname="abouti_rect.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -28,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4"
-     inkscape:cx="3.7430279"
-     inkscape:cy="32.45641"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="24.772948"
+     inkscape:cy="84.946125"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -58,12 +55,12 @@
      inkscape:label="BG"
      transform="translate(0,-15.066671)">
     <rect
-       style="opacity:1;fill:#4b2e83;fill-opacity:1;stroke:none;stroke-width:0.15653448;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       style="opacity:1;fill:#ffffff;fill-opacity:0;stroke:none;stroke-width:0.31306896;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
        id="rect899"
-       width="10.583333"
-       height="8.4666662"
-       x="5.2916665"
-       y="19.300005"
+       width="21.166666"
+       height="16.933332"
+       x="0"
+       y="15.066671"
        ry="0" />
   </g>
   <g
@@ -73,14 +70,14 @@
      transform="translate(0,-280.06667)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:1.60829759px;line-height:0.37991285px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.1005186"
-       x="8.7822933"
-       y="292.61697"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.21659517px;line-height:0.75982571px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#555555;fill-opacity:1;stroke:none;stroke-width:0.2010372"
+       x="7.0280261"
+       y="296.70636"
        id="text897"><tspan
          sodipodi:role="line"
          id="tspan895"
-         x="8.7822933"
-         y="292.61697"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.48681927px;font-family:'Coco Gothic';-inkscape-font-specification:'Coco Gothic Bold';fill:#ffffff;fill-opacity:1;stroke-width:0.1005186">?</tspan></text>
+         x="7.0280261"
+         y="296.70636"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.97363853px;font-family:'Coco Gothic';-inkscape-font-specification:'Coco Gothic Bold';fill:#555555;fill-opacity:1;stroke-width:0.2010372">?</tspan></text>
   </g>
 </svg>
