@@ -104,7 +104,7 @@ header nav a:hover {
 .contenthole {
 	margin:			auto;
 	overflow:		auto;
-	padding-bottom:	500px;
+	padding-bottom:	700px;
 }
 
 
@@ -115,16 +115,16 @@ header nav a:hover {
 footer {	
 	position: 		relative;
 	/* negative value of footer height */
-	margin:			-500px auto 0;
-  	height: 		500px;
+	margin:			-700px auto 0;
+  	height: 		700px;
   	width: 			720px;
   	padding:		200px 0 0;
   	clear: 			both;
 }
 #footimg {
-	background: #fff url('../images/footer720.png') center top no-repeat;
-	height:			180px;
-	width:			720px;
+	background: #fff url('../images/vfooter360.png') center top no-repeat;
+	height:			400px;
+	width:			360px;
 	color:			rgba(256, 256, 256, 0);
 }
 
@@ -138,8 +138,8 @@ footer {
 		display:		block;
 	}
 	header h1 {
-		margin:		0;
-		padding:	0;
+		margin:			0;
+		padding:		0;
 	}
 	header nav {
 		margin: 		0 auto 0px;
