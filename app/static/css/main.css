@@ -15,8 +15,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .container {
 	min-height:		100%;
-	max-width:		1024px;
+	width:			1024px;
 	margin:			0 auto 0;
+	padding:		0;
 }
 
   /****************************************************************************/
@@ -110,7 +111,7 @@ header nav a:hover {
 	padding-bottom:	900px;
 }
 
-
+/* Most content CSS is in page specific files */
 
   /****************************************************************************/
  /*                                  FOOTER                                  */
@@ -144,20 +145,61 @@ footer {
 	color:			rgba(256, 256, 256, 0);
 }
 
+#citediv {
+	clear:			both;
+}
+
+#toggle {
+    display: none;
+}
+
+.citation {
+	border-top:		1px dotted #555;
+	margin-top:		0;
+	padding-left: 	2em;
+	text-indent:	-2em;
+	height:			0;
+ 	overflow: 		hidden;
+ 	transition: 	height 400ms linear;
+ }
+#citediv p {
+	margin-bottom:	0;
+}
+
+label .arrow-dn { 
+	display: 		inline-block; 
+	transition:		transform 400ms linear;
+}
+
+#toggle:checked ~ .citation { 
+    height: 		115px;
+    border-top:		none;
+}
+
+#toggle:checked ~ p label .arrow-dn { 
+	transform: 		rotate(-180deg);
+}
+
+
   /****************************************************************************/
  /*                               TABLET  MODE                               */
 /****************************************************************************/
 @media (min-width: 768px) and (max-width: 1023px){
+	.container {
+		width: 768px;
+	}
 	header {
 		margin:			5px auto 5px;
 		width: 			768px;
 		display:		block;
 	}
+
 	header h1 {
 		margin:			0;
 		padding:		0;
 		width:			768px;
 	}
+
 	header nav {
 		margin: 		0 auto 0px;
 		padding: 		0 0 0 0;
@@ -176,86 +218,117 @@ footer {
 		display:		inline-block;
 		font-size:		22px;
 	}
+
 	header nav a {
 		width: 			170px;
 	}
+
 	footer {	
 	  	width: 			720px;
 	  	padding:		0 0 0;
 	  	clear: 			both;
 	}
+
 	#credits{
 		width: 			360px;
 	}
+
 	#about {
 		width: 			360px;
 		float:			right;
 	}
+
 	#footimg {
 		height:			400px;
 		width:			360px;
 	}
-		
-
+	
+	#toggle:checked ~ .citation { 
+    	height: 		140px;
+   		border-top:		none;
+	}
 }
   /****************************************************************************/
  /*                                PHONE MODE                                */
 /****************************************************************************/
 @media(max-width: 767px)
-{
-	header {
+{	
+	.container {
 		width: 			360px;
-		padding-top:	10px;
 	}
+	header {
+		width: 			345px;
+		padding-top:	10px;
+		margin: 		0 auto 0;
+		overflow:		hidden;
+	}
+
 	header h1 {
-		background: #fff url('../images/banner360.png') center center no-repeat;
-		width: 			360px;
+		background: #fff url('../images/banner360.png') left center no-repeat;
+		width: 			345px;
 		height: 		128px;
 		display: 		block;
+		overflow:		hidden;
 		padding: 		0;
 		margin: 		0;
 	}
+
 	header nav {
 		margin:			0 auto 0;
+		width:			345px;
 		float: 			none;
 	}
+
 	header nav ul {
 		margin: 		5px auto 5px;
-		width: 			360px;
+		width: 			345px;
 		display: 		block;
 	}
+
 	header nav li{
+		padding:		0;
 		display: 		block;
-		margin: 		0 auto 5px;
-		width: 			180px;
+		margin: 		0 0 5px;
 	}
+
 	header nav li a {
-		margin: 		0 0 0 -10px;
+		margin: 		0;
+		padding: 		10px;
+		width:			313px;
+		text-align: 	center;
 	}
+
 	.contenthole {
-		padding-bottom:	700px;
+		padding-bottom:	1100px;
 	}
+
 	footer {	
 		position: 		relative;
 		/* negative value of footer height */
-		margin:			-700px auto 0;
-	  	height: 		700px;
-	  	width: 			360px;
+		margin:			-1100px auto 0;
+	  	height: 		1100px;
+	  	width: 			345px;
 	  	padding:		0 0 0;
 	  	clear: 			both;
 	}
 
 	#credits{
-		width: 			360px;
+		width: 			345px;
 		float:			none;
 	}
+
 	#about {
-		width: 			360px;
+		width: 			345px;
 		float:			none;
 	}
+
 	#footimg {
 		height:			400px;
 		width:			360px;
+	}
+
+	#citediv {
+		width:	3		45px;
 	}
 }
 
