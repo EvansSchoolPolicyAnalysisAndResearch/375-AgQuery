@@ -1,80 +1,80 @@
 .contenthole {
-	width:			345px;
-	padding-left:	0;
-	padding-right:	0;
-	overflow:		hidden;
+	width:				345px;
+	padding-left:		0;
+	padding-right:		0;
+	overflow:			hidden;
 }
 
 .filterbox {
-	height: 		320px;
+	height: 			320px;
 }
 
 .indicatorbox {
-	height: 		600px;
+	height: 			600px;
 }
 
 .indicatorbox, .filterbox {
-	width:	 		344px;
-	padding: 		0;
+	width:	 			344px;
+	padding: 			0;
 }
 
 .boundingbox {
-	border: 3px solid #4c2d82;
-	padding: 10px 0 0 0;
+	border: 			3px solid #4c2d82;
+	padding:			10px 0 0 0;
 
 }
 
 .scrollbox {
-	overflow-y:scroll;
-	overflow-x:hidden;
-	height: 220px;
-	border-top:1px solid #999;
-	padding-left: 2px;
+	overflow-y:			scroll;
+	overflow-x:			hidden;
+	height: 			220px;
+	border-top:			1px solid #999;
+	padding-left:		2px;
 }
 
 .indicatorbox .scrollbox{
-	height: 500px;
+	height:				500px;
 }
 .scrollbox ul {
 	list-style: none;
-	padding-left:3px;
-	margin-top: 0;
+	padding-left:		3px;
+	margin-top:			0;
 }
 
 .scrollbox li {
-	line-height: 18px;
-	padding-bottom: 5px;
+	line-height:		18px;
+	padding-bottom:		5px;
 }
 
 .filterbox h3, .indicatorbox h3 {
-	padding:0;
-	margin: 0;
-	text-align:center;
-	font-size: 12pt;
+	padding:			0;
+	margin: 			0;
+	text-align:			center;
+	font-size: 			12pt;
 }
 
 .scrollbox p {
-	text-indent: -28px; 
-	padding: 0 3px 0 28px;
-	margin: 0;
+	text-indent:		-28px; 
+	padding: 			0 3px 0 28px;
+	margin:				0;
 }
 
 .buttonbox {
-	text-align: center;
-	width: 360px;
-	padding: 0 0 0 0;
-	margin: 5px  0 5px 0;
+	text-align:			center;
+	width:				360px;
+	padding:			0 0 0 0;
+	margin:				5px  0 5px 0;
 }
 .selectionbuttons {
-	text-align: center;
+	text-align:			center;
 }
 
 .selectionbuttons button, input[type="submit"] {
-	background-color: #fff;
-	border: 2px solid #4c2d82;
-	padding: 5px;
-	width: 150px;
-	margin: 10px;
+	background-color:	#fff;
+	border:				2px solid #4c2d82;
+	padding:			5px;
+	width: 				150px;
+	margin:				10px;
 }
 
   /****************************************************************************/
@@ -84,7 +84,7 @@
 @media (min-width: 768px) and (max-width: 1023px) {
 	/*-- The Grid Layout --*/
 	.contenthole {
-		width: 768px;
+		width: 					768px;
 	}
 
 	form {
@@ -132,7 +132,7 @@
 @media (min-width: 1024px) {
 	/*-- The Grid Layout --*/
 	.contenthole {
-		width: 900px;
+		width: 					900px;
 	}
 
 	form {
