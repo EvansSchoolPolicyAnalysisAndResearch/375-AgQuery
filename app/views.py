@@ -28,39 +28,29 @@ def index():
 	:returns: HTML file representing the index page
 	"""
 
-	# Creating the variables to be used throughout the method
-	indicators=[] # the list of indicators to display
-	goDisabled = True 
+	# the list of selectable indicators
+	indicators = [r.indicator for r in  
+			db_session.query(IndCons.indicator).all()]
 
-	# These database queries are for populating the filter lists for indicator
-	# category, georgraphy, and years
-	
-	indicatorCategory = [r.indicatorCategory for r in
-			db_session.query(Estimates.indicatorCategory).distinct()]
-	years = ["All Years", "Most Recent Survey"]
-	geography = []
+	# Get a list of all of the geography/year combos in the db
+	db_geo = db_session.query(Estimates.geography,
+		Estimates.year).distinct()
+	# Create a dict to store each geo and the years available for that geo
+	geos = {}
 
-	# If this page was accessed using post then request.form should not be 
-	# empty. In which case this code block will get the list of indicator names
-	# to be displayed in the indicators filter.
-	if request.form:
-		selectedCategories = request.form.getlist('indicatorCategory')
-		if selectedCategories:
-			# Get a list of all of the geographies
-			geography = [r.geography for r in 
-					db_session.query(Estimates.geography).distinct()]
-			# Get a list of all indicators in the selected categories
-			indicators = [r.indicator for r in
-				db_session.query(
-					Estimates.indicator).distinct().filter(
-						Estimates.indicatorCategory.in_(selectedCategories))]
-			# If the db query returned something, enable the go button
-			if len(indicators) > 0:
-				goDisabled = False
+	# place the years into different geographies
+	for g in db_geo:
+		if g.geography in geos.keys():
+			geos[g.geography].append(g.year)
+		else:
+			geos[g.geography] = [g.year]
+
+	# Sort the lists of years before displaying them
+	for g in geos.keys():
+		geos[g].sort()
 	
 	return render_template("index.html",indicators=indicators, 
-		geography=geography, indicatorCategory=indicatorCategory, 
-		goDisabled=goDisabled)
+		geoyears=geos)
 
 @app.route('/login')
 def login():
@@ -88,8 +78,6 @@ def results():
 	"""
 	# If the user got here without submitting form data reply with no 
 	# indicator selected page
-	if not request.form:
-		return render_template("no-inds.html"), 406
 
 	indicators = formHandler(request, db_session)
 	# Check if anything is returned from the formHandler. If no, then show the

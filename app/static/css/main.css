@@ -13,19 +13,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 	900;
 }
 
-.container {
-	min-height:		100%;
-	width:			1024px;
-	margin:			0 auto 0;
-	padding:		0;
-}
 
   /****************************************************************************/
  /*                                  HEADER                                  */
 /****************************************************************************/
 header {
 	color:			#000;
-	margin: 		auto;
+	margin: 		0 auto 0;
 	padding: 		0;
 	width: 			1024px;
 }
@@ -107,8 +101,8 @@ header nav a:hover {
 /****************************************************************************/
 .contenthole {
 	margin:			0 auto 0;
-	overflow:		auto;
-	padding-bottom:	900px;
+	width:			1024px;
+	padding-bottom:	600px;
 }
 
 /* Most content CSS is in page specific files */
@@ -119,8 +113,8 @@ header nav a:hover {
 footer {	
 	position: 		relative;
 	/* negative value of footer height */
-	margin:			-700px auto 0;
-  	height: 		700px;
+	margin:			-500px auto 0;
+  	height: 		500px;
   	width: 			1024px;
   	padding:		0 0 0;
   	border-top:		5px solid #555 ;

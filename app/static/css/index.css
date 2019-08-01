@@ -2,7 +2,6 @@
 	width:				345px;
 	padding-left:		0;
 	padding-right:		0;
-	overflow:			hidden;
 }
 
 .filterbox {
@@ -27,14 +26,11 @@
 .scrollbox {
 	overflow-y:			scroll;
 	overflow-x:			hidden;
-	height: 			220px;
+	height: 			500px;
 	border-top:			1px solid #999;
 	padding-left:		2px;
 }
 
-.indicatorbox .scrollbox{
-	height:				500px;
-}
 .scrollbox ul {
 	list-style: none;
 	padding-left:		3px;
@@ -76,6 +72,20 @@
 	width: 				150px;
 	margin:				10px;
 }
+.geoyear li {
+	height:				20px;
+	padding:			0 0 0 15px;
+	margin:				2px 0 2px;
+}
+.geoyear {
+	overflow:			hidden;
+	max-height:			0;
+ 	transition: 		max-height 500ms linear;
+}
+
+.geos:checked ~ .geoyear {
+	max-height:			200px;
+}
 
   /****************************************************************************/
  /*                                TABLET MODE                               */
@@ -101,7 +111,7 @@
 	}
 	
 	#indicatorbox {
-		grid-row: 				1 / 3;
+		grid-row: 				1;
 		grid-column: 			2;
 	}
 
@@ -110,18 +120,8 @@
 		grid-column: 			1;
 	}
 
-	#years {
-		grid-row: 				2;
-		grid-column: 			1;
-	}
-
-	#icgroup {
-		grid-column: 			1 / 3;
-		grid-row: 				1 / 3;
-		width: 					100%;
-	}
 	.buttonbox {
-		grid-row: 				3;
+		grid-row: 				2;
 		grid-column: 			1 / 3;
 		width: 					100%;
 	}
@@ -141,16 +141,16 @@
 		display: 				grid;
 		grid-template-columns:	repeat(2, 1fr);
 		grid-auto-rows: 		minmax();
-		grid-column-gap: 		15px;
+		grid-column-gap: 		20px;
 		grid-row-gap: 			10px;
 	}
 
 	.filterbox, .indicatorbox{
-		width: 					400px;
+		width: 					440px;
 	}
 	
 	#indicatorbox {
-		grid-row: 				1 / 3;
+		grid-row: 				1;
 		grid-column: 			2;
 	}
 
@@ -159,18 +159,8 @@
 		grid-column: 			1;
 	}
 
-	#years {
-		grid-row: 				2 ;
-		grid-column: 			1;
-	}
-
-	#icgroup {
-		grid-column: 			1 / 3;
-		grid-row: 				1 / 3;
-		width: 					100%;
-	}
 	.buttonbox {
-		grid-row: 				3;
+		grid-row: 				2;
 		grid-column: 			1 / 3;
 		width: 					100%;
 	}

@@ -69,7 +69,7 @@
 				N/A
 			{% endif %}
 		</td>
-		<td>{{ind.Estimates.n}}
+		<td>{{"{:.0f}".format(ind.Estimates.n)}}
 	</tr>
 {% endfor %}
 </table>

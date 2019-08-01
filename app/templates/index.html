@@ -10,97 +10,68 @@
 {% block pageheader %}Select your Data{% endblock %}
 
 {% block body %}
-{% if goDisabled == True %}
-<form method="POST" action="/">
-		
-		<!-- Here be the point where I need to get the indicator categories from the database -->
-	<div id="icGroup" class="filterbox">
+
+<form method="GET" action="/results">
+
+	<! The Geography selection box>
+	<div id="geoGroup" class="indicatorbox">
 		<div class='boundingbox'>
-		<h3>Indicator Category:</h3>
+			<h3>Country and Year:</h3>
 			<div class="scrollbox">
 				<ul>
-				{% for cat in indicatorCategory %}
-					<li><label><input type="checkbox"
-								value="{{cat}}"
-								name="indicatorCategory"
-								id="{{cat}}" />
-						{{cat}}</label></li>
-				{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicatorCategory');" >
-				Select All
-			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicatorCategory');">
-				Clear All
-			</button>
-		</div>
-	</div>
-	<div class='buttonbox'>
-		<input type="submit" name="Find Indicators" value="Find Indicators" />
-	</div>
-</form>
-{% endif %}
-
-{% if goDisabled == False %}
-
-
-<form method="POST" action="/results">
-	
-	<div id="geoGroup" class="filterbox">
-		<div class='boundingbox'>
-			<h3>Geographic Region:</h3>
-			<div class="scrollbox">
-				<ul>
-				{% for geo in geography %}
-					<li><label><input type="checkbox"
-								value="{{geo}}"
-								name="geography"
-								id="{{geo}}" />
-						{{geo}}</label>
+				{% for geo in geoyears.keys() %}
+					<li><input type="checkbox"
+								value=""
+								name=""
+								id="{{geo}}" 
+								class="geos"
+								onchange="ToggleSelect(this); EnableButtons();"/>
+						<label for="{{geo}}">
+							{{geo}}</label>
+						<ul class="geoyear">
+							{% for yr in geoyears[geo] %}
+								<li><label><input type="checkbox"
+									value="{{geo}}_{{yr}}"
+									name="geo_year"
+									id="{{geo}}_{{yr}}" 
+									class="{{geo}}"
+									onchange="EnableButtons();"/>
+									{{yr}}</label>
+								</li>
+							{% endfor %}
+						</ul>
 					</li>
 				{% endfor %}
 				</ul>
 			</div>
 		</div>
 		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('geography');" >
+			<button type="button" class="select" 
+				onclick="SelectAll('geos'); {% for geo in geoyears.keys() %}SelectAll('{{geo}}');{% endfor %}EnableButtons();" >
 				Select All
 			</button>
-			<button type="button" class="clear" onclick="ClearAll('geography');">
+			<button type="button" class="clear" 
+				onclick="ClearAll('geos'); {% for geo in geoyears.keys() %}ClearAll('{{geo}}'); {% endfor %}EnableButtons();">
 				Clear All
 			</button>
 		</div>
 	</div>
-	
-	<div id='years' class='filterbox'>
-		<div class='boundingbox'>
-			<h3>Years:</h3> 
-			<div class="scrollbox" id="years">
-				<ul>
-					<li><p><input type='radio' id='yearsChoice1' checked="checked"
-					 name='years' value='all' />
-					<label for='yearsChoice1'>All Waves of LSMS-ISA</label></p> </li>
-					<li><p><input type='radio' id='yearsChoice2' name='years' 
-						value='most-recent' />
-					<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></p></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
+	<! The indicator Selector Box >
 	<div id="indicatorbox" class="indicatorbox" >
 		<div class='boundingbox'>
-			<h3>Indicators:</h3>
+			<h3>Indicators: </h3>
+			
 			<div class="scrollbox">
 				<ul>
 				{% for indicator in indicators %}
-					<li><p>
+					<li class="indicli"><p>
 						<label><input type="checkbox" 
 								id="{{indicator}}" 
 								name="indicator" 
-								value="{{indicator}}" />
+								value="{{indicator}}" 
+								class="indicator"
+								onchange="EnableButtons();" />
 						{{indicator}}</label>
 					</p></li>
 				{% endfor %}
@@ -108,22 +79,29 @@
 			</div>
 		</div>
 		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicator');" >
+			<button type="button" class="select" onclick="SelectAll('indicator');EnableButtons();" >
 				Select All
 			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicator');">
+			<button type="button" class="clear" onclick="ClearAll('indicator');EnableButtons();">
 				Clear All
 			</button>
 		</div>
 	</div>
 
-
+	<! View/Download Buttons>
 	<div class='buttonbox'>
-		<input type="submit" value="View Estimates" formaction='results' />
-		<input type='submit' value='Download CSV' formaction='get-csv' />
+		<input type="submit" 
+			value="View Estimates" 
+			formaction='results' 
+			class="submitter"
+			disabled/>
+		<input type='submit' 
+			value='Download CSV' 
+			formaction='get-csv' 
+			class="submitter"
+			disabled />
 		<p><a href="/">Back to Category Selection</a></p>
 	</div>
 
 </form>
-{% endif %}
 {% endblock %}

@@ -32,33 +32,19 @@ def formHandler(request, session):
 	
 	# Pull the information necessary for the db query from the request
 	# passed to this function
-	geos = request.form.getlist('geography')
-	years = request.form.get('years')
-	inds = request.form.getlist('indicator')
-
-	# If no geographies are selected count them as all selected	
-	if not geos :
-		geos = session.query(Estimates.geography).distinct()
+	geoyears = request.values.getlist('geo_year')
+	inds = request.values.getlist('indicator')
 
 	if not inds:
 		return None
-
 	indicators = []	
-	
-	if years == "most-recent":
-		for geo in geos:
-			year = getMostRecent(geo, session)
-			indicators += session.query(Estimates, CntryCons).filter(
-				Estimates.indicator == CntryCons.indicator,
-				Estimates.instrument == CntryCons.instrument).filter(
-				Estimates.geography == geo, 
-				Estimates.year == year,
-				Estimates.indicator.in_(inds)).all()
-	else:
-		indicators = session.query(Estimates, CntryCons).filter(
-				CntryCons.indicator.like(Estimates.indicator),
-				CntryCons.instrument == Estimates.instrument).filter(
-			Estimates.geography.in_(geos), 
+	for gy in geoyears:
+		geo,year = gy.split("_", 1)
+		indicators += session.query(Estimates, CntryCons).filter(
+			Estimates.indicator == CntryCons.indicator,
+			Estimates.instrument == CntryCons.instrument).filter(
+			Estimates.geography == geo, 
+			Estimates.year == year,
 			Estimates.indicator.in_(inds)).all()
 	return indicators
 
