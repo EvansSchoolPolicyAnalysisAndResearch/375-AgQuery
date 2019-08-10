@@ -6,6 +6,19 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" media='all' />
 	<script type="text/javascript" 
 		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script>
+	<script> 
+		function load() {
+			// Check to see if boxes are pre-checked (i.e. on-reload)
+			AgQuery.EnableButtons();
+			// Enable any filters still populated on reload
+			var filterboxes = document.getElementsByClassName("filter");
+			for (let box of filterboxes){
+				AgQuery.FilterList(box);
+			}
+		}
+		window.onload = load;
+	</script>
+
 {% endblock %}
 {% block pageheader %}Select your Data{% endblock %}
 
@@ -16,16 +29,21 @@
 	<! The Geography selection box>
 	<div id="geoGroup" class="indicatorbox">
 		<div class='boundingbox'>
-			<h3>Country and Year:</h3>
+			<input type="search" 
+					class="filter" 
+					label="Geography filter" 
+					onkeyup="AgQuery.FilterList(this);" 
+					data-filterclass="geoli" />
+			<h3>Country/Year:</h3>
 			<div class="scrollbox">
 				<ul>
 				{% for geo in geoyears.keys() %}
-					<li><input type="checkbox"
+					<li class="geoli"><input type="checkbox"
 								value=""
 								name=""
 								id="{{geo}}" 
 								class="geos"
-								onchange="ToggleSelect(this); EnableButtons();"/>
+								onchange="AgQuery.ToggleSelect(this); AgQuery.EnableButtons();"/>
 						<label for="{{geo}}">
 							{{geo}}</label>
 						<ul class="geoyear">
@@ -35,7 +53,7 @@
 									name="geo_year"
 									id="{{geo}}_{{yr}}" 
 									class="{{geo}}"
-									onchange="EnableButtons();"/>
+									onchange="AgQuery.EnableButtons();"/>
 									{{yr}}</label>
 								</li>
 							{% endfor %}
@@ -47,11 +65,11 @@
 		</div>
 		<div class="selectionbuttons">
 			<button type="button" class="select" 
-				onclick="SelectAll('geos'); {% for geo in geoyears.keys() %}SelectAll('{{geo}}');{% endfor %}EnableButtons();" >
+				onclick="AgQuery.SelectAll('geos'); {% for geo in geoyears.keys() %}AgQuery.SelectAll('{{geo}}');{% endfor %} AgQuery.EnableButtons();" >
 				Select All
 			</button>
 			<button type="button" class="clear" 
-				onclick="ClearAll('geos'); {% for geo in geoyears.keys() %}ClearAll('{{geo}}'); {% endfor %}EnableButtons();">
+				onclick="AgQuery.ClearAll('geos'); {% for geo in geoyears.keys() %}AgQuery.ClearAll('{{geo}}'); {% endfor %}AgQuery.EnableButtons();">
 				Clear All
 			</button>
 		</div>
@@ -60,8 +78,14 @@
 	<! The indicator Selector Box >
 	<div id="indicatorbox" class="indicatorbox" >
 		<div class='boundingbox'>
+			<input type="search"
+ 					id="indicli"
+ 					class="filter"
+					aria-label="Filter the Indicator List"  
+					label="Filter Indicators" 
+					onkeyup="AgQuery.FilterList(this);" 
+					data-filterclass="indicli">
 			<h3>Indicators: </h3>
-			
 			<div class="scrollbox">
 				<ul>
 				{% for indicator in indicators %}
@@ -71,7 +95,7 @@
 								name="indicator" 
 								value="{{indicator}}" 
 								class="indicator"
-								onchange="EnableButtons();" />
+								onchange="AgQuery.EnableButtons();" />
 						{{indicator}}</label>
 					</p></li>
 				{% endfor %}
@@ -79,10 +103,10 @@
 			</div>
 		</div>
 		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicator');EnableButtons();" >
+			<button type="button" class="select" onclick="AgQuery.SelectAll('indicator'); AgQuery.EnableButtons();" >
 				Select All
 			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicator');EnableButtons();">
+			<button type="button" class="clear" onclick="AgQuery.ClearAll('indicator');AgQuery.EnableButtons();">
 				Clear All
 			</button>
 		</div>

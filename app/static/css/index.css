@@ -1,25 +1,22 @@
+  /*******************************/
+ /* Borders, sizing and spacing */
+/*******************************/
+
 .contenthole {
 	width:				345px;
 	padding-left:		0;
 	padding-right:		0;
 }
 
-.filterbox {
-	height: 			320px;
-}
-
 .indicatorbox {
 	height: 			600px;
-}
-
-.indicatorbox, .filterbox {
 	width:	 			344px;
 	padding: 			0;
 }
 
 .boundingbox {
 	border: 			3px solid #4c2d82;
-	padding:			10px 0 0 0;
+	padding:			0 0 0 0;
 
 }
 
@@ -31,6 +28,10 @@
 	padding-left:		2px;
 }
 
+  /********************/
+ /* Checkbox styling */
+/********************/
+
 .scrollbox ul {
 	list-style: none;
 	padding-left:		3px;
@@ -38,15 +39,10 @@
 }
 
 .scrollbox li {
-	line-height:		18px;
-	padding-bottom:		5px;
-}
-
-.filterbox h3, .indicatorbox h3 {
-	padding:			0;
-	margin: 			0;
-	text-align:			center;
-	font-size: 			12pt;
+	line-height:		22px;
+	max-height:			250px;
+	overflow:			hidden;
+	transition:			max-height 400ms linear;
 }
 
 .scrollbox p {
@@ -55,23 +51,6 @@
 	margin:				0;
 }
 
-.buttonbox {
-	text-align:			center;
-	width:				360px;
-	padding:			0 0 0 0;
-	margin:				5px  0 5px 0;
-}
-.selectionbuttons {
-	text-align:			center;
-}
-
-.selectionbuttons button, input[type="submit"] {
-	background-color:	#fff;
-	border:				2px solid #4c2d82;
-	padding:			5px;
-	width: 				150px;
-	margin:				10px;
-}
 .geoyear li {
 	height:				20px;
 	padding:			0 0 0 15px;
@@ -85,6 +64,66 @@
 
 .geos:checked ~ .geoyear {
 	max-height:			200px;
+}
+
+  /**********************/
+ /* Filterbox Headings */
+/**********************/
+.indicatorbox h3 {
+	padding:			5px 5px 5px 0;
+	display:			inline-block;
+	margin:				0 auto 0;
+	text-align:			center;
+	font-size:			12pt;
+}
+.indicatorbox input[type=search]{
+	float:				right;
+	height:				32px;
+	padding:			0 0 0;
+	margin:				2px 10px 0 0;
+	border:				1px solid #555;
+	transition-property: width, background-color;
+	transition-duration: 400ms;
+	transition-timing-function:  linear;
+	width:				32px;
+	background:	#4c2d82 url('../images/filteri.png') center center no-repeat;
+	cursor:				pointer;
+
+
+}
+
+.indicatorbox input[type=search]:focus, .indicatorbox input[type=search].haschars {
+	width:				200px;
+	background:			#fff;
+	cursor:				text;
+	
+}
+
+
+.indicatorbox input[type=search]:focus ~ h3 {
+
+}
+
+  /******************/
+ /* Button Styling */
+/******************/
+.buttonbox {
+	text-align:			center;
+	width:				360px;
+	padding:			0 0 0 0;
+	margin:				5px  0 5px 0;
+}
+
+.selectionbuttons {
+	text-align:			center;
+}
+
+.selectionbuttons button, input[type="submit"] {
+	background-color:	#fff;
+	border:				2px solid #4c2d82;
+	padding:			5px;
+	width: 				150px;
+	margin:				10px;
 }
 
   /****************************************************************************/
