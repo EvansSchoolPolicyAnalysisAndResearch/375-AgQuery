@@ -86,7 +86,7 @@
 	transition-duration: 400ms;
 	transition-timing-function:  linear;
 	width:				32px;
-	background:	#4c2d82 url('../images/filteri.png') center center no-repeat;
+	background:	#4c2d82 url('../images/filteri.png') right center no-repeat;
 	cursor:				pointer;
 
 

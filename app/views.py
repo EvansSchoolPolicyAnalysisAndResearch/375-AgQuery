@@ -31,13 +31,13 @@ def index():
 	# the list of selectable indicators
 	indicators = [r.indicator for r in  
 			db_session.query(IndCons.indicator).all()]
-
+	# sort the list of indicators alphabetically
+	indicators.sort()
 	# Get a list of all of the geography/year combos in the db
 	db_geo = db_session.query(Estimates.geography,
 		Estimates.year).distinct()
 	# Create a dict to store each geo and the years available for that geo
 	geos = {}
-
 	# place the years into different geographies
 	for g in db_geo:
 		if g.geography in geos.keys():
