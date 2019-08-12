@@ -11,9 +11,10 @@ var AgQuery = new Object({
 
 
 	/**
-	 * { function_description }
+	 * { Set all checkboxes with a given name to checked }
 	 *
-	 * @param      String  classname  The classname of the 
+	 * @param      {String}  classname  The classname of of the checkboxes to
+	 * 								  select
 	 */
 	SelectAll: function(classname)  {
 		// Finds all of the check boxes with the given name.
@@ -26,6 +27,12 @@ var AgQuery = new Object({
 		}
 	},
 
+
+	/**
+	 * { Set all checkboxes with a given name to unchecked }
+	 *
+	 * @param      {<type>}  classname  The classname
+	 */
 	ClearAll: function(classname) {
 
 		var boxes = document.getElementsByClassName(classname);
@@ -53,18 +60,50 @@ var AgQuery = new Object({
 		hasind		= false;
 		hasgeo		= false;
 
+		// Check to see if any indicators have been selected
 		for (let ind of indicators) {
 			if(ind.checked == true){
+				// At least one indicator has been selected, set hasind to true
+				// and end the loop early
 				hasind = true;
 				break;
 			}
 		}
+
+		// Check to see if any geography/year combos have been selected
 		for (let geo of geoyears) {
 			if(geo.checked == true){
+				// At least one geograpy/year combo has been selected, set 
+				// hasgeo to true and end the loop early
 				hasgeo = true;
 				break;
 			}
 		}
+		// Add or remove required as necessary for indicator checkboxes
+		if (hasind) {
+			for (let ind of indicators) {
+				ind.removeAttribute('required')
+			}
+		} else {
+			for (let ind of indicators) {
+				ind.setAttribute('required', 'true')
+			}
+		}
+
+		//  Same for geoyears. NOTE the required attribute helps with
+		// accessibility for individuals with using screen readers.
+		if (hasgeo) {
+			for (let geo of geoyears) {
+				geo.removeAttribute('required')
+			}
+		} else {
+			for (let geo of geoyears) {
+				geo.setAttribute('required', 'true')
+			}
+		}
+		// If I can find a way to get override the error messages for required
+		// text without using jquery than I will get rid of this. Until then
+		// this last chunk stays
 		if(hasind && hasgeo) {
 			for (let sub of submitters) {
 				sub.removeAttribute('disabled');

@@ -42,7 +42,6 @@
 	line-height:		22px;
 	max-height:			250px;
 	overflow:			hidden;
-	transition:			max-height 400ms linear;
 }
 
 .scrollbox p {
@@ -70,10 +69,9 @@
  /* Filterbox Headings */
 /**********************/
 .indicatorbox h3 {
-	padding:			5px 5px 5px 0;
+	padding:			5px 5px 5px 7px;
+	margin:				0;
 	display:			inline-block;
-	margin:				0 auto 0;
-	text-align:			center;
 	font-size:			12pt;
 }
 .indicatorbox input[type=search]{
@@ -82,7 +80,7 @@
 	padding:			0 0 0;
 	margin:				2px 10px 0 0;
 	border:				1px solid #555;
-	transition-property: width, background-color;
+	transition-property: width, background-color, color;
 	transition-duration: 400ms;
 	transition-timing-function:  linear;
 	width:				32px;
@@ -90,6 +88,20 @@
 	cursor:				pointer;
 
 
+}
+.indicatorbox input[type=search]:placeholder-shown {
+	color:				rgba(255,255,255,0);
+}
+.indicatorbox input[type=search]:-ms-input-placeholder {
+	color:				rgba(255,255,255,0);
+}
+
+.indicatorbox input[type=search]:focus:placeholder-shown {
+	color: 				#666;
+}
+
+.indicatorbox input[type=search]:focus:-ms-input-placeholder{
+	color: 				#666;
 }
 
 .indicatorbox input[type=search]:focus, .indicatorbox input[type=search].haschars {
