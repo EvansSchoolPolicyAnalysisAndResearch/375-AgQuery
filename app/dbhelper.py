@@ -58,13 +58,14 @@ def formHandler(request, session):
 
 def validateRequest(session, indicators, geoyears, commodity = None):
 	"""
+	Checks whether the form submission contains only valid options.
 	
-	:param dbsession:	A db session for obtaining valid responses
-	:param indicators:	The indicators
-	:param geoyears:	The geoyears
-	:param commodity:	The commodity
+	:param dbsession:	A db session for obtaining list valid responses
+	:param indicators:	The list of indicator hexids the user submitted
+	:param geoyears:	The list of geography - year combos the user submitted
+	:param commodity:	The list of commodities the user submitted
 	
-	:returns:  			The 
+	:returns:  			A boolean true if the submitted values are in the DB
 	"""
 	# Get the list of valid indicator hex ids and geoyear combinations from the
 	# database.
@@ -77,6 +78,7 @@ def validateRequest(session, indicators, geoyears, commodity = None):
 	# Test if the geoyear combos are valid
 	if not set(geoyears).issubset(set(validgeoyears)):
 		return False
+
 	# Nothing showed up as invalid return true
 	return True
 
