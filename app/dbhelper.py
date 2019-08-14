@@ -34,12 +34,19 @@ def formHandler(request, session):
 	# passed to this function
 	geoyears = request.values.getlist('geo_year')
 	inds = request.values.getlist('indicator')
-
-	if not inds:
+	
+	# Check to make sure the user is not attempting sql injection or submitting
+	# invalid database entries.
+	if not validateRequest(session, inds, geoyears):
 		return None
+
 	indicators = []	
+	# Loop through the geography/year options and get the estimates and
+	# decisions from the database
 	for gy in geoyears:
+		# Split the geoyear into two pieces - geography and year
 		geo,year = gy.split("_", 1)
+		# Query the database
 		indicators += session.query(Estimates, CntryCons).filter(
 			Estimates.indicator == CntryCons.indicator,
 			Estimates.instrument == CntryCons.instrument).filter(
@@ -49,19 +56,27 @@ def formHandler(request, session):
 	return indicators
 
 
-def getMostRecent(geo, session):
+def validateRequest(session, indicators, geoyears, commodity = None):
 	"""
-	Finds the most recent year of LSMS surveys for a given geography
-
-	:param geo: String - the geography you are seeking the most recent year for
-	:param session: SQLAlchemy Database session to use for the query
-	:returns: String of the most recent survey year for the given geography
+	
+	:param dbsession:	A db session for obtaining valid responses
+	:param indicators:	The indicators
+	:param geoyears:	The geoyears
+	:param commodity:	The commodity
+	
+	:returns:  			The 
 	"""
+	# Get the list of valid indicator hex ids and geoyear combinations from the
+	# database.
+	validinds = [r.hexid for r in session.query(IndCons.hexid).all()]
+	validgeoyears = [r.geography + "_" + r.year for r in session.query(Estimates.geography, Estimates.year).distinct()]
 
-	years = [r.year for r in 
-		session.query(Estimates.year).distinct().filter_by(geography= geo)]
-	mostRec = "0"
-	for yr in years:
-		if yr > mostRec:
-			mostRec = yr
-	return mostRec
+	# Test if the requested indicators are valid
+	if not set(indicators).issubset(set(validinds)):
+		return False
+	# Test if the geoyear combos are valid
+	if not set(geoyears).issubset(set(validgeoyears)):
+		return False
+	# Nothing showed up as invalid return true
+	return True
+
