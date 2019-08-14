@@ -32,8 +32,8 @@ def formHandler(request, session):
 	
 	# Pull the information necessary for the db query from the request
 	# passed to this function
-	geoyears = request.values.getlist('geo_year')
-	inds = request.values.getlist('indicator')
+	geoyears = request.values.getlist('gy')
+	inds = request.values.getlist('i')
 	
 	# Check to make sure the user is not attempting sql injection or submitting
 	# invalid database entries.

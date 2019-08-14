@@ -51,7 +51,7 @@
 							{% for yr in geoyears[geo] %}
 								<li><label><input type="checkbox"
 									value="{{geo}}_{{yr}}"
-									name="geo_year"
+									name="gy"
 									id="{{geo}}_{{yr}}" 
 									class="{{geo}} geo_year"
 									onchange="AgQuery.EnableButtons();"/>
@@ -94,7 +94,7 @@
 					<li class="indicli"><p>
 						<label><input type="checkbox" 
 								id="{{indicator.indicator}}" 
-								name="indicator" 
+								name="i" 
 								value="{{indicator.hexid}}" 
 								class="indicator"
 								onchange="AgQuery.EnableButtons();"
