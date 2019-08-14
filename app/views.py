@@ -29,10 +29,8 @@ def index():
 	"""
 
 	# the list of selectable indicators
-	indicators = [r.indicator for r in  
-			db_session.query(IndCons.indicator).all()]
+	indicators = db_session.query(IndCons.indicator, IndCons.hexid).all()
 	# sort the list of indicators alphabetically
-	indicators.sort()
 	# Get a list of all of the geography/year combos in the db
 	db_geo = db_session.query(Estimates.geography,
 		Estimates.year).distinct()

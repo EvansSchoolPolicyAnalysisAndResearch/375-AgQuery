@@ -9,6 +9,7 @@
 -------------------------------------------------------------------------------
 CREATE TABLE public.estimates_update (
     id bigserial PRIMARY KEY,
+    hexid text,
     geography text,
     survey text,
     instrument text,
@@ -38,7 +39,7 @@ CREATE TABLE public.estimates_update (
 );
 
 CREATE TABLE public.indcons_update (
-
+    hexid text,
     indicator text PRIMARY KEY,
     "indicatorCategory" text,
     varnamestem text,

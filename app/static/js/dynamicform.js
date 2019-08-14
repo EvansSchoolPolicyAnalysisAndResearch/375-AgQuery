@@ -54,8 +54,8 @@ var AgQuery = new Object({
 	EnableButtons: function() {
 		var indicators, geoyears, submitters, hasind, hasgeo;
 
-		indicators	= document.getElementsByName("indicator");
-		geoyears	= document.getElementsByName("geo_year");
+		indicators	= document.getElementsByClassName("indicator");
+		geoyears	= document.getElementsByClassName("geo_year");
 		submitters	= document.getElementsByClassName("submitter");
 		hasind		= false;
 		hasgeo		= false;

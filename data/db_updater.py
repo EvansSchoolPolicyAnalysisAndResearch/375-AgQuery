@@ -20,13 +20,12 @@ import xlrd
 import argparse
 import sys
 import subprocess
-from tqdm import tqdm
 import requests
 import subprocess
 
 
 
-INDCOLUMN 		= 0
+INDCOLUMN 		= 1
 INSTRUMENTS 	= ("ETH ESS Wave 1", "ETH ESS Wave 2", "ETH ESS Wave 3", "NGA GHSP Wave 1", "NGA GHSP Wave 2", "NGA GHSP Wave 3", "TZA NPS Wave 1", "TZA NPS Wave 2", "TZA NPS Wave 3", "TZA NPS Wave 4")
 INDICATORCOL	= 6
 CROPCOL			= 8
@@ -38,7 +37,7 @@ DECS_CSV		= 'decs.csv'
 EXCEL_WORKBOOK	= 'indicator-workbook.xlsx'
 EXCEL_URL		= 'https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx'
 
-
+hexmatcher = {}
 ################################################################################
 #                                 CSV HANDLING                                 #
 ################################################################################
@@ -148,7 +147,7 @@ def clean_estimates(rows):
 
 	# Get rid of the headers
 	rows.pop(0)
-	for r,row in tqdm(enumerate(rows), desc="Cleaning Estimates"):
+	for r,row in enumerate(rows):
 		# Add the ID to the row
 		row.insert(0, r)
 		# Clean the elements of the row
@@ -180,6 +179,11 @@ def clean_estimates(rows):
 			row[CROPCOL]="Buffalos"
 		elif row[INDICATORCOL] == "Milk productivity":
 			row[CROPCOL] = "Large ruminants"
+		if  row[INDICATORCOL] in hexmatcher:
+			row.insert(1, hexmatcher[row[INDICATORCOL]])
+		else:
+			print(row[INDICATORCOL])
+			row.insert(1, 'NA')
 		output.append(row)
 	return output
 
@@ -209,15 +213,23 @@ def clean_decisions(rows):
 		
 		return id_counter
 
+	def make_hex_counter():
+		id_ctr = make_id_counter()
+		def hex_counter():
+			nonlocal id_ctr
+			return hex(id_ctr())[2:]
+		return hex_counter
+
+
 	get_id = make_id_counter()
 	# Get rid of the headers
 	rows.pop(0)
+	get_hex = make_hex_counter()
 
-	for r,row in tqdm(enumerate(rows), desc="Cleaning Decisions"):
+	for r,row in enumerate(rows):
 		# Row Stub is the the elements needed for the non-country
 		# specific information
 		row_stub = row[0:15]
-		
 		# Clean the data up a bit, removig excess spaces, making
 		# sure numbers are viewed as numbers not strings, etc.
 		for i,elem in enumerate(row_stub) :
@@ -229,6 +241,9 @@ def clean_decisions(rows):
 				row_stub[i] = elem.strip()
 			else:
 				row_stub[i] = elem
+		# Add a unique ID to the 
+		row_stub.insert(0, get_hex())
+		hexmatcher[row_stub[INDCOLUMN]]= row_stub[0]
 		indcons.append(row_stub)
 		for i,inst in enumerate(INSTRUMENTS):
 			 cntrycons.append([get_id(), inst, row[i+15], row_stub[INDCOLUMN]])
@@ -266,8 +281,8 @@ def full_update():
 	# Extract the relevant sheets from the workbook
 	estimates, decisions = extract_sheets(EXCEL_WORKBOOK)
 	# Clean the data
-	est_clean = clean_estimates(sheet_to_list(estimates))
 	decs_clean, ctry_decs = clean_decisions(sheet_to_list(decisions))
+	est_clean = clean_estimates(sheet_to_list(estimates))
 	# Save to CSVs
 	write_csv(est_clean, CLEAN_EST)
 	write_csv(decs_clean, CLEAN_DECS)

@@ -22,6 +22,7 @@ class Estimates(Base):
 	"""
 	__tablename__ = 'estimates'
 	id = Column(Integer, primary_key=True)
+	hexid = Column(String)
 	geography = Column(String)
 	survey = Column(String)
 	instrument = Column(String)
@@ -63,9 +64,10 @@ class IndCons(Base):
 
 	"""
 	__tablename__ = 'indcons'
+	hexid = Column(String)
+	indicator = Column(String, primary_key=True)
 	indicatorCategory = Column(String)
-	indicator = Column(String)
-	varnamestem = Column(String, primary_key=True)
+	varnamestem = Column(String)
 	genderDisaggregation = Column(String)
 	farmSizeDisaggregation = Column(String)
 	cropDisaggregation = Column(String)
