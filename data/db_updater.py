@@ -20,9 +20,10 @@ import xlrd
 import argparse
 import sys
 import subprocess
-import requests
-import subprocess
-
+import urllib.request
+import shutil
+...
+# Download the file from `url` and save it locally under `file_name`:
 
 
 INDCOLUMN 		= 1
@@ -269,11 +270,9 @@ def estimates_cleaning(file):
 
 
 def downloader(url, filename):
-	response = requests.get(url, stream=True)
 	
-	with open(filename, "wb") as file:
-		for data in tqdm(response.iter_content(), desc='Downloading Workbook'):
-			file.write(data)
+	with urllib.request.urlopen(url) as response, open(filename, 'wb') as out_file:
+		shutil.copyfileobj(response, out_file)
 
 def full_update():
 	# Download the spreadsheet
