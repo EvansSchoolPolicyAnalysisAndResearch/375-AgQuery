@@ -1,129 +1,134 @@
 <!-- index.html -->
 
 {% extends "base.html" %}
-{% block title %}EPAR Agricultural Data Project{% endblock %}
+{% block title %}Indicator Search{% endblock %}
 {% block includes %}
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" media='all' />
 	<script type="text/javascript" 
 		src="{{ url_for('static', filename='js/dynamicform.js') }}" ></script>
+	<script> 
+		function load() {
+			// Check to see if boxes are pre-checked (i.e. on-reload)
+			AgQuery.EnableButtons();
+			// Enable any filters still populated on reload
+			var filterboxes = document.getElementsByClassName("filter");
+			for (let box of filterboxes){
+				AgQuery.FilterList(box);
+			}
+		}
+		window.onload = load;
+	</script>
+
 {% endblock %}
 {% block pageheader %}Select your Data{% endblock %}
 
 {% block body %}
-{% if goDisabled == True %}
-<form method="POST" action="/">
-		
-		<!-- Here be the point where I need to get the indicator categories from the database -->
-	<div id="icGroup" class="filterbox">
+
+<form method="GET" action="/results">
+
+	<! The Geography selection box>
+	<div id="geoGroup" class="indicatorbox">
 		<div class='boundingbox'>
-		<h3>Indicator Category:</h3>
+			<input type="search" 
+					class="filter" 
+					label="Geography filter" 
+					oninput="AgQuery.FilterList(this);" 
+					data-filterclass="geoli" 
+					placeholder="Filter Geographies/Years" />
+			<h3>Country/Year:</h3>
 			<div class="scrollbox">
 				<ul>
-				{% for cat in indicatorCategory %}
-					<li><label><input type="checkbox"
-								value="{{cat}}"
-								name="indicatorCategory"
-								id="{{cat}}" />
-						{{cat}}</label></li>
-				{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicatorCategory');" >
-				Select All
-			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicatorCategory');">
-				Clear All
-			</button>
-		</div>
-	</div>
-	<div class='buttonbox'>
-		<input type="submit" name="Find Indicators" value="Find Indicators" />
-	</div>
-</form>
-{% endif %}
-
-{% if goDisabled == False %}
-
-
-<form method="POST" action="/results">
-	
-	<div id="geoGroup" class="filterbox">
-		<div class='boundingbox'>
-			<h3>Geographic Region:</h3>
-			<div class="scrollbox">
-				<ul>
-				{% for geo in geography %}
-					<li><label><input type="checkbox"
-								value="{{geo}}"
-								name="geography"
-								id="{{geo}}" />
-						{{geo}}</label>
+				{% for geo in geoyears.keys() %}
+					<li class="geoli"><input type="checkbox"
+								value=""
+								name=""
+								id="{{geo}}" 
+								class="geos"
+								onchange="AgQuery.ToggleSelect(this); AgQuery.EnableButtons();"/>
+						<label for="{{geo}}">
+							{{geo}}</label>
+						<ul class="geoyear">
+							{% for yr in geoyears[geo] %}
+								<li><label><input type="checkbox"
+									value="{{geo}}_{{yr}}"
+									name="gy"
+									id="{{geo}}_{{yr}}" 
+									class="{{geo}} geo_year"
+									onchange="AgQuery.EnableButtons();"/>
+									{{yr}}</label>
+								</li>
+							{% endfor %}
+						</ul>
 					</li>
 				{% endfor %}
 				</ul>
 			</div>
 		</div>
 		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('geography');" >
+			<button type="button" class="select" 
+				onclick="AgQuery.SelectAll('geos'); {% for geo in geoyears.keys() %}AgQuery.SelectAll('{{geo}}');{% endfor %} AgQuery.EnableButtons();" >
 				Select All
 			</button>
-			<button type="button" class="clear" onclick="ClearAll('geography');">
+			<button type="button" class="clear" 
+				onclick="AgQuery.ClearAll('geos'); {% for geo in geoyears.keys() %}AgQuery.ClearAll('{{geo}}'); {% endfor %}AgQuery.EnableButtons();">
 				Clear All
 			</button>
 		</div>
 	</div>
-	
-	<div id='years' class='filterbox'>
-		<div class='boundingbox'>
-			<h3>Years:</h3> 
-			<div class="scrollbox" id="years">
-				<ul>
-					<li><p><input type='radio' id='yearsChoice1' checked="checked"
-					 name='years' value='all' />
-					<label for='yearsChoice1'>All Waves of LSMS-ISA</label></p> </li>
-					<li><p><input type='radio' id='yearsChoice2' name='years' 
-						value='most-recent' />
-					<label for='yearsChoice2'>Most Recent Wave of LSMS-ISA</label></p></li>
-				</ul>
-			</div>
-		</div>
-	</div>
+
+	<! The indicator Selector Box >
 	<div id="indicatorbox" class="indicatorbox" >
 		<div class='boundingbox'>
-			<h3>Indicators:</h3>
+			<input type="search"
+ 					id="indicli"
+ 					class="filter"
+					aria-label="Filter the Indicator List"  
+					label="Filter Indicators" 
+					oninput="AgQuery.FilterList(this);" 
+					data-filterclass="indicli"
+					placeholder="Filter Indicators"/>
+			<h3>Indicators: </h3>
 			<div class="scrollbox">
 				<ul>
 				{% for indicator in indicators %}
-					<li><p>
+					<li class="indicli"><p>
 						<label><input type="checkbox" 
-								id="{{indicator}}" 
-								name="indicator" 
-								value="{{indicator}}" />
-						{{indicator}}</label>
+								id="{{indicator.indicator}}" 
+								name="i" 
+								value="{{indicator.hexid}}" 
+								class="indicator"
+								onchange="AgQuery.EnableButtons();"
+								"" />
+						{{indicator.indicator}}</label>
 					</p></li>
 				{% endfor %}
 				</ul>
 			</div>
 		</div>
 		<div class="selectionbuttons">
-			<button type="button" class="select" onclick="SelectAll('indicator');" >
+			<button type="button" class="select" onclick="AgQuery.SelectAll('indicator'); AgQuery.EnableButtons();" >
 				Select All
 			</button>
-			<button type="button" class="clear" onclick="ClearAll('indicator');">
+			<button type="button" class="clear" onclick="AgQuery.ClearAll('indicator');AgQuery.EnableButtons();">
 				Clear All
 			</button>
 		</div>
 	</div>
 
-
+	<! View/Download Buttons>
 	<div class='buttonbox'>
-		<input type="submit" value="View Estimates" formaction='results' />
-		<input type='submit' value='Download CSV' formaction='get-csv' />
+		<input type="submit" 
+			value="View Estimates" 
+			formaction='results' 
+			class="submitter"
+			/>
+		<input type='submit' 
+			value='Download CSV' 
+			formaction='get-csv' 
+			class="submitter"
+			 />
 		<p><a href="/">Back to Category Selection</a></p>
 	</div>
 
 </form>
-{% endif %}
 {% endblock %}

@@ -32,50 +32,53 @@ def formHandler(request, session):
 	
 	# Pull the information necessary for the db query from the request
 	# passed to this function
-	geos = request.form.getlist('geography')
-	years = request.form.get('years')
-	inds = request.form.getlist('indicator')
-
-	# If no geographies are selected count them as all selected	
-	if not geos :
-		geos = session.query(Estimates.geography).distinct()
-
-	if not inds:
+	geoyears = request.values.getlist('gy')
+	inds = request.values.getlist('i')
+	
+	# Check to make sure the user is not attempting sql injection or submitting
+	# invalid database entries.
+	if not validateRequest(session, inds, geoyears):
 		return None
 
 	indicators = []	
-	
-	if years == "most-recent":
-		for geo in geos:
-			year = getMostRecent(geo, session)
-			indicators += session.query(Estimates, CntryCons).filter(
-				Estimates.indicator == CntryCons.indicator,
-				Estimates.instrument == CntryCons.instrument).filter(
-				Estimates.geography == geo, 
-				Estimates.year == year,
-				Estimates.indicator.in_(inds)).all()
-	else:
-		indicators = session.query(Estimates, CntryCons).filter(
-				CntryCons.indicator.like(Estimates.indicator),
-				CntryCons.instrument == Estimates.instrument).filter(
-			Estimates.geography.in_(geos), 
-			Estimates.indicator.in_(inds)).all()
+	# Loop through the geography/year options and get the estimates and
+	# decisions from the database
+	for gy in geoyears:
+		# Split the geoyear into two pieces - geography and year
+		geo,year = gy.split("_", 1)
+		# Query the database
+		indicators += session.query(Estimates, CntryCons).filter(
+			Estimates.indicator == CntryCons.indicator,
+			Estimates.instrument == CntryCons.instrument).filter(
+			Estimates.geography == geo, 
+			Estimates.year == year,
+			Estimates.hexid.in_(inds)).all()
 	return indicators
 
 
-def getMostRecent(geo, session):
+def validateRequest(session, indicators, geoyears, commodity = None):
 	"""
-	Finds the most recent year of LSMS surveys for a given geography
-
-	:param geo: String - the geography you are seeking the most recent year for
-	:param session: SQLAlchemy Database session to use for the query
-	:returns: String of the most recent survey year for the given geography
+	Checks whether the form submission contains only valid options.
+	
+	:param dbsession:	A db session for obtaining list valid responses
+	:param indicators:	The list of indicator hexids the user submitted
+	:param geoyears:	The list of geography - year combos the user submitted
+	:param commodity:	The list of commodities the user submitted
+	
+	:returns:  			A boolean true if the submitted values are in the DB
 	"""
+	# Get the list of valid indicator hex ids and geoyear combinations from the
+	# database.
+	validinds = [r.hexid for r in session.query(IndCons.hexid).all()]
+	validgeoyears = [r.geography + "_" + r.year for r in session.query(Estimates.geography, Estimates.year).distinct()]
 
-	years = [r.year for r in 
-		session.query(Estimates.year).distinct().filter_by(geography= geo)]
-	mostRec = "0"
-	for yr in years:
-		if yr > mostRec:
-			mostRec = yr
-	return mostRec
+	# Test if the requested indicators are valid
+	if not set(indicators).issubset(set(validinds)):
+		return False
+	# Test if the geoyear combos are valid
+	if not set(geoyears).issubset(set(validgeoyears)):
+		return False
+
+	# Nothing showed up as invalid return true
+	return True
+

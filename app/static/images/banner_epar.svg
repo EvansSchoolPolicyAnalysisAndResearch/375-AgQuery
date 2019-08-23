@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="720"
+   height="256"
+   viewBox="0 0 190.5 67.733334"
+   version="1.1"
+   id="svg4542"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="banner_epar.svg"
+   inkscape:export-filename="/home/sammi/webdev/epardata/app/static/images/banner720.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs4536">
+    <clipPath
+       id="clipPath831"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path829"
+         d="M 0,768 H 1366 V 0 H 0 Z" />
+    </clipPath>
+    <clipPath
+       id="clipPath851"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path849"
+         d="M 0,768 H 1366 V 0 H 0 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="280.72649"
+     inkscape:cy="31.022751"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer8"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1518"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     scale-x="1"
+     inkscape:showpageshadow="false">
+    <sodipodi:guide
+       position="-11.893494,26.860588"
+       orientation="0,1"
+       id="guide869"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="213.78333,6.6145834"
+       orientation="0,1"
+       id="guide879"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="67.726099,57.716855"
+       orientation="1,0"
+       id="guide881"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="146.02271,60.336096"
+       orientation="1,0"
+       id="guide1116"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="159.25923,20.766842"
+       orientation="0,1"
+       id="guide1118"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="78.382813,55.033334"
+       orientation="0,1"
+       id="guide857"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4539">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Background"
+     transform="translate(0,33.866667)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:6.8791666;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="rect969"
+       width="190.5"
+       height="67.73333"
+       x="0"
+       y="-33.866665"
+       ry="0" />
+    <g
+       id="g976"
+       transform="matrix(0.396875,0,0,0.396875,163.41562,6.8332412)">
+      <g
+         style="display:inline"
+         transform="matrix(1.3333333,0,0,-1.3333333,0,64)"
+         inkscape:label="finCircle"
+         id="g823">
+        <g
+           transform="matrix(0.99264704,0,0,0.99265638,0.1246633,-0.00107725)"
+           style="fill:#ffffff;fill-opacity:1;stroke:#4b2e83;stroke-width:6.04444695;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="g825">
+          <g
+             style="fill:#ffffff;fill-opacity:1;stroke:#4b2e83;stroke-width:6.04444695;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             clip-path="url(#clipPath831)"
+             id="g827">
+            <circle
+               r="21.333334"
+               transform="scale(1,-1)"
+               cy="-24"
+               cx="24"
+               id="path889"
+               style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#4b2e83;stroke-width:6.04444695;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill" />
+          </g>
+        </g>
+      </g>
+      <g
+         inkscape:label="letters"
+         id="layer2">
+        <text
+           transform="scale(0.99995971,1.0000403)"
+           id="text896"
+           y="29.520176"
+           x="14.516625"
+           style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:26.01086235px;line-height:6.14429903px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.6256789"
+           xml:space="preserve"><tspan
+             style="fill:#85754d;fill-opacity:1;stroke:#4b2e83;stroke-width:1.6256789;stroke-opacity:1"
+             y="29.520176"
+             x="14.516625"
+             id="tspan894"
+             sodipodi:role="line">E</tspan></text>
+        <text
+           transform="scale(0.99995971,1.0000403)"
+           id="text896-9"
+           y="29.473751"
+           x="33.130173"
+           style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:26.01086235px;line-height:6.14429903px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.6256789"
+           xml:space="preserve"><tspan
+             style="fill:#85754d;fill-opacity:1;stroke:#4b2e83;stroke-width:1.6256789;stroke-opacity:1"
+             y="29.473751"
+             x="33.130173"
+             id="tspan894-7"
+             sodipodi:role="line">P</tspan></text>
+        <text
+           transform="scale(0.99995971,1.0000403)"
+           id="text896-9-5"
+           y="50.890293"
+           x="12.505089"
+           style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:26.01086235px;line-height:6.14429903px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.6256789"
+           xml:space="preserve"><tspan
+             style="fill:#85754d;fill-opacity:1;stroke:#4b2e83;stroke-width:1.6256789;stroke-opacity:1"
+             y="50.890293"
+             x="12.505089"
+             id="tspan894-7-6"
+             sodipodi:role="line">A</tspan></text>
+        <text
+           id="text948"
+           y="49.756241"
+           x="38.87846"
+           style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:16px;line-height:3.77952766px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+           xml:space="preserve"><tspan
+             y="56.830006"
+             x="38.87846"
+             id="tspan946"
+             sodipodi:role="line" /></text>
+        <text
+           transform="scale(0.99995971,1.0000403)"
+           id="text896-9-5-4"
+           y="50.859535"
+           x="33.068832"
+           style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:26.01086235px;line-height:6.14429903px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.6256789"
+           xml:space="preserve"><tspan
+             style="fill:#85754d;fill-opacity:1;stroke:#4b2e83;stroke-width:1.6256789;stroke-opacity:1"
+             y="50.859535"
+             x="33.068832"
+             id="tspan894-7-6-6"
+             sodipodi:role="line">R</tspan><tspan
+             id="tspan968"
+             style="fill:#85754d;fill-opacity:1;stroke:#4b2e83;stroke-width:1.6256789;stroke-opacity:1"
+             y="57.003834"
+             x="33.068832"
+             sodipodi:role="line" /></text>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:6.62398577px;line-height:1.56472111px;font-family:'Encode Sans Black';-inkscape-font-specification:'Encode Sans Black, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.41399911"
+       x="153.49913"
+       y="13.10992"
+       id="text980"><tspan
+         sodipodi:role="line"
+         id="tspan978"
+         x="153.49913"
+         y="13.10992"
+         style="fill:#555555;fill-opacity:1;stroke-width:0.41399911">by</tspan></text>
+  </g>
+  <g
+     inkscape:label="Logo"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-229.26667)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Letters"
+     transform="matrix(3.9536471,0,0,3.9536471,-2.3463415,33.972127)">
+    <flowRoot
+       transform="matrix(0.13384266,0,0,0.13384266,-0.46531296,-5.8253266)"
+       style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:9.33333397px;line-height:3.77952766px;font-family:'Alegreya Sans SC ExtraBold';-inkscape-font-specification:'Alegreya Sans SC ExtraBold, Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot5305"
+       xml:space="preserve"><flowRegion
+         id="flowRegion5307"><rect
+           y="10.317228"
+           x="99.500023"
+           height="107.07617"
+           width="288.39856"
+           id="rect5309" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:66.66667938px;font-family:'Encode Sans ExtraBold';-inkscape-font-specification:'Encode Sans ExtraBold, Bold'"
+         id="flowPara5311" /><flowPara
+         id="flowPara863"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:54.66666794px;line-height:3.77952766px;font-family:'Encode Sans ExtraBold';-inkscape-font-specification:'Encode Sans ExtraBold, Bold';fill:#555555;fill-opacity:1">gQuery</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:74.66667175px;line-height:3.77952766px;font-family:'Encode Sans SemiBold';-inkscape-font-specification:'Encode Sans SemiBold, Bold'"
+         id="flowPara5313" /></flowRoot>    <text
+       id="text867"
+       y="6.8509812"
+       x="0.9788174"
+       style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:2.76547885px;line-height:0.65326273px;font-family:'Alegreya Sans SC ExtraBold';-inkscape-font-specification:'Alegreya Sans SC ExtraBold, Ultra-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.17284243"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.43652344px;font-family:'Encode Sans ExtraBold';-inkscape-font-specification:'Encode Sans ExtraBold, Bold';fill:#555555;fill-opacity:1;stroke-width:0.17284243"
+         y="6.8509812"
+         x="0.9788174"
+         id="tspan865"
+         sodipodi:role="line">A</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer7"
+     inkscape:label="underline"
+     transform="translate(0,33.866667)">
+    <path
+       style="fill:#4b2e83;fill-opacity:0.98728811;stroke:none;stroke-width:0.74157208px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0.72881356"
+       d="m 67.726099,7.6290544 h 78.296611 l -5.28814,5.4707696 H 67.726099 Z"
+       id="path877"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+  </g>
+</svg>

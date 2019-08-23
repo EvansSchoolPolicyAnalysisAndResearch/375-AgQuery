@@ -4,36 +4,98 @@
 <html lang=en>
 <head>
 	<meta charset="utf-8">
-	<title>{% block title %}{% endblock %}</title>
+	<title>AgQuery: {% block title %}{% endblock %}</title>
 	 <link href="https://fonts.googleapis.com/css?family=Encode+Sans:900|Open+Sans" rel="stylesheet"> 
 	<link rel="stylesheet" 
 		href="{{ url_for('static', filename='css/main.css') }}" />
 	<link rel="icon" 
-		href="{{ url_for('static', filename='images/icon.png') }}" />
+		href="{{ url_for('static', filename='images/icon16.png') }}" 
+		sizes="16x16" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon64.png') }}" 
+		sizes="64x64" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon128.png') }}" 
+		sizes="128x128" />
+	<link rel="icon" 
+		href="{{ url_for('static', filename='images/icon32.png') }}" 
+		sizes="32x32" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon60.png') }}" 
+		sizes="60x60" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon76.png') }}" 
+		sizes="76x76" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon120.png') }}" 
+		sizes="120x120" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon152.png') }}" 
+		sizes="152x152" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon167.png') }}" 
+		sizes="167x167" />
+	<link rel="apple-touch-icon" 
+		href="{{ url_for('static', filename='images/icon180.png') }}" 
+		sizes="180x180" />
 	{% block includes %}{% endblock %}
 </head>
 <body>
-	<div class="container">
-		<header>
-			<h1>AgDev Indicator Query Tool (ADIQuT)</h1>
-			<nav> 
-				<ul>
-					<li><a href="https://evans.uw.edu/policy-impact/epar">EPAR Home</a></li>
-					<li><a href="/">Data Search</a></li>
-					<li><a href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">Data Curation</a></li>
-					<li><a href="https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx">Download Data</a></li>
-				</ul>
-			</nav>
-		</header>
-		<section class="contenthole">
+	<header>
+		<h1 id="banner"> AgQuery from EPAR
+		</h1>
+		<nav> 
+			<ul>
+				<li><a class='home' href="/">AgQuery Home</a>
+				</li>
+				<li><a class='dl' href="https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx">Get Estimates</a></li>
+				<li><a class='about' href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">About the Data</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="contenthole">
 				<h1>{% block pageheader %}{% endblock %}</h1>
 				{% block body %} {% endblock %}
-		</section>
-		
-		
-	</div> <!-- end container -->
+	</section>
 <footer>
-	<p>&copy; Copyright 2018 Evans Policy Analysis and Research Group</p>
+	<div id="citediv">
+		<input type="checkbox" id="toggle" />
+		<p>
+			<label for="toggle">
+				<span class='expand'>
+					<strong>Citation</strong>
+					<span class="changeArrow arrow-dn">↓</span>
+				</span>
+			</label>
+		</p>
+		<p class="citation">
+			Evans School Policy Analysis & Research Group (2019). <em>Agricultural Development Indicator Curation</em> [Stata .do files]. University of Washington: Didier Alia, C. Leigh Anderson, Pierre Biscaye, David Coomes, Elan Ebeling, Terry Fletcher, Muel Kiel, Namrata Kolla, Jack Knauer, Josh Merfeld, Isabella Sun, Chelsea Sweeney, & Emma Weaver. Retrieved from <a href="https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation">https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation</a>
+		</p>
+	</div>
+	<div id="credits">
+		<p id="footimg"> EPAR @ University of Washington</p>
+	</div>
+	<div id="about">
+		<p>&copy; Copyright 2019 Evans Policy Analysis and Research Group</p>
+		<p>
+			Established in 2008, the Evans School Policy Analysis and Research 
+			Group (EPAR) uses an innovative student-faculty team model to 
+			provide rigorous, applied research and analysis to international
+			development stakeholders. Our research focuses on agriculture, 
+			development policy, financial services, poverty reduction, gender, 
+			and measurement and evaluation.
+		</p>
+		<p>
+			To learn more about EPAR please visit our 
+			<a href="https://evans.uw.edu/policy-impact/epar"> homepage</a>. 
+		</p>
+		<p>
+			This site is a work in progress and we would like you to help us shape it. If you have any feedback, suggestions, or bug reports please fill out our <a href="https://forms.gle/7QaQ1RYN1QrT9v6S9">feedback form</a>
+		</p>
+	</div>
+
 </footer>
 </body>
 </html>
