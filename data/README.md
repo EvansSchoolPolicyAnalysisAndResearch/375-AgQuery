@@ -1,6 +1,6 @@
 # Database Updater
 
-The scripts in this folder update the data in the [ADIQuT][iqt] Database. They
+The scripts in this folder update the data in the [AgQuery][agq] Database. They
 are designed to pull the latest version of the data from [EPAR's][epar] 
 Agricultural Data Curation Project. More information on the project is available
 [on our website][curation], and the data is hosted on [EPAR's Github
@@ -25,29 +25,8 @@ handled automatically. If you wish to update the database without having to
 enter the password, please see the PostgreSQL [password file
 documentation][pgpass] and set up a `~/.pgpass` file.
 
-### Running Pieces of the Script
 
-Using `db_updater.py` you can emulate the previous 3 script system which -
-`excel_extractor.py`, `estimates_cleaner.py`, and `construction_cleaner.py` -
-with  specific command line flags.
-
-- `db_updater.py -x <NAME OF EXCEL WORKBOOK>` Running the script with the `-x` 
-parameter will extract the the relevant sheets from a pre-downloaded version of
-the EPAR 335 spreadsheet and save them as estimates.csv and decs.csv for the
-indicator estimates and indicator construction decision sheets respectively.
-
-- `db_updater.py -c <CONSTRUCTION DECISIONS CSV>` Running the script with the 
-`-c` parameter will clean the provided construction decisions csv extracted from
-the Excel workbook. It will output to decs_cleaned.csv for the
-crosswave information and ctry_decs_cleaned.csv for the country specific
-information.
-
-- `db_updater.py -e <ESTIMATES CSV>` Running the script with the `-e` parameter
-    will clean the provided indicator estimates csv extracted from the Excel
-    workbook. It will output to estimates_cleaned.csv.
-
-
-[iqt]:      http://v1008.host.s.uw.edu
+[agq]:      https://www.agquery.org
 [epar]:     https://evans.uw.edu/policy-impact/epar
 [curation]: https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation
 [datadis]:  https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination

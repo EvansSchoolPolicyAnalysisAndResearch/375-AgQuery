@@ -2,7 +2,7 @@
 ##  Data Distribution Project
 
 This repository was created to distribute the source code behind 
-our [indicator query tool][iqt]. It was created using the  Flask Web Framework 
+EPAR's [AgQuery][agq]. It was created using the  Flask Web Framework 
 and PostgreSQL 10. It was designed to be easily adaptable to similar projects
 created by research teams around the world. Currently it is undergoing rapid
 development as we strive to make it more user friendly and powerful. 
@@ -12,9 +12,8 @@ development as we strive to make it more user friendly and powerful.
 If you are new to this project you can follow along with instructions below to
 get set up with a working version of the website on your personal computer. If 
 you are trying to set up a server using this code please make sure to follow
-best industry practices. Setting up your server in this manner is insecure, but
-for local testing it will work. If you wish to deploy this software on your
-server please consult a professional.
+best industry practices. Setting up a web-accessible server in this manner is insecure. If you wish to deploy this software on your server please consult a 
+professional.
 
 These instructions assume you have some familiarity with the command line. 
 While some of these steps may be completed using a graphic interface, many of 
@@ -32,7 +31,7 @@ them cannot.
    later steps will require you to use the command line. 
 
    ```sh 
-   git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-ADIQuT.git
+   git clone git@github.com:EvansSchoolPolicyAnalysisAndResearch/375-AgQuery.git
    ```
 
 2. Install/Setup Postgresql
@@ -175,7 +174,7 @@ them cannot.
 
 
 [epar]:     https://evans.uw.edu/policy-impact/epar
-[iqt]:      http://v1008.host.s.uw.edu
+[agq]:      https://www.agquery.org
 [ubuntu]:   https://help.ubuntu.com/lts/serverguide/postgresql.html
 [fedora]:   https://fedoraproject.org/wiki/PostgreSQL
 [osx]:      https://postgresapp.com/
