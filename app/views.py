@@ -50,17 +50,6 @@ def index():
 	return render_template("index.html",indicators=indicators, 
 		geoyears=geos)
 
-@app.route('/login')
-def login():
-	"""
-	Place holder for a login page
-
-	This will be where any login handling will be done when the login
-	system is created
-
-	:returns: HTML page for displaying a login screen. 
-	"""
-	return render_template("login.html")
 
 @app.route('/results', methods={"GET", "POST"})
 def results():
