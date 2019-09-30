@@ -8,3 +8,9 @@ __pycache__
 *.xlsx
 *.csv
 
+# Updater scriptt
+update_site.sh
+
+# virtual environment
+env/*
+
