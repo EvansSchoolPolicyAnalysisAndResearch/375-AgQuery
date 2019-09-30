@@ -27,7 +27,7 @@ import shutil
 
 
 INDCOLUMN 		= 1
-INSTRUMENTS 	= ("ETH ESS Wave 1", "ETH ESS Wave 2", "ETH ESS Wave 3", "NGA GHSP Wave 1", "NGA GHSP Wave 2", "NGA GHSP Wave 3", "TZA NPS Wave 1", "TZA NPS Wave 2", "TZA NPS Wave 3", "TZA NPS Wave 4")
+INSTRUMENTS 	= ("Ethiopia ESS Wave 1", "Ethiopia ESS Wave 2", "Ethiopia ESS Wave 3", "Nigeria GHSP Wave 1", "Nigeria GHSP Wave 2", "Nigeria GHSP Wave 3", "Tanzania NPS Wave 1", "Tanzania NPS Wave 2", "Tanzania NPS Wave 3", "Tanzania NPS Wave 4")
 INDICATORCOL	= 6
 CROPCOL			= 8
 CLEAN_EST 		= 'estimates_cleaned.csv'
