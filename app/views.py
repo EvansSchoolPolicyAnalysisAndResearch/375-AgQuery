@@ -3,7 +3,7 @@
 """
 Copyright 2018 Evans Policy Analysis and Research Group (EPAR)
 
-This project is licensed under the 3-Clause BSD License. Please see the 
+This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 from app import app
@@ -21,7 +21,7 @@ def index():
 	"""
 	Handles requests to the main page of the website
 
-	This function handles all of the requests to the default page it takes 
+	This function handles all of the requests to the default page it takes
 	no parameters, but relies on the request.form global for the flask
 	session to populate the indicators for the selected category
 
@@ -31,10 +31,12 @@ def index():
 	# the list of selectable indicators
 	indicators = db_session.query(IndCons.indicator, IndCons.hexid).all()
 	# sort the list of indicators alphabetically
+	indicators.sort()
 	# Get a list of all of the geography/year combos in the db
-	db_geo = db_session.query(Estimates.geography,
-		Estimates.year).distinct()
+	db_geo = db_session.query(Estimates.geography, Estimates.year).distinct()
 	# Create a dict to store each geo and the years available for that geo
+	crops = db_session.query(Estimates.cropDisaggregation).distinct()
+	print(db_geo)
 	geos = {}
 	# place the years into different geographies
 	for g in db_geo:
@@ -46,9 +48,9 @@ def index():
 	# Sort the lists of years before displaying them
 	for g in geos.keys():
 		geos[g].sort()
-	
-	return render_template("index.html",indicators=indicators, 
-		geoyears=geos)
+
+	return render_template("index.html",indicators=indicators,
+		geoyears=geos, crops=crops) #???????
 
 @app.route('/login')
 def login():
@@ -58,7 +60,7 @@ def login():
 	This will be where any login handling will be done when the login
 	system is created
 
-	:returns: HTML page for displaying a login screen. 
+	:returns: HTML page for displaying a login screen.
 	"""
 	return render_template("login.html")
 
@@ -74,10 +76,15 @@ def results():
 
 	:returns: an HTML page to be displayed by the website
 	"""
-	# If the user got here without submitting form data reply with no 
+	# If the user got here without submitting form data reply with no
 	# indicator selected page
 
 	indicators = formHandler(request, db_session)
+	#sort the indicators alphabetically, print the results to the terminal window
+	#still has some issues
+	indicators.sort(key=lambda i: i.Estimates.indicators)
+	for i in indicators:
+		print(i.Estimates.indicator)
 	# Check if anything is returned from the formHandler. If no, then show the
 	# error page
 	if not indicators:
@@ -90,7 +97,7 @@ def get_csv():
 	"""
 	Handles requests to download CSV Files containing the estimates
 
-	Passes the state of the filters on the index page to the formHandler 
+	Passes the state of the filters on the index page to the formHandler
 	function. It then collates the results into a CSV file which is
 	then offered as a download by the website.
 
@@ -98,21 +105,27 @@ def get_csv():
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
+	#sort the indicators alphabetically, print the results to the terminal window
+	#still has some issues
+	indicators.sort(key=lambda i: i.Estimates.variableName)
+	for i in indicators:
+		print(i.Estimates.variableName)
 
 	# Check if any indicators were selected
 	if not indicators:
 		return render_template("no-inds.html"), 406
-		
+
 	indicators = [r.Estimates for r in indicators]
 
 	# Get the headers based on the columns of the database
 	headers = Estimates.__table__.columns.keys()
 	headers = headers[1:]
-	#Generate a string which is the final csv 
+
+	#Generate a string which is the final csv
 	csv = make_csv(headers, indicators)
-	
+
 	return Response(csv, mimetype="text/csv",
-			headers={"Content-Disposition": 
+			headers={"Content-Disposition":
 				"attachment;filename=indicator_estimates.csv"})
 
 @app.route('/about-data/')
@@ -121,7 +134,7 @@ def about_data():
 	For our purposes the about_data page is now on our website. Redirect in
 	case anyone still has the old link
 	"""
-	return redirect("https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation#construction", 
+	return redirect("https://evans.uw.edu/policy-impact/epar/agricultural-development-data-curation#construction",
 		code=301)
 
 @app.teardown_appcontext

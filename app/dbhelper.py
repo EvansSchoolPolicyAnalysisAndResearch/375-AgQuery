@@ -3,7 +3,7 @@
 """
 Copyright 2018 Evans Policy Analysis and Research Group (EPAR)
 
-This project is licensed under the 3-Clause BSD License. Please see the 
+This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 from app.models import *
@@ -29,18 +29,18 @@ def formHandler(request, session):
 	:param session: the database session for the query
 	:returns: 		Results of the Database Query or None for no results
 	"""
-	
+
 	# Pull the information necessary for the db query from the request
 	# passed to this function
 	geoyears = request.values.getlist('gy')
 	inds = request.values.getlist('i')
-	
+
 	# Check to make sure the user is not attempting sql injection or submitting
 	# invalid database entries.
 	if not validateRequest(session, inds, geoyears):
 		return None
 
-	indicators = []	
+	indicators = []
 	# Loop through the geography/year options and get the estimates and
 	# decisions from the database
 	for gy in geoyears:
@@ -50,7 +50,7 @@ def formHandler(request, session):
 		indicators += session.query(Estimates, CntryCons).filter(
 			Estimates.indicator == CntryCons.indicator,
 			Estimates.instrument == CntryCons.instrument).filter(
-			Estimates.geography == geo, 
+			Estimates.geography == geo,
 			Estimates.year == year,
 			Estimates.hexid.in_(inds)).all()
 	return indicators
@@ -59,12 +59,12 @@ def formHandler(request, session):
 def validateRequest(session, indicators, geoyears, commodity = None):
 	"""
 	Checks whether the form submission contains only valid options.
-	
+
 	:param dbsession:	A db session for obtaining list valid responses
 	:param indicators:	The list of indicator hexids the user submitted
 	:param geoyears:	The list of geography - year combos the user submitted
 	:param commodity:	The list of commodities the user submitted
-	
+
 	:returns:  			A boolean true if the submitted values are in the DB
 	"""
 	# Get the list of valid indicator hex ids and geoyear combinations from the
@@ -81,4 +81,3 @@ def validateRequest(session, indicators, geoyears, commodity = None):
 
 	# Nothing showed up as invalid return true
 	return True
-
