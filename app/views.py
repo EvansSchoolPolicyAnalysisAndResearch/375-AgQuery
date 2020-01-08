@@ -31,7 +31,7 @@ def index():
 	# the list of selectable indicators
 	indicators = db_session.query(IndCons.indicator, IndCons.hexid).all()
 	# sort the list of indicators alphabetically
-	indicators.sort()
+	indicators.sort(key=lambda i: i.indicator)
 	# Get a list of all of the geography/year combos in the db
 	db_geo = db_session.query(Estimates.geography, Estimates.year).distinct()
 	# Create a dict to store each geo and the years available for that geo
@@ -52,7 +52,6 @@ def index():
 	return render_template("index.html",indicators=indicators,
 		geoyears=geos, crops=crops) #???????
 
-<<<<<<< HEAD
 @app.route('/login')
 def login():
 	"""
@@ -64,8 +63,6 @@ def login():
 	:returns: HTML page for displaying a login screen.
 	"""
 	return render_template("login.html")
-=======
->>>>>>> 6b1a2dc49a2263c5761e8f566ef2c14fc486c796
 
 @app.route('/results', methods={"GET", "POST"})
 def results():
@@ -83,11 +80,8 @@ def results():
 	# indicator selected page
 
 	indicators = formHandler(request, db_session)
-	#sort the indicators alphabetically, print the results to the terminal window
-	#still has some issues
-	indicators.sort(key=lambda i: i.Estimates.indicators)
-	for i in indicators:
-		print(i.Estimates.indicator)
+	#sort the indicators alphabetically
+	indicators.sort(key=lambda i: i.Estimates.indicator)
 	# Check if anything is returned from the formHandler. If no, then show the
 	# error page
 	if not indicators:
@@ -108,12 +102,8 @@ def get_csv():
 	"""
 	# Get the estimates from the formhandler
 	indicators = formHandler(request, db_session)
-	#sort the indicators alphabetically, print the results to the terminal window
-	#still has some issues
-	indicators.sort(key=lambda i: i.Estimates.variableName)
-	for i in indicators:
-		print(i.Estimates.variableName)
-
+	#sort the indicators alphabetically
+	indicators.sort(key=lambda i: i.Estimates.indicator)
 	# Check if any indicators were selected
 	if not indicators:
 		return render_template("no-inds.html"), 406
