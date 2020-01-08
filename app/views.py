@@ -52,6 +52,7 @@ def index():
 	return render_template("index.html",indicators=indicators,
 		geoyears=geos, crops=crops) #???????
 
+<<<<<<< HEAD
 @app.route('/login')
 def login():
 	"""
@@ -63,6 +64,8 @@ def login():
 	:returns: HTML page for displaying a login screen.
 	"""
 	return render_template("login.html")
+=======
+>>>>>>> 6b1a2dc49a2263c5761e8f566ef2c14fc486c796
 
 @app.route('/results', methods={"GET", "POST"})
 def results():
