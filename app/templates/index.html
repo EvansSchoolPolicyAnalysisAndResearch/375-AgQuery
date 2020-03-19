@@ -114,46 +114,6 @@
 			</button>
 		</div>
 	</div>
-	<!PROPOSED CROP SELECTOR BOX>
-	<div id="cropselectorbox" class="indicatorbox" >
-	   	<div class='boundingbox'>
-	      		<input type="search"
-	      				id="crops"
-	 				class="filter"
-    					aria-label="Filter the Crop/Livestock List"
-       					label="Filter by Crop/Livestock"
-	  				oninput="AgQuery.FilterList(this);"
-     					data-filterclass="crops"
-					placeholder="Filter Crops/Livestock"/>
-	      		<h3>Crops & Livestock: </h3>
-	      		<div class="scrollbox">
-	      			<ul>
-				{% for crop in crops %}
-					<li class="crops"><p>
-				   		<label><input type="checkbox"
-		     						id="{{crop.cropDisaggregation}}"
-      								name="i"
-			  							value = "{{crop.cropDisaggregation}}"
-											class="indicator"
-     								onchange="AgQuery.EnableButtons();"
-	  							"" />
-				  		{{crop.cropDisaggregation}}</label>
-			        	</p></li>
-				{% endfor %}
-				</ul>
-			</div>
-		</div>
-		<div class="selectionbuttons">
-		   <button type="button" class="select" onclick="AgQuery.SelectAll('crops'); AgQuery.EnableButtons();" >
-		       Select All
-		   </button>
-		   <button type="button" class="clear" onclick="AgQuery.ClearAll('crops');AgQuery.EnableButtons();">
-		       Clear All
-		   </button>
-		</div>
-	</div>
-
-
 
 
 
