@@ -8,5 +8,6 @@ __pycache__
 *.xlsx
 *.csv
 
-# The env file
+# Environment/setup
 .env
+env/*
