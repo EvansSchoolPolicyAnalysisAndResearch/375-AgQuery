@@ -23,7 +23,7 @@ import subprocess
 import sys
 import urllib.request
 import xlrd
-...
+
 # Download the file from `url` and save it locally under `file_name`:
 
 
@@ -289,12 +289,9 @@ def full_update():
 	write_csv(ctry_decs, CLEAN_CTRY_DECS)
 
 	# Run the sql query
-	print(os.getenv('PSQL_USERNAME', 'Username not found in env, using default: \'epardata\''))
+	print("Using username: " + os.getenv('PSQL_USERNAME', '\'epardata\' (default)'))
 	subprocess.run(['psql', f"--username={os.getenv('PSQL_USERNAME', 'epardata')}", '--dbname=epardata', 
 		'--file=update-database.sql'])
-
-
-
 
 if __name__ == "__main__":
 	pars = argparse.ArgumentParser(description = __doc__, 
