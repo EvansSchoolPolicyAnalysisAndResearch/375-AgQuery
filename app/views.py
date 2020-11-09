@@ -77,7 +77,7 @@ def results():
 	# If the user got here without submitting form data reply with no 
 	# indicator selected page
 
-	indicators = formHandler(request, db_session)	
+	indicators = formHandler(request, db_session)
 	# Check if anything is returned from the formHandler. If no, then show the
 	# error page
 	if not indicators:
