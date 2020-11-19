@@ -8,15 +8,8 @@ __pycache__
 *.xlsx
 *.csv
 
-<<<<<<< HEAD
 # Updater scriptt
 update_site.sh
 
 # virtual environment
 env/*
-
-=======
-# Environment/setup
-.env
-env/*
->>>>>>> e4e9524b2d44bc7590c84d0d665c3e2b9b238441
