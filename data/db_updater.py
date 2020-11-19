@@ -15,13 +15,14 @@ This project is licensed under the 3-Clause BSD License. Please see the
 license.txt file for more information.
 """
 
-import csv
-import xlrd
 import argparse
-import sys
-import subprocess
-import urllib.request
+import csv
+import os
 import shutil
+import subprocess
+import sys
+import urllib.request
+import xlrd
 ...
 # Download the file from `url` and save it locally under `file_name`:
 
@@ -288,7 +289,8 @@ def full_update():
 	write_csv(ctry_decs, CLEAN_CTRY_DECS)
 
 	# Run the sql query
-	subprocess.run(['psql', '--username=epardata', '--dbname=epardata', 
+	print(os.getenv('PSQL_USERNAME', 'Username not found in env, using default: \'epardata\''))
+	subprocess.run(['psql', f"--username={os.getenv('PSQL_USERNAME', 'epardata')}", '--dbname=epardata', 
 		'--file=update-database.sql'])
 
 

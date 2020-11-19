@@ -83,7 +83,7 @@ them cannot.
 
 
    Once you have the database set up you will need to set up the python virtual
-   environment and install the required python modules required to run the 
+   environment and install the python modules required to run the 
    python app server. 
  
    > __NOTE:__ lines starting with # should not be typed in. They are comments 
