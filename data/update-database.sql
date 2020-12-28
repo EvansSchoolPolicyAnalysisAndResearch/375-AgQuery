@@ -83,6 +83,21 @@ ALTER TABLE public.estimates_update OWNER TO epardata;
 ALTER TABLE public.indcons_update OWNER to epardata;
 ALTER TABLE public.cntrycons_update OWNER to epardata;
 
+-- Suppress Nigerian Yield Estimates --
+UPDATE estimates
+SET
+	mean = 0.0,
+	se = 0.0,
+	sd = 0.0,
+	median = 0.0,
+	minim = 0.0,
+	maxim = 0.0,
+	p25 = 0.0,
+	p75 = 0.0
+WHERE
+	indicator LIKE 'Yield%' AND 
+	geography = 'Nigeria';
+
 
 -------------------------------------------------------------------------------
 --                             REPLACE OLD TABLE                             --

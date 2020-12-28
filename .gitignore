@@ -13,4 +13,7 @@ update_site.sh
 
 # virtual environment
 env/*
-
+# ignore my notes file
+notes.md
+# i use gitattributes for password smudging don't commit this
+.gitattributes

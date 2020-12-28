@@ -89,18 +89,20 @@
 
 
 }
-.indicatorbox input[type=search]:placeholder-shown {
+.indicatorbox input[type=search]::placeholder{
 	color:				rgba(255,255,255,0);
 }
-.indicatorbox input[type=search]:-ms-input-placeholder {
+}
+.indicatorbox input[type=search]::-ms-input-placeholder {
 	color:				rgba(255,255,255,0);
 }
 
-.indicatorbox input[type=search]:focus:placeholder-shown {
+
+.indicatorbox input[type=search]:focus::placeholder {
 	color: 				#666;
 }
 
-.indicatorbox input[type=search]:focus:-ms-input-placeholder{
+.indicatorbox input[type=search]:focus::-ms-input-placeholder{
 	color: 				#666;
 }
 
