@@ -180,10 +180,13 @@ def clean_estimates(rows):
 			row[CROPCOL]="Buffalos"
 		elif row[INDICATORCOL] == "Milk productivity":
 			row[CROPCOL] = "Large ruminants"
+
 		if  row[INDICATORCOL] in hexmatcher:
 			row.insert(1, hexmatcher[row[INDICATORCOL]])
 		else:
-			print(row[INDICATORCOL])
+			if not ("(Kharif" in row[INDICATORCOL] or 
+				"(Rabi" in row[INDICATORCOL]):
+				print(row[INDICATORCOL])
 			row.insert(1, 'NA')
 		output.append(row)
 	return output
