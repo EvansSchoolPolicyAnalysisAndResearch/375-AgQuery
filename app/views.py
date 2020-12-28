@@ -86,8 +86,10 @@ def results():
 	# error page
 	if not indicators:
 		return render_template("no-inds.html"), 406
-
-	return render_template("results.html", indicators=indicators)
+	#Grab the GET query containing the filters and pass to results page
+	r = str(request)
+	filters = r[r.find("?") + 1 : r.find("'", r.find("'") + 1)]
+	return render_template("results.html", indicators=indicators, filters=filters)
 
 @app.route('/get-csv',methods={"GET","POST"})
 def get_csv():

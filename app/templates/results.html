@@ -11,6 +11,14 @@
 {% block pageheader %}Results:{% endblock %}
 
 {% block body %}
+<form method="GET" action="/get-csv">
+{% for filter in filters.split("&") %} 
+<!-- name and value become GET query arguments -->
+  <input type='hidden' name="{{filter.split('=')[0]}}" 
+  	value="{{filter.split('=')[1]}}">
+{% endfor %} 
+<input type='submit' value='Download CSV'/>
+</form>
 <table>
 	<tr>
 		<th>Indicator Name</th>

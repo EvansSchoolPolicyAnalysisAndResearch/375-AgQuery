@@ -104,4 +104,4 @@ class CntryCons(Base):
 
 	def __repr__(self):
 		return "<Instrument: %s; IndCon ID: %s>" % \
-			(self.instrument, self.indid)
+			(self.instrument, self.indicator)
