@@ -254,9 +254,6 @@ def clean_decisions(rows):
 			 cntrycons.append([get_id(), inst, row[i+15], row_stub[INDCOLUMN]])
 	return (indcons, cntrycons)
 
-
-
-
 def excel_extraction(filename):
 	estimates, construction = extract_sheets(filename)
 	sheet_to_csv(estimates, 'estimates.csv')
@@ -271,7 +268,6 @@ def construction_cleaning(file):
 
 def estimates_cleaning(file):
 	write_csv(clean_estimates(read_csv(file)), CLEAN_EST)
-
 
 def downloader(url, filename):
 	
@@ -292,9 +288,22 @@ def full_update():
 	write_csv(ctry_decs, CLEAN_CTRY_DECS)
 
 	# Run the sql query
-	print("Using username: " + os.getenv('PSQL_USERNAME', '\'epardata\' (default)'))
-	subprocess.run(['psql', f"--username={os.getenv('PSQL_USERNAME', 'epardata')}", '--dbname=epardata', 
+	username = get_username_from_uri(os.getenv('DATABASE_URI'))
+	print("Using username: " + username)
+	subprocess.run(['psql', f"--username={username}", '--dbname=epardata', 
 		'--file=update-database.sql'])
+
+#Returns {username} from uri "postgresql://{username}:{password}@localhost/{database}"
+def get_username_from_uri(uri):
+	try:
+		username = uri.split(":")[1][2:]
+		if isinstance(username, str):
+			return username
+		else:
+			raise TypeError("Bad URI")
+	except (IndexError, TypeError) as e:
+		print("Failed to parse URI. Check format and try again.\nCorrect format: \"postgresql://\{username\}:\{password\}@localhost/\{database\}\"")
+		
 
 if __name__ == "__main__":
 	pars = argparse.ArgumentParser(description = __doc__, 
