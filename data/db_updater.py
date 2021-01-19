@@ -2,10 +2,6 @@
 
 #data/db_updater.py
 
-"""
-
-"""
-
 __copyright__ = """
 Copyright 2019 Evans Policy Analysis and Research Group (EPAR).
 """
