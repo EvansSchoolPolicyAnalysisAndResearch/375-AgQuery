@@ -1,0 +1,211 @@
+\documentclass[$if(fontsize)$$fontsize$,$else$12pt,$endif$letterpaper]{article}
+
+% Copyright Samantha Kiel, 2020
+
+% Released under the LGPL, version 3. A copy of the LGPL can be found at
+% http://www.gnu.org/licenses/lgpl.html
+
+\usepackage{tabto}		% Used to line up the memo headings
+\usepackage{enumitem}	% Enumerated Lists, used for memo title
+\usepackage{amsmath}	% If mathematical Formula are required
+\usepackage{fontspec}	% Font Settings
+\usepackage{setspace}	% Control Spacing
+\usepackage{titlesec}	% allow modifications of the title formatting
+\usepackage{csquotes}	% I think this is needed for enquote to work
+
+
+\RequirePackage{geometry}
+\geometry{margin=1.0in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom Commands/Formatting %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Horizonal Line
+\newcommand\decorativeline[1][1pt]{
+	\par\noindent%
+	\rule[0.5ex]{\linewidth}{#1}\par
+}
+
+% Pandoc-Citeproc Fix Hanging Indents
+$if(csl)$
+\newlength{\cslhangindent}       % set up new length
+\setlength{\cslhangindent}{$if(csl-hanging-indent)$1.5em$else$0em$endif$}
+\newenvironment{cslreferences}%
+  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
+  {\par} % by default, this env does not change anything
+$endif$
+% This is suppsoed to fix tables. Let's see if it works.
+$if(tables)$
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+$endif$
+
+% Commands created by the default latex template for pandoc
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Set linespacing
+$if(linespacing)$
+\linespread{$linespacing$}
+$endif$
+
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\usepackage[section]{placeins}
+$endif$
+
+$if(natbib)$
+\usepackage[$natbiboptions$]{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+$endif$
+
+$if(numbersections)$
+	\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
+$else$
+	\setcounter{secnumdepth}{0}
+$endif$
+
+% Other useful packages
+%\usepackage{pdflscape}
+\PassOptionsToPackage{hyphens}{url}\usepackage[colorlinks]{hyperref}
+\hypersetup{	pdfborder	=	0 0 0,
+				linkcolor	=	blue, 
+				urlcolor	=	blue,
+				citecolor	=	black }
+
+% Set Main Font
+$if(mainfont)$
+	\setmainfont{$mainfont$}[
+		Ligatures = TeX,
+		$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]
+$endif$
+
+% Set Roman Font
+$if(romanfont)$
+	\setromanfont[
+	Ligatures = TeX,
+	$for(romanfontoptions)$$romanfontoptions$$sep$,$endfor$]{$romanfont$}
+$endif$
+
+% Set Sans font
+$if(titlefont)$
+	\setsansfont{$titlefont$}[
+		Ligatures = TeX,
+		$for(titlefontoptions)$$titlefontoptions$$sep$,$endfor$]
+$endif$
+
+% Set Mono Font
+$if(monofont)$
+\setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
+$endif$
+
+$if(numbersections)$
+\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+
+
+% Header Formatting
+\titleformat*{\section}{\normalsize \bfseries \sffamily}
+\titleformat*{\subsection}{\normalsize \slshape \sffamily}
+\titleformat*{\subsubsection}{\normalsize \sffamily}
+\titleformat*{\paragraph}{\sffamily}
+\titleformat*{\subparagraph}{\slshape \sffamily}
+
+% Header Spacing
+\titlespacing\section{0pt}{16pt plus 6pt minus 4pt}{4pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{4pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{12pt plus 4pt minus 2pt}{4pt plus 2pt minus 2pt}
+
+% Create the Letterhead and To/From Block
+\renewcommand{\maketitle}{\makememotitle}
+\newcommand\makememotitle{
+	$if(logo)$
+	{ % Create With Logo
+		\begin{minipage}[t]{1\columnwidth}%
+			\begin{flushright}
+				\vspace{-0.6in}
+				$logo$
+				\vspace{0.5in}
+				\par
+			\end{flushright}%
+		\end{minipage}
+	}
+	$endif$
+	% To, From, Subject Block
+	\begin{description}[noitemsep]
+		$if(to)$\item[{\sffamily To:}] \tabto{30 pt} $to$$endif$
+		$if(author)$\item[{\sffamily From:}] \tabto{30 pt} $author$$endif$
+		$if(title)$\item[{\sffamily RE:}] \tabto{30 pt} $title$$endif$
+		$if(date)$\item[{\sffamily Date:}] \tabto{30 pt} $date$$endif$
+	\end{description} 
+	\vspace{-1em}
+	\decorativeline	
+}
+
+
+\begin{document}
+{
+	\singlespace
+	\maketitle
+}
+$if(abstract)$
+\begin{abstract}
+	$abstract$
+\end{abstract}
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$body$
+
+$if(natbib)$
+$if(bibliography)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+{
+	\singlespace
+	\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+}
+$endif$
+$endif$
+
+$if(biblatex)$
+{
+	\singlespace
+	\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+}
+$endif$
+
+
+$for(include-after)$
+
+$include-after$
+
+$endfor$
+
+\end{document}

@@ -17,3 +17,6 @@ env/*
 notes.md
 # i use gitattributes for password smudging don't commit this
 .gitattributes
+
+# exclude the pdf files created by the ict - pandoc shit
+*.pdf
