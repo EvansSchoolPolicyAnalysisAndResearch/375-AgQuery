@@ -1,5 +1,5 @@
 ICT = ict.py
-WB = indicator-workbook.xlsx
+WB = ../indicator-workbook.xlsx
 META = meta.yaml
 TEMPLATE = mdMemo.latex
 PC = python3
