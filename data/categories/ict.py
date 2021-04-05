@@ -24,7 +24,7 @@ import re
 	SP_COL: col number for the subpopulation of estimates info
 """
 
-EXCEL_WORKBOOK	= 'indicator-workbook.xlsx'
+EXCEL_WORKBOOK	= '../indicator-workbook.xlsx'
 IND_COL = 0
 GD_COL = 3
 FS_COL = 4
