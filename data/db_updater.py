@@ -13,13 +13,12 @@ license.txt file for more information.
 
 import argparse
 import csv
+import openpyxl
 import os
 import shutil
 import subprocess
 import sys
 import urllib.request
-from openpyxl import Workbook
-import openpyxl
 # Download the file from `url` and save it locally under `file_name`:
 
 
@@ -118,26 +117,21 @@ def sheet_to_list(sheet):
     :param sheet	: an openpyxl sheet oo be written to disk
     :returns		: an open file for writing
     """
-    print("sheet name = \'" + sheet.title + "\'.\nmax_rows = " + str(sheet.max_row) + ", max_cols = " + str(sheet.max_column) + "column-wise max=" + str(len(sheet['A'])))
     c = []
     i = 0
     for row in sheet.values:
         c.append([])
-        print("Loading in row" + str(i+1))
+        if not ((i+1) % 10000):
+            print("Loading in row #" + str(i+1))
         has_data = False
         for value in row:
-            if value != None:
-                c[i].append(value)
-                has_data = True
-            else:
-                c[i].append(0)
+            c[i].append(value if value else 0)
+            has_data = True if value else has_data
         #openpyxl max_rows is not accurate. Return after first fully empty row
-        print(*c[i])
+        # print(*c[i])
         if not has_data:
             c.pop(i)
-            print("bailed after row #" + str(i))
             return c
-
         i += 1
     return c
 
@@ -157,10 +151,8 @@ def clean_estimates(rows):
     # Get rid of the headers
     rows.pop(0)
     for r,row in enumerate(rows):
-        print(*row, sep=', ')
         # Add the ID to the row
         row.insert(0, r)
-        print(*row, sep=', ')
         # Clean the elements of the row
         for i in range(len(row)) :
             if row[i] == "0 ":

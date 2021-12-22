@@ -79,12 +79,12 @@ DELETE FROM public.estimates_update WHERE survey = 'AgDev Baseline';
 
 
 -- Change owners of the new tables to epardata --
-ALTER TABLE public.estimates_update OWNER TO epardata;
-ALTER TABLE public.indcons_update OWNER to epardata;
-ALTER TABLE public.cntrycons_update OWNER to epardata;
+-- ALTER TABLE public.estimates_update OWNER TO epardata;
+-- ALTER TABLE public.indcons_update OWNER to epardata;
+-- ALTER TABLE public.cntrycons_update OWNER to epardata;
 
 -- Suppress Nigerian Yield Estimates --
-UPDATE estimates
+UPDATE estimates_update
 SET
 	mean = 0.0,
 	se = 0.0,
