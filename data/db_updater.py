@@ -294,8 +294,8 @@ def full_update():
     write_csv(ctry_decs, CLEAN_CTRY_DECS)
 
     # Run the sql query
-    print("Using username: " + os.getenv('PSQL_USERNAME', '\'epardata\' (default)'))
-    subprocess.run(['psql', f"--username={os.getenv('PSQL_USERNAME', 'epardata')}", '--dbname=epardata', 
+    print("Using username: " + os.getenv('PSQL_USERNAME', '\'ubuntu\' (default)'))
+    subprocess.run(['psql', f"--username={os.getenv('PSQL_USERNAME', 'ubuntu')}", '--dbname=epardata', 
         '--file=update-database.sql'])
 
 if __name__ == "__main__":
