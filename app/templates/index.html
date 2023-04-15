@@ -115,21 +115,78 @@
 		</div>
 	</div>
 
+	
+	<div id="genderbox" class="indicatorbox" >
+		<div class='boundingbox'>
+			
+			<h3>Gender Filter: </h3>
+			<div class="scrollbox">
+				<ul>
+					{% for gender in genders %}
+				<li>	<label>
+						<input type="checkbox" name="gender" value="{{ gender[0] }}" 	class="gender"
+						onchange="AgQuery.EnableButtons();">
+						{{ gender[0] }}
+					</label>
+				</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		 <div class="selectionbuttons">
+			<button type="button" class="select" onclick="AgQuery.SelectAll('gender'); AgQuery.EnableButtons();" >
+				Select All
+			</button>
+			<button type="button" class="clear" onclick="AgQuery.ClearAll('gender');AgQuery.EnableButtons();">
+				Clear All
+			</button>
+		</div> 
+	</div>
+	
+	<div id="farmsizebox" class="indicatorbox" >
+		<div class='boundingbox'>
+			
+			<h3>Farm Size Filter: </h3>
+			<div class="scrollbox">
+				<ul>
+					{% for farmSize in farmSizes %}
+				<li>	<label>
+						<input type="checkbox" name="farmSize" value="{{ farmSize[0] }}" 	class="farmsize"
+						onchange="AgQuery.EnableButtons();">
+						{{ farmSize[0] }}
+					</label> </li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+			<div class="selectionbuttons">
+				<button type="button" class="select" onclick="AgQuery.SelectAll('farmsize'); AgQuery.EnableButtons();" >
+					Select All
+				</button>
+				<button type="button" class="clear" onclick="AgQuery.ClearAll('farmsize');AgQuery.EnableButtons();">
+					Clear All
+				</button>
+			</div> 
+		
+	
+	</div>
 
 
-	<! View/Download Buttons>
-	<div class='buttonbox'>
-		<input type="submit"
-			value="View Estimates"
-			formaction='results'
-			class="submitter"
-			/>
-		<input type='submit'
-			value='Download CSV'
-			formaction='get-csv'
-			class="submitter"
-			 />
-		<p><a href="/">Back to Category Selection</a></p>
+	<!--View/Download Buttons> -->
+	<div class="center">
+		<div class='buttonbox'>
+			<input type="submit"
+				value="View Estimates"
+				formaction='results'
+				class="submitter"
+				/>
+			<input type='submit'
+				value='Download CSV'
+				formaction='get-csv'
+				class="submitter"
+				 />
+			<p><a href="/">Back to Category Selection</a></p>
+		</div>
 	</div>
 
 </form>
