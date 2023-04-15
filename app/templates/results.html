@@ -19,7 +19,9 @@
 {% endfor %} 
 <input type='submit' value='Download CSV'/>
 </form>
-<table>
+<div>
+<table id="resultsTable" class="display">
+	<thead>
 	<tr>
 		<th>Indicator Name</th>
 		<th>Geography</th>
@@ -33,7 +35,10 @@
 		<th>SE</th>
 		<th>N</th>
 	</tr>
+</thead>
+<tbody>
 {% for ind in indicators %}
+
 	<tr>
 		<td title="{{ ind.CntryCons.indcon.constructiondecision }}">
 			{{ind.Estimates.indicator}}
@@ -77,8 +82,20 @@
 				N/A
 			{% endif %}
 		</td>
-		<td>{{"{:.0f}".format(ind.Estimates.n)}}
+		<td title="Test">{{"{:.0f}".format(ind.Estimates.n)}}
+		</td>
 	</tr>
+
 {% endfor %}
+</tbody>
 </table>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#resultsTable').DataTable({
+    responsive: true
+});
+    });
+</script>
+
 {% endblock %}
