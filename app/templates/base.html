@@ -8,6 +8,7 @@
 	 <link href="https://fonts.googleapis.com/css?family=Encode+Sans:900|Open+Sans" rel="stylesheet"> 
 	<link rel="stylesheet" 
 		href="{{ url_for('static', filename='css/main.css') }}" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />	
 	<link rel="icon" 
 		href="{{ url_for('static', filename='images/icon16.png') }}" 
 		sizes="16x16" />
@@ -38,6 +39,9 @@
 	<link rel="apple-touch-icon" 
 		href="{{ url_for('static', filename='images/icon180.png') }}" 
 		sizes="180x180" />
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+	
 	{% block includes %}{% endblock %}
 </head>
 <body>
