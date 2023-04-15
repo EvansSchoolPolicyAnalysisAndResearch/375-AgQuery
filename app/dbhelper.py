@@ -34,6 +34,8 @@ def formHandler(request, session):
 	# passed to this function
 	geoyears = request.values.getlist('gy')
 	inds = request.values.getlist('i')
+	gender_filters = request.values.getlist('gender')
+	farm_size_filters = request.values.getlist('farmSize')
 
 	# Check to make sure the user is not attempting sql injection or submitting
 	# invalid database entries.
@@ -47,13 +49,26 @@ def formHandler(request, session):
 		# Split the geoyear into two pieces - geography and year
 		geo,year = gy.split("_", 1)
 		# Query the database
-		indicators += session.query(Estimates, CntryCons).filter(
+		query += session.query(Estimates, CntryCons).filter(
 			Estimates.indicator == CntryCons.indicator,
 			Estimates.instrument == CntryCons.instrument).filter(
 			Estimates.geography == geo,
 			Estimates.year == year,
 			Estimates.hexid.in_(inds)).all()
+	
+	# Apply gender filters only if the list is not empty
+	if gender_filters:
+            query = query.filter(Estimates.genderDisaggregation.in_(gender_filters))
+
+    	# Apply farm size filters only if the list is not empty
+	if farm_size_filters:
+            query = query.filter(Estimates.farmSizeDisaggregation.in_(farm_size_filters))
+
+	indicators += query.all()
+	
+	
 	return indicators
+	
 
 
 def validateRequest(session, indicators, geoyears, commodity = None):
