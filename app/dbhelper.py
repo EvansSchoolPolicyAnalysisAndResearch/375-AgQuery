@@ -54,7 +54,7 @@ def formHandler(request, session):
 			Estimates.instrument == CntryCons.instrument).filter(
 			Estimates.geography == geo,
 			Estimates.year == year,
-			Estimates.hexid.in_(inds)).all()
+			Estimates.hexid.in_(inds))
 	
 	# Apply gender filters only if the list is not empty
 	if gender_filters:
