@@ -48,9 +48,19 @@ def index():
 	# Sort the lists of years before displaying them
 	for g in geos.keys():
 		geos[g].sort()
+	
+	#Get Gender
+	genders = db_session.query(Estimates.genderDisaggregation).distinct().order_by(Estimates.genderDisaggregation)
+
+ 
+	#Get farm Sizes
+	farmSizes = db_session.query(Estimates.farmSizeDisaggregation).distinct().order_by(Estimates.farmSizeDisaggregation)
+
 
 	return render_template("index.html",indicators=indicators,
-		geoyears=geos, crops=crops) #???????
+		geoyears=geos, crops=crops, genders = genders, farmSizes = farmSizes) #???????
+
+	
 
 @app.route('/login')
 def login():
