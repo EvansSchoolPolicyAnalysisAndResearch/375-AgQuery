@@ -49,7 +49,7 @@ def formHandler(request, session):
 		# Split the geoyear into two pieces - geography and year
 		geo,year = gy.split("_", 1)
 		# Query the database
-		query += session.query(Estimates, CntryCons).filter(
+		query = session.query(Estimates, CntryCons).filter(
 			Estimates.indicator == CntryCons.indicator,
 			Estimates.instrument == CntryCons.instrument).filter(
 			Estimates.geography == geo,
