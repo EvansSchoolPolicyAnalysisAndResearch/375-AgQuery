@@ -1,14 +1,24 @@
-.contenthole {
+/* .contenthole {
 	overflow:auto;
 	min-width: 1400px;
 	width:100%;
-}
+} */
 
-td {
+/* td {
 	padding: 10px;
 	border-bottom-width:2px;
 	border-bottom-style: dashed;
-}
+} */
+.dataTables_filter {
+	float: right !important;
+	}
+
+
+ 
+thead input {
+    width: 100%;
+    } 
+
 
 input[type="submit"] {
 	background-color:	#fff;
