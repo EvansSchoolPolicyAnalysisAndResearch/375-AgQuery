@@ -57,14 +57,13 @@ def formHandler(request, session):
 			Estimates.hexid.in_(inds))
 	
 	# Apply gender filters only if the list is not empty
-	if gender_filters:
-            query = query.filter(Estimates.genderDisaggregation.in_(gender_filters))
+		if gender_filters:
+			query = query.filter(Estimates.genderDisaggregation.in_(gender_filters))
 
     	# Apply farm size filters only if the list is not empty
-	if farm_size_filters:
-            query = query.filter(Estimates.farmSizeDisaggregation.in_(farm_size_filters))
-
-	indicators += query.all()
+		if farm_size_filters:
+			query = query.filter(Estimates.farmSizeDisaggregation.in_(farm_size_filters))
+		indicators += query.all()
 	
 	
 	return indicators
