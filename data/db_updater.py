@@ -58,7 +58,7 @@ EST_CSV			= 'estimates.csv'
 EST_SHEET		= 'Estimates by Instrument'
 DECS_CSV		= 'decs.csv'
 EXCEL_WORKBOOK	= 'indicator-workbook.xlsx'
-EXCEL_URL		= 'https://github.com/EvansSchoolPolicyAnalysisAndResearch/335_Data-Dissemination/raw/master/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx'
+EXCEL_URL		= 'https://github.com/EvansSchoolPolicyAnalysisAndResearch/LSMS-Data-Dissemination/raw/refs/heads/main/EPAR_UW_335_AgDev_Indicator_Estimates.xlsx'
 
 hexmatcher = {}
 ################################################################################
