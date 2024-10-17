@@ -23,7 +23,31 @@ import urllib.request
 
 
 INDCOLUMN 		= 1
-INSTRUMENTS 	= ("Ethiopia ESS Wave 1", "Ethiopia ESS Wave 2", "Ethiopia ESS Wave 3", "Ethiopia ESS Wave 4", "Nigeria GHS Wave 1", "Nigeria GHS Wave 2", "Nigeria GHS Wave 3", "Nigeria GHS Wave 4", "Tanzania NPS Wave 1", "Tanzania NPS Wave 2", "Tanzania NPS Wave 3", "Tanzania NPS Wave 4", "Tanzania NPS Wave 5")
+INSTRUMENTS 	= ("Ethiopia ESS Wave 1", 
+                   "Ethiopia ESS Wave 2", 
+                   "Ethiopia ESS Wave 3", 
+                   "Ethiopia ESS Wave 4", 
+                   "Ethiopia ESS Wave 5", 
+                   "Nigeria GHS Wave 1", 
+                   "Nigeria GHS Wave 2", 
+                   "Nigeria GHS Wave 3", 
+                   "Nigeria GHS Wave 4", 
+                   "Tanzania NPS Wave 1", 
+                   "Tanzania NPS Wave 2", 
+                   "Tanzania NPS Wave 3", 
+                   "Tanzania NPS Wave 4", 
+                   "Tanzania NPS Wave 5",
+                  "Uganda UNPS Wave 1",
+                  "Uganda UNPS Wave 2",
+                  "Uganda UNPS Wave 3",
+                  "Uganda UNPS Wave 4",
+                  "Uganda UNPS Wave 5",
+                  "Uganda UNPS Wave 7",
+                  "Uganda UNPS Wave 8",
+                  "Malawi IHS/IHPS Wave 1",
+                  "Malawi IHS/IHPS Wave 2",
+                  "Malawi IHS/IHPS Wave 3",
+                  "Malawi IHS/IHPS Wave 4")
 INDICATORCOL	= 6
 INDICATOR_SHEET = 'Summ. of Indicator Construction'
 CROPCOL			= 8
