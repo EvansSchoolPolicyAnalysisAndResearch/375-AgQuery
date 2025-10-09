@@ -1,4 +1,6 @@
 #   [Evans School Policy Analysis and Research Group][epar]
+### This repo has been archived and is no longer maintained. The AgQuery framework is now located at [github.com/EvansSchoolPolicyAnalysisAndResearch/AgQuery-Refresh](github.com/EvansSchoolPolicyAnalysisAndResearch/AgQuery-Refresh)
+
 ##  Data Distribution Project
 
 This repository was created to distribute the source code behind 
